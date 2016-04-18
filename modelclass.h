@@ -25,7 +25,7 @@ using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 class ModelClass
 {
-private:
+protected:
 	struct VertexType
 	{
 		D3DXVECTOR3 position;
@@ -45,15 +45,17 @@ public:
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
-	bool Initialize(ID3D11Device*, char*, WCHAR*);
+	bool Initialize(ID3D11Device*, WCHAR*);
 	void Shutdown();
 	void Render(ID3D11DeviceContext*);
 
 	int GetIndexCount();
 	ID3D11ShaderResourceView* GetTexture();
 
+	//virtual void SetRadius(float r) = 0;
+	//virtual void SetX() = 0;
 
-private:
+protected:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
 	void RenderBuffers(ID3D11DeviceContext*);
@@ -61,10 +63,10 @@ private:
 	bool LoadTexture(ID3D11Device*, WCHAR*);
 	void ReleaseTexture();
 
-	bool LoadModel(char*);
+	virtual bool LoadModel() = 0;
 	void ReleaseModel();
 
-private:
+protected:
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;
 	TextureClass* m_Texture;

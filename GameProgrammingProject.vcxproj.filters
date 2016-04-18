@@ -45,6 +45,12 @@
     <ClCompile Include="lightshaderclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="modelcircleclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="modelcubeclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lightshaderclass.h">
@@ -72,6 +78,12 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="lightclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="modelcircleclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="modelcubeclass.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

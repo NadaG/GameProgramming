@@ -87,7 +87,9 @@
     <ClCompile Include="lightclass.cpp" />
     <ClCompile Include="lightshaderclass.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="modelcircleclass.cpp" />
     <ClCompile Include="modelclass.cpp" />
+    <ClCompile Include="modelcubeclass.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
   </ItemGroup>
@@ -98,7 +100,9 @@
     <ClInclude Include="inputclass.h" />
     <ClInclude Include="lightclass.h" />
     <ClInclude Include="lightshaderclass.h" />
+    <ClInclude Include="modelcircleclass.h" />
     <ClInclude Include="modelclass.h" />
+    <ClInclude Include="modelcubeclass.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
   </ItemGroup>
