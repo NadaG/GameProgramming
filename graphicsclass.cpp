@@ -163,7 +163,6 @@ bool GraphicsClass::Frame()
 	bool result;
 	static float rotation = 0.0f;
 
-
 	// Update the rotation variable each frame.
 	rotation += (float)D3DX_PI * 0.005f;
 	if(rotation > 360.0f)
@@ -202,7 +201,7 @@ bool GraphicsClass::Render(float rotation)
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
 	D3DXMatrixRotationY(&worldMatrix, rotation);
 
-	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
+	//// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	m_Model->Render(m_D3D->GetDeviceContext());
 
 	// Render the model using the light shader.
@@ -217,6 +216,7 @@ bool GraphicsClass::Render(float rotation)
 	//D3DXMatrixRotationX(&worldMatrix, rotation);
 
 	D3DXMatrixIdentity(&worldMatrix);
+	D3DXMatrixTranslation(&worldMatrix, 2.0f, 0.0f, 0.0f);
 
 	// 각 모델을 트리 구조로 만들어서 처리해야 할듯
 	// 충돌 처리 같은 부분도 처리해야함
