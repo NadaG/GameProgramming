@@ -3,21 +3,25 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "inputclass.h"
 
+InputClass* InputClass::m_instance = 0;
 
 InputClass::InputClass()
 {
 }
 
-
-InputClass::InputClass(const InputClass& other)
-{
-}
-
-
 InputClass::~InputClass()
 {
 }
 
+InputClass* InputClass::GetInstance()
+{
+	if (!m_instance)
+	{
+		m_instance = new InputClass;
+	}
+
+	return m_instance;
+}
 
 void InputClass::Initialize()
 {

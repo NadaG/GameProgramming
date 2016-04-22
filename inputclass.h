@@ -4,16 +4,13 @@
 #ifndef _INPUTCLASS_H_
 #define _INPUTCLASS_H_
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: InputClass
 ////////////////////////////////////////////////////////////////////////////////
 class InputClass
 {
 public:
-	InputClass();
-	InputClass(const InputClass&);
-	~InputClass();
+	static InputClass* GetInstance();
 
 	void Initialize();
 
@@ -24,6 +21,11 @@ public:
 
 private:
 	bool m_keys[256];
+	InputClass();
+	~InputClass();
+
+	static InputClass* m_instance;
 };
+
 
 #endif

@@ -6,7 +6,7 @@
 
 SystemClass::SystemClass()
 {
-	m_Input = 0;
+	//m_Input = 0;
 	m_Graphics = 0;
 }
 
@@ -35,15 +35,15 @@ bool SystemClass::Initialize()
 	InitializeWindows(screenWidth, screenHeight);
 
 	// Create the input object.  This object will be used to handle reading the keyboard input from the user.
-	m_Input = new InputClass;
+	/*m_Input = new InputClass;
 	if(!m_Input)
 	{
 		return false;
-	}
+	}*/
 
 	// Initialize the input object.
-	m_Input->Initialize();
-
+	
+	InputClass::GetInstance()->Initialize();
 	// Create the graphics object.  This object will handle rendering all the graphics for this application.
 	m_Graphics = new GraphicsClass;
 	if(!m_Graphics)
@@ -73,11 +73,11 @@ void SystemClass::Shutdown()
 	}
 
 	// Release the input object.
-	if(m_Input)
+	/*if(m_Input)
 	{
 		delete m_Input;
 		m_Input = 0;
-	}
+	}*/
 
 	// Shutdown the window.
 	ShutdownWindows();
@@ -132,7 +132,7 @@ bool SystemClass::Frame()
 	bool result;
 
 	// Check if the user pressed escape and wants to exit the application.
-	if(m_Input->IsKeyDown(VK_ESCAPE))
+	if (InputClass::GetInstance()->IsKeyDown(VK_ESCAPE))
 	{
 		return false;
 	}
@@ -150,29 +150,25 @@ bool SystemClass::Frame()
 
 LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)
 {
-	switch(umsg)
+	switch (umsg)
 	{
 		// Check if a key has been pressed on the keyboard.
-		case WM_KEYDOWN:
-		{
-			// If a key is pressed send it to the input object so it can record that state.
-			m_Input->KeyDown((unsigned int)wparam);
-			return 0;
-		}
+	case WM_KEYDOWN:
+
+		// If a key is pressed send it to the input object so it can record that state.
+		InputClass::GetInstance()->KeyDown((unsigned int)wparam);
+		return 0;
 
 		// Check if a key has been released on the keyboard.
-		case WM_KEYUP:
-		{
-			// If a key is released then send it to the input object so it can unset the state for that key.
-			m_Input->KeyUp((unsigned int)wparam);
-			return 0;
-		}
+	case WM_KEYUP:
+		// If a key is released then send it to the input object so it can unset the state for that key.
+
+		InputClass::GetInstance()->KeyUp((unsigned int)wparam);
+		return 0;
 
 		// Any other messages send to the default message handler as our application won't make use of them.
-		default:
-		{
-			return DefWindowProc(hwnd, umsg, wparam, lparam);
-		}
+	default:
+		return DefWindowProc(hwnd, umsg, wparam, lparam);
 	}
 }
 

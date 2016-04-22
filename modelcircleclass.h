@@ -13,15 +13,15 @@ class ModelCircleClass : public ModelClass
 protected:
 	virtual bool LoadModel() override;
 	// final은 마지막을 뜻함, override는 override된 함수임을 뜻함
-
 	//virtual void SetRadius(float r) override;
 
 public:
 	ModelCircleClass()
 		:m_r(1.0f), m_triNum(10)
 	{
-
 	}
+
+	virtual void Update() override;
 
 private:
 	float m_r;

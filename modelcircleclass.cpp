@@ -42,8 +42,14 @@ bool ModelCircleClass::LoadModel()
 
 	return true;
 }
-//
-//void ModelCircleClass::SetRadius(float r)
-//{
-//
-//}
+
+void ModelCircleClass::Update()
+{
+	static float r_y = 0;
+	r_y += 0.01f;
+	if (r_y > 360.0f)
+		r_y = -360.0f;
+	//m_worldMatrix
+
+	D3DXMatrixRotationY(&m_worldMatrix, r_y);
+}

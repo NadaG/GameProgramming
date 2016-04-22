@@ -1,8 +1,8 @@
-﻿빌드 시작: 2016-04-20 오전 3:21:10
+﻿빌드 시작: 2016-04-22 오전 9:18:19
      1>2 노드의 "C:\Users\Nada\Desktop\GameProgrammingProject\GameProgrammingProject\GameProgrammingProject.vcxproj" 프로젝트(Build 대상)입니다.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt graphicsclass.cpp
-         graphicsclass.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt modelcubeclass.cpp
+         modelcubeclass.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : 매크로 재정의
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50002) : 'DXGI_STATUS_OCCLUDED'의 이전 정의를 참조하십시오.
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : 매크로 재정의
@@ -77,4 +77,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:02.01
+경과 시간: 00:00:01.45

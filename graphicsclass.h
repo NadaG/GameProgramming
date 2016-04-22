@@ -8,6 +8,7 @@
 ///////////////////////
 // MY CLASS INCLUDES //
 ///////////////////////
+#include<vector>
 #include "d3dclass.h"
 #include "cameraclass.h"
 #include "modelcircleclass.h"
@@ -40,15 +41,23 @@ public:
 	bool Frame();
 
 private:
-	bool Render(float);
+	bool Render();
 
 private:
 	D3DClass* m_D3D;
 	CameraClass* m_Camera;
-	ModelClass* m_Model;
-	ModelClass* m_Model2;
+	vector<ModelClass*> m_Models;
 	LightShaderClass* m_LightShader;
 	LightClass* m_Light;
+	
+	bool CollisionCheck(ModelCircleClass, ModelCubeClass);
+
+	// TODO!!!!!!!!!!!!!!!!!! 나중에 할것 pimple인가? ㄷ
+	class CollisionChecker
+	{
+
+
+	};
 };
 
 #endif

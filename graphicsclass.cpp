@@ -8,8 +8,6 @@ GraphicsClass::GraphicsClass()
 {
 	m_D3D = 0;
 	m_Camera = 0;
-	m_Model = 0;
-	m_Model2 = 0;
 	m_LightShader = 0;
 	m_Light = 0;
 }
@@ -28,7 +26,6 @@ GraphicsClass::~GraphicsClass()
 bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
 	bool result;
-
 
 	// Create the Direct3D object.
 	m_D3D = new D3DClass;
@@ -56,22 +53,26 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
 	
 	// Create the model object.
-	m_Model = new ModelCircleClass;
-	m_Model2 = new ModelCubeClass;
-	if (!m_Model || !m_Model2)
-	{
+	ModelCircleClass* circle = new ModelCircleClass;
+	if (!circle)
 		return false;
-	}
+	
+	ModelCubeClass* cube = new ModelCubeClass;
+	if (!cube)
+		return false;
+	
+	m_Models.push_back(circle);
+	m_Models.push_back(cube);
 
 	// Initialize the model object.
-	result = m_Model->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
-	//m_Model->SetX();
-	result = m_Model2->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
-	//m_Model2->SetX();
-	if(!result)
+	for (int i = 0; i < m_Models.size(); i++)
 	{
-		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
-		return false;
+		result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
+		if (!result)
+		{
+			MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
+			return false;
+		}
 	}
 
 	// Create the light shader object.
@@ -125,18 +126,15 @@ void GraphicsClass::Shutdown()
 	}
 
 	// Release the model object.
-	if(m_Model)
-	{
-		m_Model->Shutdown();
-		delete m_Model;
-		m_Model = 0;
-	}
 
-	if (m_Model2)
+	for (int i = 0; i < m_Models.size(); i++)
 	{
-		m_Model2->Shutdown();
-		delete m_Model2;
-		m_Model2 = 0;
+		if (m_Models[i])
+		{
+			m_Models[i]->Shutdown();
+			delete m_Models[i];
+			m_Models[i] = 0;
+		}
 	}
 
 	// Release the camera object.
@@ -157,21 +155,26 @@ void GraphicsClass::Shutdown()
 	return;
 }
 
-
+// 각 프레임마다 호출되는 함수
 bool GraphicsClass::Frame()
 {
 	bool result;
-	static float rotation = 0.0f;
 
-	// Update the rotation variable each frame.
-	rotation += (float)D3DX_PI * 0.005f;
-	if(rotation > 360.0f)
+	for (int i = 0; i < m_Models.size(); i++)
 	{
-		rotation -= 360.0f;
+		m_Models[i]->Update();
 	}
-	
+
+	for (int i = 0; i < m_Models.size(); i++)
+	{
+		for (int j = i + 1; j < m_Models.size(); j++)
+		{
+
+		}
+	}
+
 	// Render the graphics scene.
-	result = Render(rotation);
+	result = Render();
 	if(!result)
 	{
 		return false;
@@ -181,11 +184,10 @@ bool GraphicsClass::Frame()
 }
 
 
-bool GraphicsClass::Render(float rotation)
+bool GraphicsClass::Render()
 {
-	D3DXMATRIX worldMatrix, viewMatrix, projectionMatrix;
+	D3DXMATRIX viewMatrix, projectionMatrix;
 	bool result;
-
 
 	// Clear the buffers to begin the scene.
 	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
@@ -195,41 +197,23 @@ bool GraphicsClass::Render(float rotation)
 
 	// Get the world, view, and projection matrices from the camera and d3d objects.
 	m_Camera->GetViewMatrix(viewMatrix);
-	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
-	D3DXMatrixRotationY(&worldMatrix, rotation);
-
-	//// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
-	m_Model->Render(m_D3D->GetDeviceContext());
-
+	
+	for (int i = 0; i < m_Models.size(); i++)
+	{
+		m_Models[i]->Render(m_D3D->GetDeviceContext());
+		result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
+			m_Models[i]->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		if (!result)
+		{
+			return false;
+		}
+	}
 	// Render the model using the light shader.
-	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, 
-								   m_Model->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(), 
-								   m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
-	if(!result)
-	{
-		return false;
-	}
-
-	//D3DXMatrixRotationX(&worldMatrix, rotation);
-
-	D3DXMatrixIdentity(&worldMatrix);
-	D3DXMatrixTranslation(&worldMatrix, 2.0f, 0.0f, 0.0f);
-
-	// 각 모델을 트리 구조로 만들어서 처리해야 할듯
-	// 충돌 처리 같은 부분도 처리해야함
-	m_Model2->Render(m_D3D->GetDeviceContext());
-
-	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model2->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-		m_Model2->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
-		m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
-	if (!result)
-	{
-		return false;
-	}
-
+	
 	// Present the rendered scene to the screen.
 	m_D3D->EndScene();
 

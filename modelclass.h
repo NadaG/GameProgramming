@@ -13,12 +13,11 @@
 #include <fstream>
 using namespace std;
 
-
 ///////////////////////
 // MY CLASS INCLUDES //
 ///////////////////////
 #include "textureclass.h"
-
+#include "inputclass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
@@ -51,6 +50,9 @@ public:
 
 	int GetIndexCount();
 	ID3D11ShaderResourceView* GetTexture();
+	D3DXMATRIX GetWorldMatrix();
+
+	virtual void Update() = 0;
 
 	//virtual void SetRadius(float r) = 0;
 	//virtual void SetX() = 0;
@@ -71,6 +73,12 @@ protected:
 	int m_vertexCount, m_indexCount;
 	TextureClass* m_Texture;
 	ModelType* m_model;
+	D3DXMATRIX m_worldMatrix;
+
+	// TODO!!!!!!!!!!!!!!!!!!!!!!
+	D3DXVECTOR3 m_worldPosition;
+	D3DXVECTOR3 m_worldScale;
+	D3DXVECTOR3 m_worldRotation;
 };
 
 #endif

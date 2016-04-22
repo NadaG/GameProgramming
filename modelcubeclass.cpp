@@ -249,8 +249,14 @@ bool ModelCubeClass::LoadModel()
 
 	return true;
 }
-//
-//void ModelCubeClass::SetX()
-//{
-//
-//}
+
+void ModelCubeClass::Update()
+{
+	static float x = 0.0f;
+
+	if (InputClass::GetInstance()->IsKeyDown(VK_LEFT))
+		x -= 0.1f;
+	if (InputClass::GetInstance()->IsKeyDown(VK_RIGHT))
+		x += 0.1f;
+	D3DXMatrixTranslation(&m_worldMatrix, x, 0.0f, 0.0f);
+}

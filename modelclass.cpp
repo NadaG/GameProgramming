@@ -10,6 +10,7 @@ ModelClass::ModelClass()
 	m_indexBuffer = 0;
 	m_Texture = 0;
 	m_model = 0;
+	D3DXMatrixIdentity(&m_worldMatrix);
 }
 
 
@@ -87,6 +88,10 @@ ID3D11ShaderResourceView* ModelClass::GetTexture()
 	return m_Texture->GetTexture();
 }
 
+D3DXMATRIX ModelClass::GetWorldMatrix()
+{
+	return m_worldMatrix;
+}
 
 bool ModelClass::InitializeBuffers(ID3D11Device* device)
 {
@@ -96,7 +101,6 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
     D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
 	int i;
-
 
 	// Create the vertex array.
 	vertices = new VertexType[m_vertexCount];

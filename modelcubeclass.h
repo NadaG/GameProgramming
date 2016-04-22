@@ -21,6 +21,8 @@ public:
 		m_center = { 0, -3, 2 };
 	}
 
+	virtual void Update() override;
+
 	const float& GetWidth() const;
 	const float& GetHeight() const;
 	const float& GetDepth() const;
