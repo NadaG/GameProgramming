@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "modelclass.h"
 
-
 ModelClass::ModelClass()
 {
 	m_vertexBuffer = 0;
@@ -11,13 +10,15 @@ ModelClass::ModelClass()
 	m_Texture = 0;
 	m_model = 0;
 	D3DXMatrixIdentity(&m_worldMatrix);
-}
 
+	m_worldPosition = { 1.0f, 0.0f, 1.0f };
+	m_worldScale = { 1.0f, 1.0f, 1.0f };
+	m_worldRotation = { 0.0f, 0.0f, 0.0f };
+}
 
 ModelClass::ModelClass(const ModelClass& other)
 {
 }
-
 
 ModelClass::~ModelClass()
 {
@@ -52,6 +53,22 @@ bool ModelClass::Initialize(ID3D11Device* device, WCHAR* textureFilename)
 	return true;
 }
 
+void ModelClass::SyncMatrix()
+{
+	D3DXMATRIX m;
+	D3DXMatrixIdentity(&m_worldMatrix);
+	D3DXMatrixTranslation(&m, m_worldPosition.x, m_worldPosition.y, m_worldPosition.z);
+	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
+
+	D3DXMatrixRotationYawPitchRoll(&m, m_worldRotation.y, m_worldRotation.x, m_worldRotation.z);
+	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
+
+	D3DXMatrixScaling(&m, m_worldScale.x, m_worldScale.y, m_worldScale.z);
+	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
+
+	//D3DXMatrixRotationYawPitchRoll(&m_worldMatrix, m_worldRotation.x, m_worldRotation.y, m_worldRotation.z);
+	//D3DXMatrixScaling(&m_worldMatrix, m_worldScale.x, m_worldScale.y, m_worldScale.z);
+}
 
 void ModelClass::Shutdown()
 {
@@ -76,12 +93,10 @@ void ModelClass::Render(ID3D11DeviceContext* deviceContext)
 	return;
 }
 
-
 int ModelClass::GetIndexCount()
 {
 	return m_indexCount;
 }
-
 
 ID3D11ShaderResourceView* ModelClass::GetTexture()
 {
@@ -176,7 +191,6 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	return true;
 }
 
-
 void ModelClass::ShutdownBuffers()
 {
 	// Release the index buffer.
@@ -196,12 +210,10 @@ void ModelClass::ShutdownBuffers()
 	return;
 }
 
-
 void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
 	unsigned int stride;
 	unsigned int offset;
-
 
 	// Set vertex buffer stride and offset.
 	stride = sizeof(VertexType); 
@@ -218,7 +230,6 @@ void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 
 	return;
 }
-
 
 bool ModelClass::LoadTexture(ID3D11Device* device, WCHAR* filename)
 {
@@ -240,7 +251,6 @@ bool ModelClass::LoadTexture(ID3D11Device* device, WCHAR* filename)
 
 	return true;
 }
-
 
 void ModelClass::ReleaseTexture()
 {

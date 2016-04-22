@@ -49,7 +49,4 @@ void ModelCircleClass::Update()
 	r_y += 0.01f;
 	if (r_y > 360.0f)
 		r_y = -360.0f;
-	//m_worldMatrix
-
-	D3DXMatrixRotationY(&m_worldMatrix, r_y);
 }

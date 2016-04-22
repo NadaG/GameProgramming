@@ -53,6 +53,7 @@ public:
 	D3DXMATRIX GetWorldMatrix();
 
 	virtual void Update() = 0;
+	void SyncMatrix();
 
 	//virtual void SetRadius(float r) = 0;
 	//virtual void SetX() = 0;

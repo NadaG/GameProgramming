@@ -163,6 +163,7 @@ bool GraphicsClass::Frame()
 	for (int i = 0; i < m_Models.size(); i++)
 	{
 		m_Models[i]->Update();
+		m_Models[i]->SyncMatrix();
 	}
 
 	for (int i = 0; i < m_Models.size(); i++)
