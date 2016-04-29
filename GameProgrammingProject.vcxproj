@@ -81,7 +81,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp" />
+    <ClCompile Include="colliderclass.cpp" />
+    <ClCompile Include="collidercubeclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="graphicsclass.cpp" />
     <ClCompile Include="inputclass.cpp" />
     <ClCompile Include="lightclass.cpp" />
@@ -90,12 +93,16 @@
     <ClCompile Include="modelcircleclass.cpp" />
     <ClCompile Include="modelclass.cpp" />
     <ClCompile Include="modelcubeclass.cpp" />
+    <ClCompile Include="modelsphereclass.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cameraclass.h" />
+    <ClInclude Include="colliderclass.h" />
+    <ClInclude Include="collidercubeclass.h" />
     <ClInclude Include="d3dclass.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="graphicsclass.h" />
     <ClInclude Include="inputclass.h" />
     <ClInclude Include="lightclass.h" />
@@ -103,6 +110,7 @@
     <ClInclude Include="modelcircleclass.h" />
     <ClInclude Include="modelclass.h" />
     <ClInclude Include="modelcubeclass.h" />
+    <ClInclude Include="modelsphereclass.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
   </ItemGroup>

@@ -252,30 +252,10 @@ bool ModelCubeClass::LoadModel()
 
 void ModelCubeClass::Update()
 {
-	static float x = 0.0f;
-	static float r_x = 0.0f;
+	m_worldPosition = { 0.0f, 5.0f, 10.0f };
+}
 
-	if (InputClass::GetInstance()->IsKeyDown(VK_LEFT))
-	{
-		m_worldPosition.x = x;
-		x -= 0.1f;
-	}
-	if (InputClass::GetInstance()->IsKeyDown(VK_RIGHT))
-	{
-		m_worldPosition.x = x;
-		x += 0.1f;
-	}
+void ModelCubeClass::OnCollisionStay(ModelClass* model)
+{
 
-	if (InputClass::GetInstance()->IsKeyDown(VK_UP))
-	{
-		m_worldRotation.x = r_x;
-		r_x += 0.1f;
-	}
-
-	if (InputClass::GetInstance()->IsKeyDown(VK_DOWN))
-	{
-		m_worldRotation.x = r_x;
-		r_x -= 0.1f;
-	}
-	//m_worldScale = { 2.0f, 1.0f, 1.0f };
 }

@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "systemclass.h"
 
-
 SystemClass::SystemClass()
 {
 	//m_Input = 0;
@@ -91,7 +90,6 @@ void SystemClass::Run()
 	MSG msg;
 	bool done, result;
 
-
 	// Initialize the message structure.
 	ZeroMemory(&msg, sizeof(MSG));
 	
@@ -152,6 +150,13 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam
 {
 	switch (umsg)
 	{
+	case WM_CREATE:
+
+		AllocConsole();
+		FILE *acStreamOut;
+		FILE *acStreamIn;
+		freopen_s(&acStreamOut, "CONOUT$", "wt", stdout);
+		freopen_s(&acStreamIn, "CONIN$", "r", stdin);
 		// Check if a key has been pressed on the keyboard.
 	case WM_KEYDOWN:
 
@@ -283,26 +288,20 @@ void SystemClass::ShutdownWindows()
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 {
-	switch(umessage)
+	switch (umessage)
 	{
-		// Check if the window is being destroyed.
-		case WM_DESTROY:
-		{
-			PostQuitMessage(0);
-			return 0;
-		}
-
+	case WM_DESTROY:
+		FreeConsole();
+		PostQuitMessage(0);
+		return 0;
 		// Check if the window is being closed.
-		case WM_CLOSE:
-		{
-			PostQuitMessage(0);		
-			return 0;
-		}
-
+	case WM_CLOSE:
+		FreeConsole();
+		PostQuitMessage(0);
+		return 0;
 		// All other messages pass to the message handler in the system class.
-		default:
-		{
-			return ApplicationHandle->MessageHandler(hwnd, umessage, wparam, lparam);
-		}
+	default:
+		return ApplicationHandle->MessageHandler(hwnd, umessage, wparam, lparam);
+
 	}
 }

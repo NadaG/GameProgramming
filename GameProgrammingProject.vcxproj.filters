@@ -51,6 +51,18 @@
     <ClCompile Include="modelcubeclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="colliderclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="collidercubeclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="modelsphereclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lightshaderclass.h">
@@ -84,6 +96,18 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="modelcubeclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="colliderclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="collidercubeclass.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="modelsphereclass.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,13 +4,13 @@
 #ifndef _MODELCLASS_H_
 #define _MODELCLASS_H_
 
-
 //////////////
 // INCLUDES //
 //////////////
 #include <d3d11.h>
 #include <d3dx10math.h>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 ///////////////////////
@@ -18,6 +18,7 @@ using namespace std;
 ///////////////////////
 #include "textureclass.h"
 #include "inputclass.h"
+#include "Debug.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
@@ -52,9 +53,13 @@ public:
 	ID3D11ShaderResourceView* GetTexture();
 	D3DXMATRIX GetWorldMatrix();
 
-	virtual void Update() = 0;
+	virtual void Update();
 	void SyncMatrix();
+	virtual void OnCollisionStay(ModelClass* model);
 
+	const D3DXVECTOR3& GetPosition() const{ return m_worldPosition; }
+	const D3DXVECTOR3& GetRotation() const{ return m_worldRotation; }
+	const D3DXVECTOR3& GetScale() const{ return m_worldScale; }
 	//virtual void SetRadius(float r) = 0;
 	//virtual void SetX() = 0;
 
@@ -66,7 +71,7 @@ protected:
 	bool LoadTexture(ID3D11Device*, WCHAR*);
 	void ReleaseTexture();
 
-	virtual bool LoadModel() = 0;
+	virtual bool LoadModel();
 	void ReleaseModel();
 
 protected:
@@ -76,7 +81,16 @@ protected:
 	ModelType* m_model;
 	D3DXMATRIX m_worldMatrix;
 
-	// TODO!!!!!!!!!!!!!!!!!!!!!!
+	// 트리 구조 구현을 위한 부분
+	// TODO!!!!!!!!!!!!!!!!!!!!!!!
+	ModelClass* m_parent;
+	vector<ModelClass*> m_children; 
+
+	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!
+	// GameObject class를 만들어 map으로
+	// Component들을 넣을 것
+
+	// 이 행렬들을 조작하면 오브젝트의 움직임이 가능하도록 구현함
 	D3DXVECTOR3 m_worldPosition;
 	D3DXVECTOR3 m_worldScale;
 	D3DXVECTOR3 m_worldRotation;

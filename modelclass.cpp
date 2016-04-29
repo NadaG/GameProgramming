@@ -57,15 +57,15 @@ void ModelClass::SyncMatrix()
 {
 	D3DXMATRIX m;
 	D3DXMatrixIdentity(&m_worldMatrix);
-	D3DXMatrixTranslation(&m, m_worldPosition.x, m_worldPosition.y, m_worldPosition.z);
+	D3DXMatrixScaling(&m, m_worldScale.x, m_worldScale.y, m_worldScale.z);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
 	D3DXMatrixRotationYawPitchRoll(&m, m_worldRotation.y, m_worldRotation.x, m_worldRotation.z);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
-	D3DXMatrixScaling(&m, m_worldScale.x, m_worldScale.y, m_worldScale.z);
+	D3DXMatrixTranslation(&m, m_worldPosition.x, m_worldPosition.y, m_worldPosition.z);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
-
+	
 	//D3DXMatrixRotationYawPitchRoll(&m_worldMatrix, m_worldRotation.x, m_worldRotation.y, m_worldRotation.z);
 	//D3DXMatrixScaling(&m_worldMatrix, m_worldScale.x, m_worldScale.y, m_worldScale.z);
 }
@@ -274,4 +274,21 @@ void ModelClass::ReleaseModel()
 	}
 
 	return;
+}
+
+bool ModelClass::LoadModel()
+{
+	return false;
+}
+
+// TODO!!!!!!!!!!!!!!!!!
+// 필요없는 함수 정의
+void ModelClass::Update()
+{
+}
+
+// TODO!!!!!!!!!!!!!!!!!
+// 필요없는 함수 정의
+void ModelClass::OnCollisionStay(ModelClass* model)
+{
 }

@@ -9,6 +9,7 @@
 // MY CLASS INCLUDES //
 ///////////////////////
 #include<vector>
+#include<xtree>
 #include "d3dclass.h"
 #include "cameraclass.h"
 #include "modelcircleclass.h"
@@ -50,9 +51,9 @@ private:
 	LightShaderClass* m_LightShader;
 	LightClass* m_Light;
 	
-	bool CollisionCheck(ModelCircleClass, ModelCubeClass);
+	bool CollisionCheck(ModelClass*, ModelClass*);
 
-	// TODO!!!!!!!!!!!!!!!!!! 나중에 할것 pimple인가? ㄷ
+	// TODO!!!!!!!!!!!!!!!!!! 나중에 할것 pimpl 인가? ㄷ
 	class CollisionChecker
 	{
 

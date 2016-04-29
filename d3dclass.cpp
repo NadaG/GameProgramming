@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "d3dclass.h"
 
-
 D3DClass::D3DClass()
 {
 	m_swapChain = 0;
@@ -413,7 +412,6 @@ void D3DClass::Shutdown()
 void D3DClass::BeginScene(float red, float green, float blue, float alpha)
 {
 	float color[4];
-
 
 	// Setup the color to clear the buffer to.
 	color[0] = red;

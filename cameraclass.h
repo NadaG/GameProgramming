@@ -19,7 +19,8 @@ class CameraClass
 public:
 	CameraClass();
 	CameraClass(const CameraClass&);
-	~CameraClass();
+	// ¼Ò¸êÀÚ¸¦ virtual·Î ÇØµÖ¾ßÇÔ
+	virtual ~CameraClass();
 
 	void SetPosition(float, float, float);
 	void SetRotation(float, float, float);

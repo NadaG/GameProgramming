@@ -12,7 +12,6 @@ GraphicsClass::GraphicsClass()
 	m_Light = 0;
 }
 
-
 GraphicsClass::GraphicsClass(const GraphicsClass& other)
 {
 }
@@ -21,7 +20,6 @@ GraphicsClass::GraphicsClass(const GraphicsClass& other)
 GraphicsClass::~GraphicsClass()
 {
 }
-
 
 bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
@@ -160,6 +158,8 @@ bool GraphicsClass::Frame()
 {
 	bool result;
 
+	// 하... 망했다 너무 맘대로다
+	// 보통 어떤식으로 짜는지 모르니까 넘 힘들다 ㅠ
 	for (int i = 0; i < m_Models.size(); i++)
 	{
 		m_Models[i]->Update();
@@ -170,7 +170,17 @@ bool GraphicsClass::Frame()
 	{
 		for (int j = i + 1; j < m_Models.size(); j++)
 		{
+			if (CollisionCheck(m_Models[i], m_Models[j]))
+			{
+				// TODO!!!!!!!!!!!!!!!!!!!!!
+				// 누구와 부딪혔는지 인자로 넘겨줄 것!!!!!!!!
+				m_Models[i]->OnCollisionStay(m_Models[j]);
+				m_Models[j]->OnCollisionStay(m_Models[i]);
 
+				// TODO!!!!!!!!!!!!!!!!!!!!!!!
+				// 메모리 누수를 신경씁시다
+				m_Models.erase(m_Models.begin() + j);
+			}
 		}
 	}
 
@@ -219,4 +229,25 @@ bool GraphicsClass::Render()
 	m_D3D->EndScene();
 
 	return true;
+}
+
+double GetDistance(D3DXVECTOR3 a, D3DXVECTOR3 b)
+{
+	return sqrt((a.x - b.x)*(a.x - b.x) +
+		(a.y - b.y)*(a.y - b.y) +
+		(a.z - b.z)*(a.z - b.z));
+}
+
+bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
+{
+	if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
+		model1->GetScale().x + model2->GetScale().x)
+	{
+		return true;
+	}
+	else
+	{
+	}
+
+	return false;
 }

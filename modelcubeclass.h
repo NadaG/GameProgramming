@@ -17,26 +17,16 @@ public:
 
 	ModelCubeClass()
 	{
-		m_size = { 2, 2, 2 };
-		m_center = { 0, -3, 2 };
 	}
 
 	virtual void Update() override;
+	virtual void OnCollisionStay(ModelClass* model) override;
 
-	const float& GetWidth() const;
-	const float& GetHeight() const;
-	const float& GetDepth() const;
-
-	const float& GetX() const;
-	const float& GetY() const;
-	const float& GetZ() const;
-
-	void SetPosition(float x, float y, float z);
-	void SetSize(float x, float y, float z);
+	const float& GetX() const{ return m_worldScale.x; }
+	const float& GetY() const{ return m_worldScale.y; }
+	const float& GetZ() const{ return m_worldScale.z; }
 
 private:
-	D3DVECTOR m_size;
-	D3DVECTOR m_center;
 };
 
 #endif
