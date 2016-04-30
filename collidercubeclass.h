@@ -11,15 +11,12 @@ class ColliderCube : public Collider
 {
 public:
 	ColliderCube();
-	ColliderCube(ModelClass modelClass);
+	ColliderCube(Collider model);
 	ColliderCube(const ColliderCube&);
 	virtual ~ColliderCube();
 
 protected:
-	virtual void Update() override;
-
 private:
-	ModelClass m_modelClass;
 
 };
 

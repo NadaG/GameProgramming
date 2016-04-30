@@ -23,7 +23,23 @@ Debug::~Debug()
 {
 }
 
-void Debug::Log(string str)
+void Debug::Log(const string& str)
 {
 	cout << str << endl;
+}
+
+
+void Debug::Log(const int& num)
+{
+	cout << num << endl;
+}
+
+void Debug::Log(const float& fnum)
+{
+	cout << fnum << endl;
+}
+
+void Debug::Log(const D3DXVECTOR3& vec)
+{
+	cout << "x:" << vec.x << " y:" << vec.y << " z:" << vec.z << endl;
 }

@@ -83,6 +83,7 @@
     <ClCompile Include="cameraclass.cpp" />
     <ClCompile Include="colliderclass.cpp" />
     <ClCompile Include="collidercubeclass.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="graphicsclass.cpp" />
@@ -101,6 +102,7 @@
     <ClInclude Include="cameraclass.h" />
     <ClInclude Include="colliderclass.h" />
     <ClInclude Include="collidercubeclass.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="d3dclass.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="graphicsclass.h" />

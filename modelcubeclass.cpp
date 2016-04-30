@@ -257,5 +257,4 @@ void ModelCubeClass::Update()
 
 void ModelCubeClass::OnCollisionStay(ModelClass* model)
 {
-
 }

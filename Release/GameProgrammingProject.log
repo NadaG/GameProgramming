@@ -1,0 +1,39 @@
+﻿빌드 시작: 2016-04-30 오후 4:22:57
+     1>2 노드의 "C:\Users\Nada\Desktop\GameProgrammingProject\GameProgrammingProject\GameProgrammingProject.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt cameraclass.cpp colliderclass.cpp collidercubeclass.cpp Component.cpp d3dclass.cpp Debug.cpp graphicsclass.cpp inputclass.cpp lightclass.cpp lightshaderclass.cpp main.cpp modelcircleclass.cpp modelclass.cpp modelcubeclass.cpp modelsphereclass.cpp systemclass.cpp textureclass.cpp
+         cameraclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\cameraclass.h(11): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         colliderclass.cpp
+         collidercubeclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\d3dclass.h(23): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         Component.cpp
+         d3dclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\d3dclass.h(23): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         Debug.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\d3dclass.h(23): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         graphicsclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\d3dclass.h(23): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         inputclass.cpp
+         lightclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\lightclass.h(11): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         lightshaderclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\lightshaderclass.h(12): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         main.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\d3dclass.h(23): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         modelcircleclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\modelcircleclass.h(5): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         modelclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\modelclass.h(11): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         modelcubeclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\modelcubeclass.h(4): fatal error C1083: 포함 파일을 열 수 없습니다. 'D3DX11.h': No such file or directory
+         modelsphereclass.cpp
+         systemclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\d3dclass.h(23): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx10math.h': No such file or directory
+         textureclass.cpp
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\textureclass.h(12): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx11tex.h': No such file or directory
+     1>"C:\Users\Nada\Desktop\GameProgrammingProject\GameProgrammingProject\GameProgrammingProject.vcxproj" 프로젝트를 빌드했습니다(Build 대상). - 실패
+
+빌드하지 못했습니다.
+
+경과 시간: 00:00:08.06

@@ -11,9 +11,3 @@ Collider::Collider(const Collider&)
 Collider::~Collider()
 {
 }
-
-
-void Collider::Update()
-{
-
-}

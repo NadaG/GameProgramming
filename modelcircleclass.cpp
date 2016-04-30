@@ -47,34 +47,37 @@ bool ModelCircleClass::LoadModel()
 // 변수 관리 잘할 것
 static float y = -5.0f;
 static float yv = 0.0f;
+static float xv = 0.0f;
 
 void ModelCircleClass::Update()
 {	
 	static float x = 0.0f;
-	static float v = 0.0f;
 	static bool isFired = false;
 
 	if (InputClass::GetInstance()->IsKeyDown(VK_LEFT) &&
 		!isFired)
-		v -= 0.05f;
+		x -= 0.05f;
 
 	if (InputClass::GetInstance()->IsKeyDown(VK_RIGHT) &&
 		!isFired)
-		v += 0.05f;
+		x += 0.05f;
 
 	if (InputClass::GetInstance()->IsKeyDown(VK_SPACE) &&
 		!isFired)
 	{
 		isFired = true;
-		yv = 0.4f;
+		yv = 0.3f;
 	}
 
 	y += yv;
-	m_worldPosition = { x + v, y, 10.0f };
+	x += xv;
+	m_worldPosition = { x, y, 10.0f };
 	m_worldRotation = { 0.0f, 135.0f, 0.0f };
 }
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
-	yv = -0.4f;
+	yv = -0.3f;
+
+	xv = (GetPosition().x - model->GetPosition().x)*0.4f / 1.0f;
 }

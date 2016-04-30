@@ -4,9 +4,9 @@
 #ifndef _COLLIDERCLASS_H_
 #define _COLLIDERCLASS_H_
 
-#include "modelclass.h"
+#include "Component.h"
 
-class Collider : public ModelClass
+class Collider : public Component
 {
 public:
 	Collider();
@@ -14,9 +14,6 @@ public:
 	virtual ~Collider();
 
 protected:
-
-	virtual void Update() override;
-
 private:
 };
 

@@ -11,6 +11,7 @@
 #include <d3dx10math.h>
 #include <fstream>
 #include <vector>
+#include <map>
 using namespace std;
 
 ///////////////////////
@@ -19,10 +20,12 @@ using namespace std;
 #include "textureclass.h"
 #include "inputclass.h"
 #include "Debug.h"
+#include "Component.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
 ////////////////////////////////////////////////////////////////////////////////
+
 class ModelClass
 {
 protected:
@@ -63,6 +66,8 @@ public:
 	//virtual void SetRadius(float r) = 0;
 	//virtual void SetX() = 0;
 
+	const Component& GetComponent(COMPONENT_ID component_id) const;
+
 protected:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
@@ -89,6 +94,7 @@ protected:
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!
 	// GameObject class를 만들어 map으로
 	// Component들을 넣을 것
+	map<COMPONENT_ID, Component> m_components;
 
 	// 이 행렬들을 조작하면 오브젝트의 움직임이 가능하도록 구현함
 	D3DXVECTOR3 m_worldPosition;
