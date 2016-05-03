@@ -49,6 +49,14 @@ static float y = -5.0f;
 static float yv = 0.0f;
 static float xv = 0.0f;
 
+void ModelCircleClass::Start()
+{
+	Collider* col = new Collider(COL_SPHERE);
+	SetComponent(COM_COLLIDER, col);
+	// col->SetCenter({ 0.0f, 0.0f, 0.0f });
+	// m_worldScale.x += 2.0f;
+}
+
 void ModelCircleClass::Update()
 {	
 	static float x = 0.0f;

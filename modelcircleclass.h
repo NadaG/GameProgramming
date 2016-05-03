@@ -23,6 +23,7 @@ public:
 
 	virtual void Update() override;
 	virtual void OnCollisionStay(ModelClass* model) override;
+	virtual void Start() override;
 
 	const float& GetR_X() const{ return m_r*m_worldScale.x; }
 	const float& GetR_Y() const{ return m_r*m_worldScale.y; }

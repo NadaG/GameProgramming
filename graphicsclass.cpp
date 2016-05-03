@@ -51,6 +51,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
 	
 	// Create the model object.
+	// 여기서 초기화함!!!!!!!!!!!!!!!!!
 	ModelCircleClass* circle = new ModelCircleClass;
 	if (!circle)
 		return false;
@@ -153,6 +154,11 @@ void GraphicsClass::Shutdown()
 	return;
 }
 
+//bool GraphicsClass::Start()
+//{
+//
+//}
+
 // 각 프레임마다 호출되는 함수
 bool GraphicsClass::Frame()
 {
@@ -170,16 +176,20 @@ bool GraphicsClass::Frame()
 	{
 		for (int j = i + 1; j < m_Models.size(); j++)
 		{
-			if (CollisionCheck(m_Models[i], m_Models[j]))
+			if (m_Models[i]->isComponentExist(COM_COLLIDER) &&
+				m_Models[j]->isComponentExist(COM_COLLIDER))
 			{
-				// TODO!!!!!!!!!!!!!!!!!!!!!
-				// 누구와 부딪혔는지 인자로 넘겨줄 것!!!!!!!!
-				m_Models[i]->OnCollisionStay(m_Models[j]);
-				m_Models[j]->OnCollisionStay(m_Models[i]);
+				if (CollisionCheck(m_Models[i], m_Models[j]))
+				{
+					// TODO!!!!!!!!!!!!!!!!!!!!!
+					// 누구와 부딪혔는지 인자로 넘겨줄 것!!!!!!!!
+					m_Models[i]->OnCollisionStay(m_Models[j]);
+					m_Models[j]->OnCollisionStay(m_Models[i]);
 
-				// TODO!!!!!!!!!!!!!!!!!!!!!!!
-				// 메모리 누수를 신경씁시다
-				m_Models.erase(m_Models.begin() + j);
+					// TODO!!!!!!!!!!!!!!!!!!!!!!!
+					// 메모리 누수를 신경씁시다
+					m_Models.erase(m_Models.begin() + j);
+				}
 			}
 		}
 	}
@@ -231,6 +241,9 @@ bool GraphicsClass::Render()
 	return true;
 }
 
+
+// TODO!!!!!!!!!!!!!!!!!!!!!!!!
+// MYMATH 클래스로 다 빼낼것
 double GetDistance(D3DXVECTOR3 a, D3DXVECTOR3 b)
 {
 	return sqrt((a.x - b.x)*(a.x - b.x) +
@@ -238,8 +251,47 @@ double GetDistance(D3DXVECTOR3 a, D3DXVECTOR3 b)
 		(a.z - b.z)*(a.z - b.z));
 }
 
+// TODO!!!!!!!!!!!!!!!!!!!!!!!!
+// MYMATH 클래스로 다 빼낼것
+D3DXVECTOR3 ScaleProduct(D3DXVECTOR3 a, D3DXVECTOR3 b)
+{
+	D3DXVECTOR3 ret;
+	ret.x = a.x*b.x;
+	ret.y = a.y*b.y;
+	ret.z = a.z*b.z;
+	return ret;
+}
+
+// TODO!!!!!!!!!!!!!!!!!!!!!!!!
+// MYMATH 클래스로 다 빼낼것
+D3DXVECTOR3 VECTOR3PLUS(D3DXVECTOR3 a, D3DXVECTOR3 b)
+{
+	D3DXVECTOR3 ret;
+	ret.x = a.x + b.x;
+	ret.y = a.y + b.y;
+	ret.z = a.z + b.z;
+	return ret;
+}
+
 bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 {
+	Collider* model1_col = ((Collider*)model1->GetComponent(COM_COLLIDER));
+	Collider* model2_col = ((Collider*)model2->GetComponent(COM_COLLIDER));
+
+	COLLIDER_TYPE col_type1 = model1_col->GetType();
+	COLLIDER_TYPE col_type2 = model2_col->GetType();
+
+	D3DXVECTOR3 center1, center2, size1, size2, rot1, rot2;
+	center1 = VECTOR3PLUS(model1->GetPosition(),
+		ScaleProduct(model1_col->GetCenter(), model1->GetScale()));
+	center2 = model2->GetPosition() + ScaleProduct(model2_col->GetCenter(), model2->GetScale());
+
+
+
+	Debug::GetInstance()->Log(center1);
+	
+	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// 좌표계 관리 해야함
 	if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
 		model1->GetScale().x + model2->GetScale().x)
 	{
@@ -248,6 +300,7 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	else
 	{
 	}
+
 
 	return false;
 }

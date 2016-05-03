@@ -250,6 +250,12 @@ bool ModelCubeClass::LoadModel()
 	return true;
 }
 
+void ModelCubeClass::Start()
+{
+	Collider* col = new Collider(COL_CUBE);
+	SetComponent(COM_COLLIDER, col);
+}
+
 void ModelCubeClass::Update()
 {
 	m_worldPosition = { 0.0f, 5.0f, 10.0f };

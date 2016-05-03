@@ -3,6 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "modelclass.h"
 
+static int id = 0;
+
 ModelClass::ModelClass()
 {
 	m_vertexBuffer = 0;
@@ -14,6 +16,8 @@ ModelClass::ModelClass()
 	m_worldPosition = { 1.0f, 0.0f, 1.0f };
 	m_worldScale = { 1.0f, 1.0f, 1.0f };
 	m_worldRotation = { 0.0f, 0.0f, 0.0f };
+
+	m_id = id++;
 }
 
 ModelClass::ModelClass(const ModelClass& other)
@@ -49,6 +53,8 @@ bool ModelClass::Initialize(ID3D11Device* device, WCHAR* textureFilename)
 	{
 		return false;
 	}
+
+	Start();
 
 	return true;
 }
@@ -293,7 +299,46 @@ void ModelClass::OnCollisionStay(ModelClass* model)
 {
 }
 
-const Component& ModelClass::GetComponent(COMPONENT_ID component_id) const
+// TODO!!!!!!!!!!!!!!!!!
+// 필요없는 함수 정의
+void ModelClass::Start()
+{
+}
+
+const Component* ModelClass::GetComponent(COMPONENT_ID component_id) const
 {
 	return m_components.find(component_id)->second;
+}
+
+void ModelClass::SetComponent(COMPONENT_ID component_id, Component* component)
+{
+	m_components[component_id] = component;
+}
+
+void ModelClass::DeleteComponent(COMPONENT_ID component_id)
+{
+	if (isComponentExist(component_id))
+	{
+		m_components.erase(component_id);
+	}
+}
+
+bool ModelClass::isComponentExist(COMPONENT_ID component_id)
+{
+	// nullptr로 할 경우 새 원소가 생성될 수 있기 때문에
+	// 이런식으로 존재하는지 확인한다.
+	return m_components.find(component_id) != m_components.end();
+}
+
+void ModelClass::AddChild(const ModelClass* model)
+{
+
+}
+
+ModelClass* ModelClass::GetChild() const
+{
+	for (int i = 0; i < m_children.size(); i++)
+	{
+		return m_children[i];
+	}
 }

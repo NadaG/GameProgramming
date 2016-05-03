@@ -3,8 +3,9 @@
 
 enum COMPONENT_ID
 {
-	COLLiDER = 0,
-	SPRITERENDERER = 1
+	COM_NONE = 0,
+	COM_COLLIDER = 1,
+	COM_SPRITERENDERER = 2
 };
 
 class Component
@@ -13,7 +14,6 @@ public:
 	Component();
 	Component(const Component& component);
 	virtual ~Component();
-
 
 protected:
 private:

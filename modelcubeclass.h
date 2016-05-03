@@ -21,6 +21,7 @@ public:
 
 	virtual void Update() override;
 	virtual void OnCollisionStay(ModelClass* model) override;
+	virtual void Start() override;
 
 	const float& GetX() const{ return m_worldScale.x; }
 	const float& GetY() const{ return m_worldScale.y; }
