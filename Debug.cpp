@@ -23,6 +23,11 @@ Debug::~Debug()
 {
 }
 
+void Debug::Log(const char* str)
+{
+	cout << str << endl;
+}
+
 void Debug::Log(const string& str)
 {
 	cout << str << endl;

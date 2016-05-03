@@ -14,6 +14,7 @@ class Debug
 {
 public:
 	static Debug* GetInstance();
+	void Log(const char* str);
 	void Log(const string& str);
 	void Log(const int& num);
 	void Log(const float& fnum);

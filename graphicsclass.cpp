@@ -282,13 +282,14 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	COLLIDER_TYPE col_type2 = model2_col->GetType();
 
 	D3DXVECTOR3 center1, center2, size1, size2, rot1, rot2;
+
 	center1 = VECTOR3PLUS(model1->GetPosition(),
 		ScaleProduct(model1_col->GetCenter(), model1->GetScale()));
-	center2 = model2->GetPosition() + ScaleProduct(model2_col->GetCenter(), model2->GetScale());
+	center2 = VECTOR3PLUS(model2->GetPosition(),
+		ScaleProduct(model2_col->GetCenter(), model2->GetScale()));
 
-
-
-	Debug::GetInstance()->Log(center1);
+	size1 = ScaleProduct(model1_col->GetSize(), model1->GetScale());
+	size2 = ScaleProduct(model2_col->GetSize(), model2->GetScale());
 	
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// 좌표계 관리 해야함
@@ -302,5 +303,13 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	}
 
 
+	Vector3f a = { 1.0f, 2.0f, 5.0f };
+	Vector3f b = { 2.0f, 1.5f, 1.0f };
+
+	float aa = (a*b).GetX();
+	float bb = (a*b).GetY();
+	float cc = (a*b).GetZ();
+
+	
 	return false;
 }
