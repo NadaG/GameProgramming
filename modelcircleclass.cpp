@@ -6,39 +6,7 @@ bool ModelCircleClass::LoadModel()
 	m_vertexCount = m_triNum * 3;
 	m_indexCount = m_vertexCount;
 
-	float per_radian = 2 * 3.141592 / m_triNum;
-	float now_radian = 0;
-	for (int i = 0; i < m_triNum * 3; i += 3)
-	{
-		m_model[i].x = 0.0f;
-		m_model[i].y = 0.0f;
-		m_model[i].z = 0.0f;
-		m_model[i].tu = 0.0f;
-		m_model[i].tv = 1.0f;
-		m_model[i].nx = 0.0f;
-		m_model[i].ny = 0.0f;
-		m_model[i].nz = -1.0f;
-
-		m_model[i + 1].x = m_r*cosf(now_radian);
-		m_model[i + 1].y = m_r*sinf(now_radian);
-		m_model[i + 1].z = 0.0f;
-		m_model[i + 1].tu = 0.0f;
-		m_model[i + 1].tv = 0.0f;
-		m_model[i + 1].nx = 0.0f;
-		m_model[i + 1].ny = 0.0f;
-		m_model[i + 1].nz = -1.0f;
-
-		m_model[i + 2].x = m_r*cosf(now_radian + per_radian);
-		m_model[i + 2].y = m_r*sinf(now_radian + per_radian);
-		m_model[i + 2].z = 0.0f;
-		m_model[i + 2].tu = 1.0f;
-		m_model[i + 2].tv = 0.0f;
-		m_model[i + 2].nx = 0.0f;
-		m_model[i + 2].ny = 0.0f;
-		m_model[i + 2].nz = -1.0f;
-
-		now_radian += per_radian;
-	}
+	m_mesh.LoadVertices(MESH_SHPERE, m_model, m_triNum * 3);
 
 	return true;
 }

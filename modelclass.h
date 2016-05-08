@@ -22,6 +22,7 @@ using namespace std;
 #include "Debug.h"
 #include "Component.h"
 #include "colliderclass.h"
+#include "meshclass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
@@ -36,13 +37,6 @@ protected:
 		D3DXVECTOR3 position;
 	    D3DXVECTOR2 texture;
 		D3DXVECTOR3 normal;
-	};
-
-	struct ModelType
-	{
-		float x, y, z;
-		float tu, tv;
-		float nx, ny, nz;
 	};
 
 	int m_id;
@@ -118,6 +112,8 @@ protected:
 	D3DXVECTOR3 m_worldPosition;
 	D3DXVECTOR3 m_worldScale;
 	D3DXVECTOR3 m_worldRotation;
+
+	Mesh m_mesh;
 };
 
 #endif
