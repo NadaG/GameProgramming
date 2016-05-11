@@ -78,7 +78,8 @@ public:
 
 	// 자식 오브젝트를 관리하는 함수들
 	void AddChild(const ModelClass*);
-	ModelClass* GetChild() const;
+	ModelClass* GetChild(const int& i) const;
+	vector<ModelClass*> GetChildren() const;
 
 protected:
 	bool InitializeBuffers(ID3D11Device*);
@@ -95,7 +96,10 @@ protected:
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;
 	TextureClass* m_Texture;
+
 	ModelType* m_model;
+	int* m_model_indices;
+	
 	D3DXMATRIX m_worldMatrix;
 
 	// 트리 구조 구현을 위한 부분

@@ -10,7 +10,8 @@ enum MESH_TYPE
 {
 	MESH_NONE = 0,
 	MESH_CUBE = 1,
-	MESH_SHPERE = 2
+	MESH_CIRCLE = 2,
+	MESH_SHPERE = 3
 };
 
 struct ModelType
@@ -27,7 +28,8 @@ public:
 	Mesh(const Mesh&);
 	~Mesh();
 
-	void LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const int& v_n);
+	void LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const int& v_n
+		,int* indices, const int& i_n);
 
 private:
 

@@ -121,7 +121,6 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
     D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
-	int i;
 
 	// Create the vertex array.
 	vertices = new VertexType[m_vertexCount];
@@ -138,13 +137,16 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	}
 
 	// Load the vertex array and index array with data.
-	for(i=0; i<m_vertexCount; i++)
+	for (int i = 0; i < m_vertexCount; i++)
 	{
 		vertices[i].position = D3DXVECTOR3(m_model[i].x, m_model[i].y, m_model[i].z);
 		vertices[i].texture = D3DXVECTOR2(m_model[i].tu, m_model[i].tv);
 		vertices[i].normal = D3DXVECTOR3(m_model[i].nx, m_model[i].ny, m_model[i].nz);
+	}
 
-		indices[i] = i;
+	for (int i = 0; i < m_indexCount; i++)
+	{
+		indices[i] = m_model_indices[i];
 	}
 
 	// Set up the description of the static vertex buffer.
@@ -332,13 +334,21 @@ bool ModelClass::isComponentExist(COMPONENT_ID component_id)
 
 void ModelClass::AddChild(const ModelClass* model)
 {
-
 }
 
-ModelClass* ModelClass::GetChild() const
+ModelClass* ModelClass::GetChild(const int& t) const
 {
+	if (t >= m_children.size())
+		Debug::GetInstance()->Log("No Children");
+
 	for (int i = 0; i < m_children.size(); i++)
 	{
-		return m_children[i];
+		if (t == i)
+			return m_children[i];
 	}
+}
+
+vector<ModelClass*> ModelClass::GetChildren() const
+{
+	return m_children;
 }

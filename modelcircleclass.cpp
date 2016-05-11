@@ -2,11 +2,12 @@
 
 bool ModelCircleClass::LoadModel()
 {
-	m_model = new ModelType[m_triNum * 3];
 	m_vertexCount = m_triNum * 3;
+	m_model = new ModelType[m_vertexCount];
 	m_indexCount = m_vertexCount;
+	m_model_indices = new int[m_indexCount];
 
-	m_mesh.LoadVertices(MESH_SHPERE, m_model, m_triNum * 3);
+	m_mesh.LoadVertices(MESH_CIRCLE, m_model, m_vertexCount, m_model_indices, m_indexCount);
 
 	return true;
 }

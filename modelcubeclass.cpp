@@ -2,11 +2,12 @@
 
 bool ModelCubeClass::LoadModel()
 {
-	m_model = new ModelType[36];
 	m_vertexCount = 36;
+	m_model = new ModelType[m_vertexCount];
 	m_indexCount = m_vertexCount;
+	m_model_indices = new int[m_indexCount];
 
-	m_mesh.LoadVertices(MESH_CUBE, m_model, 36);
+	m_mesh.LoadVertices(MESH_CUBE, m_model, m_vertexCount, m_model_indices,m_indexCount);
 
 	return true;
 }

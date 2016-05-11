@@ -3,22 +3,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "textureclass.h"
 
-
 TextureClass::TextureClass()
 {
 	m_texture = 0;
 }
 
-
 TextureClass::TextureClass(const TextureClass& other)
 {
 }
 
-
 TextureClass::~TextureClass()
 {
 }
-
 
 bool TextureClass::Initialize(ID3D11Device* device, WCHAR* filename)
 {
@@ -35,7 +31,6 @@ bool TextureClass::Initialize(ID3D11Device* device, WCHAR* filename)
 	return true;
 }
 
-
 void TextureClass::Shutdown()
 {
 	// Release the texture resource.
@@ -47,7 +42,6 @@ void TextureClass::Shutdown()
 
 	return;
 }
-
 
 ID3D11ShaderResourceView* TextureClass::GetTexture()
 {
