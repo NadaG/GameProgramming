@@ -20,7 +20,7 @@ void ModelCubeClass::Start()
 
 void ModelCubeClass::Update()
 {
-	m_worldPosition = { 0.0f, 5.0f, 10.0f };
+	//m_worldPosition = { 0.0f, 5.0f, 10.0f };
 }
 
 void ModelCubeClass::OnCollisionStay(ModelClass* model)

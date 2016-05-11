@@ -19,8 +19,8 @@ using namespace std;
 ///////////////////////
 #include "textureclass.h"
 #include "inputclass.h"
-#include "Debug.h"
-#include "Component.h"
+#include "debug.h"
+#include "component.h"
 #include "colliderclass.h"
 #include "meshclass.h"
 
@@ -56,8 +56,9 @@ public:
 
 	// 각각의 오브젝트 별로 따로 구현되는 함수들
 	// 스크립트 부분을 여기서 짜도록 하면 될것!
-	virtual void Update();
 	void SyncMatrix();
+
+	virtual void Update();
 	virtual void OnCollisionStay(ModelClass* model);
 	virtual void Start();
 
@@ -67,8 +68,10 @@ public:
 	const D3DXVECTOR3& GetPosition() const{ return m_worldPosition; }
 	const D3DXVECTOR3& GetRotation() const{ return m_worldRotation; }
 	const D3DXVECTOR3& GetScale() const{ return m_worldScale; }
-	//virtual void SetRadius(float r) = 0;
-	//virtual void SetX() = 0;
+	
+	void SetPosition(const D3DXVECTOR3& position){ m_worldPosition = position; }
+	void SetRotation(const D3DXVECTOR3& rotation){ m_worldRotation = rotation; }
+	void SetScale(const D3DXVECTOR3& scale){ m_worldScale = scale; }
 
 	// 오브젝트의 컴포넌트들을 관리하는 함수들
 	const Component* GetComponent(COMPONENT_ID component_id) const;
@@ -77,7 +80,8 @@ public:
 	bool isComponentExist(COMPONENT_ID component_id);
 
 	// 자식 오브젝트를 관리하는 함수들
-	void AddChild(const ModelClass*);
+	void AddChild(ModelClass*);
+	void DeleteChild(const int& k);
 	ModelClass* GetChild(const int& i) const;
 	vector<ModelClass*> GetChildren() const;
 
@@ -93,6 +97,9 @@ protected:
 	void ReleaseModel();
 
 protected:
+
+
+
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;
 	TextureClass* m_Texture;

@@ -1,4 +1,4 @@
-#include "MyMath.h"
+#include "mymath.h"
 
 Vector3f::Vector3f()
 {

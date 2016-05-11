@@ -5,7 +5,8 @@ enum COMPONENT_ID
 {
 	COM_NONE = 0,
 	COM_COLLIDER = 1,
-	COM_SPRITERENDERER = 2
+	COM_SPRITERENDERER = 2,
+	COM_SCRIPT = 3
 };
 
 class Component

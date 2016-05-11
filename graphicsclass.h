@@ -16,7 +16,7 @@
 #include "modelcubeclass.h"
 #include "lightshaderclass.h"
 #include "lightclass.h"
-#include "MyMath.h"
+#include "mymath.h"
 
 /////////////
 // GLOBALS //
@@ -51,6 +51,8 @@ private:
 	LightClass* m_Light;
 	
 	bool CollisionCheck(ModelClass*, ModelClass*);
+	bool InitializeModels();
+	void InitializeTransform();
 
 	// TODO!!!!!!!!!!!!!!!!!! 나중에 할것 pimpl 인가? ㄷ
 	class CollisionChecker

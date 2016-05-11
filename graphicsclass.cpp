@@ -52,16 +52,12 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	
 	// Create the model object.
 	// 여기서 초기화함!!!!!!!!!!!!!!!!!
-	ModelCircleClass* circle = new ModelCircleClass;
-	if (!circle)
+	result = InitializeModels();
+	if (!result)
+	{
+		MessageBox(hwnd, L"Initialize models failed", L"Error", MB_OK);
 		return false;
-	
-	ModelCubeClass* cube = new ModelCubeClass;
-	if (!cube)
-		return false;
-	
-	m_Models.push_back(circle);
-	m_Models.push_back(cube);
+	}
 
 	// Initialize the model object.
 	for (int i = 0; i < m_Models.size(); i++)
@@ -73,6 +69,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 			return false;
 		}
 	}
+
+	InitializeTransform();
 
 	// Create the light shader object.
 	m_LightShader = new LightShaderClass;
@@ -241,6 +239,30 @@ bool GraphicsClass::Render()
 	return true;
 }
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// 여기서 미리 위치와 회전 스케일을 정할것
+bool GraphicsClass::InitializeModels()
+{
+	ModelCircleClass* circle = new ModelCircleClass;
+	if (!circle)
+		return false;
+
+	ModelCubeClass* cube = new ModelCubeClass;
+	if (!cube)
+		return false;
+
+	ModelCubeClass* cube2 = new ModelCubeClass;
+
+	m_Models.push_back(circle);
+	m_Models.push_back(cube);
+	m_Models.push_back(cube2);
+}
+
+void GraphicsClass::InitializeTransform()
+{
+	m_Models[1]->SetPosition({ 0.0f, 2.0f, 10.0f });
+	m_Models[2]->SetPosition({ 3.0f, 0.0f, 10.0f });
+}
 
 // TODO!!!!!!!!!!!!!!!!!!!!!!!!
 // MYMATH 클래스로 다 빼낼것

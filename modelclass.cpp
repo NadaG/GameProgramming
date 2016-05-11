@@ -332,8 +332,22 @@ bool ModelClass::isComponentExist(COMPONENT_ID component_id)
 	return m_components.find(component_id) != m_components.end();
 }
 
-void ModelClass::AddChild(const ModelClass* model)
+void ModelClass::AddChild(ModelClass* model)
 {
+	m_children.push_back(model);
+}
+
+void ModelClass::DeleteChild(const int& k)
+{
+	int j = 0;
+	for (vector<ModelClass*>::iterator i = m_children.begin(); i != m_children.end(); ++i, ++j)
+	{
+		if (j == k)
+		{
+			m_children.erase(i);
+			return;
+		}
+	}
 }
 
 ModelClass* ModelClass::GetChild(const int& t) const

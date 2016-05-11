@@ -17,6 +17,14 @@ void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const i
 {
 	float now_radian, per_radian;
 
+	int rings = 10, sectors = 10;
+	float M_PI = 3.14159263f;
+	float radius = 0.01f;
+
+	float const R = 1. / (float)(rings - 1);
+	float const S = 1. / (float)(sectors - 1);
+	int r, s;
+
 	switch (mesh_type)
 	{
 	case MESH_NONE:
@@ -310,13 +318,7 @@ void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const i
 
 	case MESH_SHPERE:
 
-		int rings = 10, sectors = 10;
-		float M_PI = 3.14159263f;
-		float radius = 0.01f;
-
-		float const R = 1. / (float)(rings - 1);
-		float const S = 1. / (float)(sectors - 1);
-		int r, s;
+		
 
 		for (r = 0; r < rings; r++)
 		{
