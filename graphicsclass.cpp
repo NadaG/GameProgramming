@@ -248,20 +248,37 @@ bool GraphicsClass::InitializeModels()
 		return false;
 
 	ModelCubeClass* cube = new ModelCubeClass;
-	if (!cube)
-		return false;
-
 	ModelCubeClass* cube2 = new ModelCubeClass;
+	ModelCubeClass* cube3 = new ModelCubeClass;
+	ModelCubeClass* cube4 = new ModelCubeClass;
+	ModelCubeClass* cube5 = new ModelCubeClass;
 
 	m_Models.push_back(circle);
 	m_Models.push_back(cube);
 	m_Models.push_back(cube2);
+	m_Models.push_back(cube3);
+	m_Models.push_back(cube4);
+	m_Models.push_back(cube5);
 }
 
 void GraphicsClass::InitializeTransform()
 {
-	m_Models[1]->SetPosition({ 0.0f, 2.0f, 10.0f });
-	m_Models[2]->SetPosition({ 3.0f, 0.0f, 10.0f });
+	m_Models[1]->SetPosition({ 0.0f, 0.0f, 12.5f });
+	m_Models[1]->SetScale({ 5.0f, 5.0f, 1.0f });
+
+	m_Models[2]->SetPosition({ 0.0f, 5.0f, 10.0f });
+	m_Models[2]->SetScale({ 5.0f, 0.3f, 1.0f });
+	
+	m_Models[3]->SetPosition({ 0.0f, -5.0f, 10.0f });
+	m_Models[3]->SetScale({ 5.0f, 0.3f, 1.0f });
+	
+	m_Models[4]->SetPosition({ 5.0f, 0.0f, 10.0f });
+	m_Models[4]->SetScale({ 5.0f, 0.3f, 1.0f });
+	m_Models[4]->SetRotation({ 0.0f, 0.0f, 90.0f });
+
+	m_Models[5]->SetPosition({ -5.0f, 0.0f, 10.0f });
+	m_Models[5]->SetScale({ 5.0f, 0.3f, 1.0f });
+	m_Models[5]->SetRotation({ 0.0f, 0.0f, -90.0f });
 }
 
 // TODO!!!!!!!!!!!!!!!!!!!!!!!!
@@ -304,6 +321,7 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	COLLIDER_TYPE col_type2 = model2_col->GetType();
 
 	D3DXVECTOR3 center1, center2, size1, size2, rot1, rot2;
+	float radius1, radius2;
 
 	center1 = VECTOR3PLUS(model1->GetPosition(),
 		ScaleProduct(model1_col->GetCenter(), model1->GetScale()));
@@ -312,25 +330,69 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 
 	size1 = ScaleProduct(model1_col->GetSize(), model1->GetScale());
 	size2 = ScaleProduct(model2_col->GetSize(), model2->GetScale());
+
+	radius1 = model1_col->GetRadius();
+	radius2 = model2_col->GetRadius();
 	
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// 좌표계 관리 해야함
-	if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
-		model1->GetScale().x + model2->GetScale().x)
+	switch (col_type1)
 	{
-		return true;
+	case COL_CUBE:
+
+		switch (col_type2)
+		{
+		case COL_CUBE:
+			if ((center1.x + size1.x   > center2.x - size2.x   &&
+				center1.x - size1.x   < center2.x + size2.x  ) &&
+				(center1.y + size1.y   > center2.y - size2.y   &&
+				center1.y - size1.y   < center2.y + size2.y  ) &&
+				(center1.z + size1.z   > center2.z - size2.z   &&
+				center1.z - size1.z   < center2.z + size2.z  ))
+			{
+				return true;
+			}
+			else
+				return false;
+			break;
+		case COL_SPHERE:
+			if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
+				radius1 + radius2)
+			{
+				return true;
+			}
+			else
+			{
+			}
+			break;
+		default:
+			break;
+		}
+
+		break;
+	case COL_SPHERE:
+		switch (col_type2)
+		{
+		case COL_CUBE:
+			return CollisionCheck(model2, model1);
+		case COL_SPHERE:
+			if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
+				radius1 + radius2)
+			{
+				return true;
+			}
+			else
+			{
+			}
+			break;
+		default:
+			break;
+		}
+		break;
+	default:
+		break;
 	}
-	else
-	{
-	}
 
-
-	Vector3f a = { 1.0f, 2.0f, 5.0f };
-	Vector3f b = { 2.0f, 1.5f, 1.0f };
-
-	float aa = (a*b).GetX();
-	float bb = (a*b).GetY();
-	float cc = (a*b).GetZ();
 
 	
 	return false;

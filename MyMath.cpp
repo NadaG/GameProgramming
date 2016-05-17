@@ -66,7 +66,6 @@ void Vector3f::SetVector3f(const float& x, const float& y, const float& z)
 	m_z = z;
 }
 
-
 const float& Vector3f::DotProduct(const Vector3f& a)
 {
 	float t;

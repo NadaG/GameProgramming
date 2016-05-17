@@ -29,10 +29,12 @@ public:
 	const float& DotProduct(const Vector3f& a);
 	// 외적
 	const Vector3f& CrossProduct(const Vector3f& a);
-
-	// GetDistance
-	// Normalize
-	// GetLength
+	// 거리
+	const float& GetDistance(const Vector3f& a);
+	// 정규화
+	const Vector3f& Normalize();
+	// 크기
+	const float& GetLength();
 
 	// 각 요소끼리 합하는 것
 	friend const Vector3f& operator+(const Vector3f& a, const Vector3f& b);

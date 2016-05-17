@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "inputclass.h"
 
-InputClass* InputClass::m_instance = 0;
+InputClass* InputClass::m_instance = new InputClass;
 
 InputClass::InputClass()
 {
@@ -15,18 +15,12 @@ InputClass::~InputClass()
 
 InputClass* InputClass::GetInstance()
 {
-	if (!m_instance)
-	{
-		m_instance = new InputClass;
-	}
-
 	return m_instance;
 }
 
 void InputClass::Initialize()
 {
 	int i;
-	
 
 	// Initialize all the keys to being released and not pressed.
 	for(i=0; i<256; i++)
