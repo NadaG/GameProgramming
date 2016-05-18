@@ -2,6 +2,7 @@
 // Filename: modelclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "modelclass.h"
+#include "mymath.h"
 
 static int id = 0;
 
@@ -66,7 +67,9 @@ void ModelClass::SyncMatrix()
 	D3DXMatrixScaling(&m, m_worldScale.x, m_worldScale.y, m_worldScale.z);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
-	D3DXMatrixRotationYawPitchRoll(&m, m_worldRotation.y, m_worldRotation.x, m_worldRotation.z);
+	D3DXMatrixRotationYawPitchRoll(&m, m_worldRotation.y*M_PI / 180.0f
+		, m_worldRotation.x*M_PI / 180.0f
+		, m_worldRotation.z*M_PI / 180.0f);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
 	D3DXMatrixTranslation(&m, m_worldPosition.x, m_worldPosition.y, m_worldPosition.z);
@@ -139,9 +142,9 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	// Load the vertex array and index array with data.
 	for (int i = 0; i < m_vertexCount; i++)
 	{
-		vertices[i].position = D3DXVECTOR3(m_model[i].x, m_model[i].y, m_model[i].z);
-		vertices[i].texture = D3DXVECTOR2(m_model[i].tu, m_model[i].tv);
-		vertices[i].normal = D3DXVECTOR3(m_model[i].nx, m_model[i].ny, m_model[i].nz);
+		vertices[i].position = Vector3f(m_model[i].x, m_model[i].y, m_model[i].z);
+		vertices[i].texture = Vector2f(m_model[i].tu, m_model[i].tv);
+		vertices[i].normal = Vector3f(m_model[i].nx, m_model[i].ny, m_model[i].nz);
 	}
 
 	for (int i = 0; i < m_indexCount; i++)

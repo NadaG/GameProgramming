@@ -24,8 +24,7 @@ void ModelCircleClass::Start()
 {
 	Collider* col = new Collider(COL_SPHERE);
 	SetComponent(COM_COLLIDER, col);
-	// col->SetCenter({ 0.0f, 0.0f, 0.0f });
-	// m_worldScale.x += 2.0f;
+	m_worldRotation = { 0.0f, 180.0f, 0.0f };
 }
 
 void ModelCircleClass::Update()
@@ -58,7 +57,7 @@ void ModelCircleClass::Update()
 	z += zv;
 	x += xv;
 	m_worldPosition = { x, y, z };
-	m_worldRotation = { 0.0f, 135.0f, 0.0f };
+	//m_worldRotation = { 0.0f, 0.0f, 90.0f };
 }
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)

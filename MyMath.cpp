@@ -1,5 +1,67 @@
 #include "mymath.h"
 
+Vector2f::Vector2f()
+{}
+
+Vector2f::Vector2f(const float& x, const float& y)
+{
+	m_x = x;
+	m_y = y;
+}
+
+Vector2f::Vector2f(Vector2f& vec)
+{
+	m_x = vec.m_x;
+	m_y = vec.m_y;
+}
+
+Vector2f& Vector2f::operator=(Vector2f& vec)
+{
+	return *this;
+}
+
+Vector2f::~Vector2f()
+{
+
+}
+
+const float& Vector2f::GetX()
+{
+	return m_x;
+}
+
+const float& Vector2f::GetY()
+{
+	return m_y;
+}
+
+void Vector2f::SetX(const float& x)
+{
+	m_x = x;
+}
+
+void Vector2f::SetY(const float& y)
+{
+	m_y = y;
+}
+
+void Vector2f::SetVector2f(Vector2f& vec)
+{
+	m_x = vec.m_x;
+	m_y = vec.m_y;
+}
+
+void Vector2f::SetVector2f(const float& x, const float& y)
+{
+
+}
+
+const float& CrossProduct(const float& a, const float& b, const float& c)
+{}
+
+const float& CrossProduct(const Vector2f& a, const Vector2f& b)
+{}
+
 Vector3f::Vector3f()
 {
 	m_x = 0.0f;
@@ -7,8 +69,11 @@ Vector3f::Vector3f()
 	m_z = 0.0f;
 }
 
-Vector3f::Vector3f(const Vector3f& vec)
+Vector3f::Vector3f(Vector3f& vec)
 {
+	m_x = vec.m_x;
+	m_y = vec.m_y;
+	m_z = vec.m_z;
 }
 
 Vector3f::Vector3f(const float& x, const float& y, const float& z)
@@ -52,7 +117,7 @@ void Vector3f::SetZ(const float& z)
 	m_z = z;
 }
 
-void Vector3f::SetVector3f(const Vector3f& vec)
+void Vector3f::SetVector3f(Vector3f& vec)
 {
 	m_x = vec.m_x;
 	m_y = vec.m_y;

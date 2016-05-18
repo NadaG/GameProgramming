@@ -23,6 +23,7 @@ using namespace std;
 #include "component.h"
 #include "colliderclass.h"
 #include "meshclass.h"
+#include "mymath.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
@@ -34,9 +35,9 @@ class ModelClass
 protected:
 	struct VertexType
 	{
-		D3DXVECTOR3 position;
-	    D3DXVECTOR2 texture;
-		D3DXVECTOR3 normal;
+		Vector3f position;
+		Vector2f texture;
+		Vector3f normal;
 	};
 
 	int m_id;

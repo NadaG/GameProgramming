@@ -6,13 +6,39 @@
 // 수학적인 요소들이 들어있는 소스
 
 // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const float M_PI = 3.141592653f;
 // namespace 개념을 공부해서 이 및에 부분들을 namespace로 뺄것
+class Vector2f
+{
+public:
+	Vector2f();
+	Vector2f(const float& x, const float& y);
+	Vector2f(Vector2f& vec);
+	Vector2f& operator=(Vector2f& vec);
+	~Vector2f();
+
+	const float& GetX();
+	const float& GetY();
+
+	void SetX(const float& x);
+	void SetY(const float& y);
+	void SetVector2f(Vector2f& vec);
+	void SetVector2f(const float& x, const float& y);
+
+	friend const float& CrossProduct(const float& a, const float& b, const float& c);
+	friend const float& CrossProduct(const Vector2f& a, const Vector2f& b);
+
+private:
+	float m_x;
+	float m_y;
+};
+
 class Vector3f
 {
 public:
 	Vector3f();
 	Vector3f(const float& x, const float& y, const float& z);
-	Vector3f(const Vector3f&);
+	Vector3f(Vector3f&);
 	~Vector3f();
 
 	const float& GetX();
@@ -22,7 +48,7 @@ public:
 	void SetX(const float& x);
 	void SetY(const float& y);
 	void SetZ(const float& z);
-	void SetVector3f(const Vector3f& vec);
+	void SetVector3f(Vector3f& vec);
 	void SetVector3f(const float& x, const float& y, const float& z);
 
 	// 내적
