@@ -23,12 +23,12 @@ Collider::~Collider()
 {
 }
 
-const D3DXVECTOR3& Collider::GetCenter()
+const Vector3f& Collider::GetCenter()
 {
 	return m_center;
 }
 
-const D3DXVECTOR3& Collider::GetSize()
+const Vector3f& Collider::GetSize()
 {
 	return m_size;
 }
@@ -43,12 +43,12 @@ const COLLIDER_TYPE& Collider::GetType()
 	return m_type;
 }
 
-void Collider::SetCenter(const D3DXVECTOR3& center)
+void Collider::SetCenter(const Vector3f& center)
 {
 	m_center = center;
 }
 
-void Collider::SetSize(const D3DXVECTOR3& size)
+void Collider::SetSize(const Vector3f& size)
 {
 	m_size = size;
 }

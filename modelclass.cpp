@@ -64,15 +64,15 @@ void ModelClass::SyncMatrix()
 {
 	D3DXMATRIX m;
 	D3DXMatrixIdentity(&m_worldMatrix);
-	D3DXMatrixScaling(&m, m_worldScale.x, m_worldScale.y, m_worldScale.z);
+	D3DXMatrixScaling(&m, m_worldScale.m_x, m_worldScale.m_y, m_worldScale.m_z);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
-	D3DXMatrixRotationYawPitchRoll(&m, m_worldRotation.y*M_PI / 180.0f
-		, m_worldRotation.x*M_PI / 180.0f
-		, m_worldRotation.z*M_PI / 180.0f);
+	D3DXMatrixRotationYawPitchRoll(&m, m_worldRotation.m_y*M_PI / 180.0f
+		, m_worldRotation.m_x*M_PI / 180.0f
+		, m_worldRotation.m_z*M_PI / 180.0f);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
-	D3DXMatrixTranslation(&m, m_worldPosition.x, m_worldPosition.y, m_worldPosition.z);
+	D3DXMatrixTranslation(&m, m_worldPosition.m_x, m_worldPosition.m_y, m_worldPosition.m_z);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 	
 	//D3DXMatrixRotationYawPitchRoll(&m_worldMatrix, m_worldRotation.x, m_worldRotation.y, m_worldRotation.z);

@@ -41,13 +41,6 @@ public:
 	Vector3f(Vector3f&);
 	~Vector3f();
 
-	const float& GetX();
-	const float& GetY();
-	const float& GetZ();
-
-	void SetX(const float& x);
-	void SetY(const float& y);
-	void SetZ(const float& z);
 	void SetVector3f(Vector3f& vec);
 	void SetVector3f(const float& x, const float& y, const float& z);
 
@@ -56,7 +49,7 @@ public:
 	// 외적
 	const Vector3f& CrossProduct(const Vector3f& a);
 	// 거리
-	const float& GetDistance(const Vector3f& a);
+	//const float& GetDistance(const Vector3f& a);
 	// 정규화
 	const Vector3f& Normalize();
 	// 크기
@@ -70,7 +63,8 @@ public:
 	friend const Vector3f& operator*(const float& a, const Vector3f& b);
 	friend const Vector3f& operator*(const Vector3f& a, const float& b);
 
-private:
+	friend const float& GetDistance(const Vector3f& a, const Vector3f& b);
+
 	float m_x;
 	float m_y;
 	float m_z;

@@ -66,13 +66,13 @@ public:
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// 따로 수학 클래스를 만들어서 관리하면 좋을거 같음
 	// D3DXVECTOR3만으로 하기에는 익숙하지 않은 부분이 많음
-	const D3DXVECTOR3& GetPosition() const{ return m_worldPosition; }
-	const D3DXVECTOR3& GetRotation() const{ return m_worldRotation; }
-	const D3DXVECTOR3& GetScale() const{ return m_worldScale; }
+	const Vector3f& GetPosition() const{ return m_worldPosition; }
+	const Vector3f& GetRotation() const{ return m_worldRotation; }
+	const Vector3f& GetScale() const{ return m_worldScale; }
 	
-	void SetPosition(const D3DXVECTOR3& position){ m_worldPosition = position; }
-	void SetRotation(const D3DXVECTOR3& rotation){ m_worldRotation = rotation; }
-	void SetScale(const D3DXVECTOR3& scale){ m_worldScale = scale; }
+	void SetPosition(const Vector3f& position){ m_worldPosition = position; }
+	void SetRotation(const Vector3f& rotation){ m_worldRotation = rotation; }
+	void SetScale(const Vector3f& scale){ m_worldScale = scale; }
 
 	// 오브젝트의 컴포넌트들을 관리하는 함수들
 	const Component* GetComponent(COMPONENT_ID component_id) const;
@@ -99,8 +99,6 @@ protected:
 
 protected:
 
-
-
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;
 	TextureClass* m_Texture;
@@ -121,9 +119,9 @@ protected:
 	map<COMPONENT_ID, Component*> m_components;
 
 	// 이 행렬들을 조작하면 오브젝트의 움직임이 가능하도록 구현함
-	D3DXVECTOR3 m_worldPosition;
-	D3DXVECTOR3 m_worldScale;
-	D3DXVECTOR3 m_worldRotation;
+	Vector3f m_worldPosition;
+	Vector3f m_worldScale;
+	Vector3f m_worldRotation;
 
 	Mesh m_mesh;
 };

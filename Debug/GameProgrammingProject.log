@@ -1,4 +1,4 @@
-﻿빌드 시작: 2016-05-18 오후 11:20:16
+﻿빌드 시작: 2016-05-20 오후 6:47:16
      1>2 노드의 "C:\Users\Nada\Desktop\GameProgrammingProject\GameProgrammingProject\GameProgrammingProject.vcxproj" 프로젝트(Build 대상)입니다.
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt mymath.cpp
@@ -59,11 +59,14 @@
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50355) : 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'의 이전 정의를 참조하십시오.
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND' : 매크로 재정의
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50364) : 'D3D10_ERROR_FILE_NOT_FOUND'의 이전 정의를 참조하십시오.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(113): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(123): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(132): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(140): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(149): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(61): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(66): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(112): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(122): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(131): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(139): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(148): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(160): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.lib" /MACHINE:X86 Debug\cameraclass.obj
          Debug\colliderclass.obj
@@ -88,4 +91,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:07.12
+경과 시간: 00:00:10.96

@@ -6,6 +6,7 @@
 
 #include "Component.h"
 #include "d3dclass.h"
+#include "mymath.h"
 
 enum COLLIDER_TYPE
 {
@@ -24,19 +25,19 @@ public:
 	Collider(const Collider&);
 	virtual ~Collider();
 	
-	const D3DXVECTOR3& GetCenter();
-	const D3DXVECTOR3& GetSize();
+	const Vector3f& GetCenter();
+	const Vector3f& GetSize();
 	const float& GetRadius();
 
 	const COLLIDER_TYPE& GetType();
 
-	void SetCenter(const D3DXVECTOR3& center);
-	void SetSize(const D3DXVECTOR3& size);
+	void SetCenter(const Vector3f& center);
+	void SetSize(const Vector3f& size);
 	void SetSize(const float& radius);
 
 private:
-	D3DXVECTOR3 m_center;
-	D3DXVECTOR3 m_size;
+	Vector3f m_center;
+	Vector3f m_size;
 
 	float m_radius;
 

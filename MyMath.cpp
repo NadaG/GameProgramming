@@ -57,10 +57,14 @@ void Vector2f::SetVector2f(const float& x, const float& y)
 }
 
 const float& CrossProduct(const float& a, const float& b, const float& c)
-{}
+{
+	return 0;
+}
 
 const float& CrossProduct(const Vector2f& a, const Vector2f& b)
-{}
+{
+	return 0;
+}
 
 Vector3f::Vector3f()
 {
@@ -85,36 +89,6 @@ Vector3f::Vector3f(const float& x, const float& y, const float& z)
 
 Vector3f::~Vector3f()
 {
-}
-
-const float& Vector3f::GetX()
-{
-	return m_x;
-}
-
-const float& Vector3f::GetY()
-{
-	return m_y;
-}
-
-const float& Vector3f::GetZ()
-{
-	return m_z;
-}
-
-void Vector3f::SetX(const float& x)
-{
-	m_x = x;
-}
-
-void Vector3f::SetY(const float& y)
-{
-	m_y = y;
-}
-
-void Vector3f::SetZ(const float& z)
-{
-	m_z = z;
 }
 
 void Vector3f::SetVector3f(Vector3f& vec)
@@ -177,4 +151,11 @@ const Vector3f& operator*(const float& a, const Vector3f& b)
 const Vector3f& operator*(const Vector3f& a, const float& b)
 {
 	return b*a;
+}
+
+const float& GetDistance(const Vector3f& a, const Vector3f& b)
+{
+	return sqrtf((a.m_x - b.m_x)*(a.m_x - b.m_x) +
+		(a.m_y - b.m_y)*(a.m_y - b.m_y) +
+		(a.m_z - b.m_z)*(a.m_z - b.m_z));
 }

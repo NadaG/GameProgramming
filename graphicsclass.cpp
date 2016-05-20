@@ -281,36 +281,36 @@ void GraphicsClass::InitializeTransform()
 	m_Models[5]->SetRotation({ 0.0f, 0.0f, -90.0f });
 }
 
-// TODO!!!!!!!!!!!!!!!!!!!!!!!!
-// MYMATH 클래스로 다 빼낼것
-double GetDistance(D3DXVECTOR3 a, D3DXVECTOR3 b)
-{
-	return sqrt((a.x - b.x)*(a.x - b.x) +
-		(a.y - b.y)*(a.y - b.y) +
-		(a.z - b.z)*(a.z - b.z));
-}
-
-// TODO!!!!!!!!!!!!!!!!!!!!!!!!
-// MYMATH 클래스로 다 빼낼것
-D3DXVECTOR3 ScaleProduct(D3DXVECTOR3 a, D3DXVECTOR3 b)
-{
-	D3DXVECTOR3 ret;
-	ret.x = a.x*b.x;
-	ret.y = a.y*b.y;
-	ret.z = a.z*b.z;
-	return ret;
-}
-
-// TODO!!!!!!!!!!!!!!!!!!!!!!!!
-// MYMATH 클래스로 다 빼낼것
-D3DXVECTOR3 VECTOR3PLUS(D3DXVECTOR3 a, D3DXVECTOR3 b)
-{
-	D3DXVECTOR3 ret;
-	ret.x = a.x + b.x;
-	ret.y = a.y + b.y;
-	ret.z = a.z + b.z;
-	return ret;
-}
+//// TODO!!!!!!!!!!!!!!!!!!!!!!!!
+//// MYMATH 클래스로 다 빼낼것
+//double GetDistance(D3DXVECTOR3 a, D3DXVECTOR3 b)
+//{
+//	return sqrt((a.x - b.x)*(a.x - b.x) +
+//		(a.y - b.y)*(a.y - b.y) +
+//		(a.z - b.z)*(a.z - b.z));
+//}
+//
+//// TODO!!!!!!!!!!!!!!!!!!!!!!!!
+//// MYMATH 클래스로 다 빼낼것
+//D3DXVECTOR3 ScaleProduct(D3DXVECTOR3 a, D3DXVECTOR3 b)
+//{
+//	D3DXVECTOR3 ret;
+//	ret.x = a.x*b.x;
+//	ret.y = a.y*b.y;
+//	ret.z = a.z*b.z;
+//	return ret;
+//}
+//
+//// TODO!!!!!!!!!!!!!!!!!!!!!!!!
+//// MYMATH 클래스로 다 빼낼것
+//D3DXVECTOR3 VECTOR3PLUS(D3DXVECTOR3 a, D3DXVECTOR3 b)
+//{
+//	D3DXVECTOR3 ret;
+//	ret.x = a.x + b.x;
+//	ret.y = a.y + b.y;
+//	ret.z = a.z + b.z;
+//	return ret;
+//}
 
 bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 {
@@ -320,17 +320,15 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	COLLIDER_TYPE col_type1 = model1_col->GetType();
 	COLLIDER_TYPE col_type2 = model2_col->GetType();
 
-	D3DXVECTOR3 center1, center2, size1, size2, rot1, rot2;
+	Vector3f center1, center2, size1, size2, rot1, rot2;
 	float radius1, radius2;
 
-	center1 = VECTOR3PLUS(model1->GetPosition(),
-		ScaleProduct(model1_col->GetCenter(), model1->GetScale()));
-	center2 = VECTOR3PLUS(model2->GetPosition(),
-		ScaleProduct(model2_col->GetCenter(), model2->GetScale()));
-
-	size1 = ScaleProduct(model1_col->GetSize(), model1->GetScale());
-	size2 = ScaleProduct(model2_col->GetSize(), model2->GetScale());
-
+	center1 = model1->GetPosition() + model1_col->GetCenter()*model1->GetScale();
+	center2 = model2->GetPosition() + model2_col->GetCenter()*model2->GetScale();
+	
+	size1 = model1_col->GetSize()*model1->GetScale();
+	size2 = model2_col->GetSize()*model2->GetScale();
+	
 	radius1 = model1_col->GetRadius();
 	radius2 = model2_col->GetRadius();
 	
@@ -343,12 +341,12 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 		switch (col_type2)
 		{
 		case COL_CUBE:
-			if ((center1.x + size1.x   > center2.x - size2.x   &&
-				center1.x - size1.x   < center2.x + size2.x  ) &&
-				(center1.y + size1.y   > center2.y - size2.y   &&
-				center1.y - size1.y   < center2.y + size2.y  ) &&
-				(center1.z + size1.z   > center2.z - size2.z   &&
-				center1.z - size1.z   < center2.z + size2.z  ))
+			if ((center1.m_x + size1.m_x > center2.m_x - size2.m_x &&
+				center1.m_x - size1.m_x   < center2.m_x + size2.m_x) &&
+				(center1.m_y + size1.m_y   > center2.m_y - size2.m_y &&
+				center1.m_y - size1.m_y   < center2.m_y + size2.m_y) &&
+				(center1.m_z + size1.m_z   > center2.m_z - size2.m_z &&
+				center1.m_z - size1.m_z < center2.m_z + size2.m_z))
 			{
 				return true;
 			}
@@ -356,6 +354,8 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 				return false;
 			break;
 		case COL_SPHERE:
+			
+			
 			if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
 				radius1 + radius2)
 			{

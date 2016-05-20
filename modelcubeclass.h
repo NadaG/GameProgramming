@@ -23,9 +23,9 @@ public:
 	virtual void OnCollisionStay(ModelClass* model) override;
 	virtual void Start() override;
 
-	const float& GetX() const{ return m_worldScale.x; }
-	const float& GetY() const{ return m_worldScale.y; }
-	const float& GetZ() const{ return m_worldScale.z; }
+	const float& GetX() const{ return m_worldScale.m_x; }
+	const float& GetY() const{ return m_worldScale.m_y; }
+	const float& GetZ() const{ return m_worldScale.m_z; }
 
 private:
 };
