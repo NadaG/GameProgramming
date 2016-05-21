@@ -1,9 +1,8 @@
 #ifndef _MYMATH_H_
 #define _MYMATH_H_
 
-#include "Debug.h"
-
 // 수학적인 요소들이 들어있는 소스
+#include<cmath>
 
 // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const float M_PI = 3.141592653f;

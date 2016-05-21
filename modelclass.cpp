@@ -14,7 +14,7 @@ ModelClass::ModelClass()
 	m_model = 0;
 	D3DXMatrixIdentity(&m_worldMatrix);
 
-	m_worldPosition = { 1.0f, 0.0f, 1.0f };
+	m_worldPosition = { 0.0f, 0.0f, 0.0f };
 	m_worldScale = { 1.0f, 1.0f, 1.0f };
 	m_worldRotation = { 0.0f, 0.0f, 0.0f };
 
@@ -62,9 +62,13 @@ bool ModelClass::Initialize(ID3D11Device* device, WCHAR* textureFilename)
 
 void ModelClass::SyncMatrix()
 {
+	// 무조건 월드 좌표계를 기준으로 작업을 한다!
+	// 스케일, 회전, 위치 순이기 때문에 축을 기준으로 회전하게 하는 것은 어렵다
+	// 초기값 설정이나 강제로 위치조정을 하게 할때 사용된다
+	// 자연스러운 움직임을 구현하고 싶다면 Translate,rotate,scale 함수를 사용할것
 	D3DXMATRIX m;
 	D3DXMatrixIdentity(&m_worldMatrix);
-	D3DXMatrixScaling(&m, m_worldScale.m_x, m_worldScale.m_y, m_worldScale.m_z);
+	D3DXMatrixScaling(&m, m_worldScale.m_x / 2, m_worldScale.m_y / 2, m_worldScale.m_z / 2);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
 	D3DXMatrixRotationYawPitchRoll(&m, m_worldRotation.m_y*M_PI / 180.0f
@@ -74,9 +78,6 @@ void ModelClass::SyncMatrix()
 
 	D3DXMatrixTranslation(&m, m_worldPosition.m_x, m_worldPosition.m_y, m_worldPosition.m_z);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
-	
-	//D3DXMatrixRotationYawPitchRoll(&m_worldMatrix, m_worldRotation.x, m_worldRotation.y, m_worldRotation.z);
-	//D3DXMatrixScaling(&m_worldMatrix, m_worldScale.x, m_worldScale.y, m_worldScale.z);
 }
 
 void ModelClass::Shutdown()

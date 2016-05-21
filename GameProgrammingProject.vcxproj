@@ -96,6 +96,7 @@
     <ClCompile Include="modelcubeclass.cpp" />
     <ClCompile Include="modelsphereclass.cpp" />
     <ClCompile Include="mymath.cpp" />
+    <ClCompile Include="physics.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
   </ItemGroup>
@@ -115,6 +116,7 @@
     <ClInclude Include="modelcubeclass.h" />
     <ClInclude Include="modelsphereclass.h" />
     <ClInclude Include="mymath.h" />
+    <ClInclude Include="physics.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
   </ItemGroup>

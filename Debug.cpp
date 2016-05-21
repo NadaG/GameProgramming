@@ -44,7 +44,7 @@ void Debug::Log(const float& fnum)
 	cout << fnum << endl;
 }
 
-void Debug::Log(const D3DXVECTOR3& vec)
+void Debug::Log(const Vector3f& vec)
 {
-	cout << "x:" << vec.x << " y:" << vec.y << " z:" << vec.z << endl;
+	cout << "x:" << vec.m_x << " y:" << vec.m_y << " z:" << vec.m_z << endl;
 }

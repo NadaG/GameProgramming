@@ -86,6 +86,18 @@ public:
 	ModelClass* GetChild(const int& i) const;
 	vector<ModelClass*> GetChildren() const;
 
+	void SetName(const string& str){ m_name = str; }
+	const string& GetName(){ return m_name; }
+
+	void Translate(const float& x, const float& y, const float& z);
+	void Translate(const Vector3f& vec);
+
+	void Rotate(const float& x, const float& y, const float& z);
+	void Rotate(const Vector3f& vec);
+
+	void Scaling(const float& x, const float& y, const float& z);
+	void Scaling(const Vector3f& vec);
+
 protected:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
@@ -123,7 +135,13 @@ protected:
 	Vector3f m_worldScale;
 	Vector3f m_worldRotation;
 
+	// 속도
+	// 이걸로 가속도 같은 것도 정할 수 있을 듯??
+	Vector3f m_velocity;
+
 	Mesh m_mesh;
+
+	string m_name;
 };
 
 #endif

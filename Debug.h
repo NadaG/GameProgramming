@@ -5,6 +5,7 @@
 #include<string>
 
 #include"d3dclass.h"
+#include"mymath.h"
 
 using std::cout;
 using std::endl;
@@ -18,7 +19,7 @@ public:
 	void Log(const string& str);
 	void Log(const int& num);
 	void Log(const float& fnum);
-	void Log(const D3DXVECTOR3& vec);
+	void Log(const Vector3f& vec);
 
 private:
 	Debug();

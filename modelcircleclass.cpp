@@ -22,7 +22,7 @@ static float xv = 0.0f;
 
 void ModelCircleClass::Start()
 {
-	Collider* col = new Collider(COL_SPHERE);
+	Collider* col = new Collider(COL_CUBE);
 	SetComponent(COM_COLLIDER, col);
 	m_worldRotation = { 0.0f, 180.0f, 0.0f };
 }
@@ -57,7 +57,6 @@ void ModelCircleClass::Update()
 	z += zv;
 	x += xv;
 	m_worldPosition = { x, y, z };
-	//m_worldRotation = { 0.0f, 0.0f, 90.0f };
 }
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
