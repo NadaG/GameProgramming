@@ -23,7 +23,9 @@ InputClass* InputClass::GetInstance()
 void InputClass::Initialize()
 {
     int i;
-    leftclick = false;
+    leftdown = false;
+    leftup = true;
+    firstclick = false;
     // Initialize all the keys to being released and not pressed.
     for (i = 0; i<256; i++)
     {
@@ -62,6 +64,8 @@ void InputClass::MouseLeftButtonDown(unsigned int input)
     cout << "before : " << mouse.y << " " << mouse.x << endl;
     Y[0] = mouse.y;
     X[0] = mouse.x;
+    leftdown = true;
+    leftup = false;
     return;
 }
 void InputClass::MouseLeftButtonUp(unsigned int input)
@@ -72,7 +76,11 @@ void InputClass::MouseLeftButtonUp(unsigned int input)
     Y[1] = mouse.y;
     X[1] = mouse.x;
     cout << Y[0] - Y[1] << " " << X[0] - X[1] << endl;
-    leftclick = true;
+    leftdown = false;
+    leftup = true;
+
+    firstclick = true;
+
     return;
 }
 
@@ -87,17 +95,23 @@ float InputClass::getdiffX() {
     return ret;
 }
 
-bool InputClass::isMouseDown(unsigned int mouse) {
-    return leftclick;
+bool InputClass::isFirstClick() {
+    return firstclick;
+}
+bool InputClass::isLeftDown() {
+    return leftdown;
+}
+bool InputClass::isLeftUp() {
+    return leftup;
 }
 
 int InputClass::getMouseY(unsigned int input) {
     POINT cursor;
-    ::GetCursorPos(&cursor);
+    GetCursorPos(&cursor);
     return cursor.y-540;
 }
 int InputClass::getMouseX(unsigned int input) {
     POINT cursor;
-    ::GetCursorPos(&cursor);
+    GetCursorPos(&cursor);
     return cursor.x-1060;
 }

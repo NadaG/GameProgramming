@@ -16,7 +16,7 @@ bool ModelCircleClass::LoadModel()
 // 변수 관리 잘할 것
 static float x = 0.0f;
 static float y = 0.0f;
-static float z = -5.0f;
+static float z = -1.0f;
 static float zv = 0.0f;
 static float xv = 0.0f;
 static float yv = 0.0f;
@@ -55,7 +55,7 @@ void ModelCircleClass::Update()
 	   isFired = true;
 	   zv = 0.3f;
     }
-    if (InputClass::GetInstance()->isMouseDown(WM_LBUTTONUP) && !isFired) {
+    if (InputClass::GetInstance()->isFirstClick() && !isFired) {
 	   isFired = true;
 	   zv = 0.3f;
 	   xv = InputClass::GetInstance()->getdiffX(); //x는 그냥 그대로

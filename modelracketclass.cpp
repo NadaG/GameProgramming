@@ -1,8 +1,5 @@
 #include "modelracketclass.h"
 #include<iostream>
-float x = 2.0f;
-float y = 2.0f;
-float z = 2.0f;
 bool ModelRacketClass::LoadModel()
 {
     m_vertexCount = 36;
@@ -20,6 +17,7 @@ void ModelRacketClass::Start()
    // Collider* col = new Collider(COL_CUBE);
     //SetComponent(COM_COLLIDER, col);
     //m_worldPosition = {0.0f,1.0f,1.0f};
+    m_worldScale = {1.0f,1.0f,0.01f};
 }
 
 void ModelRacketClass::Update()
@@ -30,7 +28,16 @@ void ModelRacketClass::Update()
     y /= 64.0f;
     x /= 64.0f;
     cout << x << " " << y << endl;
-    m_worldPosition = { x, -y, 0.0f };
+    m_worldPosition = { x, -y, -1.5f };
+
+
+    if (InputClass::GetInstance()->isLeftDown()) {
+	   m_worldRotation = {0.0f,-50.0f,10.0f};
+    }
+    if (InputClass::GetInstance()->isLeftUp()) {
+	   m_worldRotation = { 0.0f,0.0f,0.0f };
+    }
+ 
     //m_worldPosition = { 0.0f, 5.0f, 10.0f };
 }
 

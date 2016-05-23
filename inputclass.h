@@ -24,7 +24,10 @@ public:
 
 
     bool IsKeyDown(unsigned int);
-    bool isMouseDown(unsigned int);
+    bool isFirstClick();
+    bool isLeftDown();
+    bool isLeftUp();
+
 
 
     int getMouseX(unsigned int);
@@ -34,7 +37,9 @@ public:
 
 private:
     bool m_keys[256];
-    bool leftclick;
+    bool leftdown;
+    bool leftup;
+    bool firstclick;
     InputClass();
     ~InputClass();
 
