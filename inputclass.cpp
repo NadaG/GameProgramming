@@ -90,3 +90,14 @@ float InputClass::getdiffX() {
 bool InputClass::isMouseDown(unsigned int mouse) {
     return leftclick;
 }
+
+int InputClass::getMouseY(unsigned int input) {
+    POINT cursor;
+    ::GetCursorPos(&cursor);
+    return cursor.y-540;
+}
+int InputClass::getMouseX(unsigned int input) {
+    POINT cursor;
+    ::GetCursorPos(&cursor);
+    return cursor.x-1060;
+}

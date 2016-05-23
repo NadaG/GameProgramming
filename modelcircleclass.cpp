@@ -71,7 +71,6 @@ void ModelCircleClass::Update()
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
     zv = -0.3f;
-
     //xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
 
 }

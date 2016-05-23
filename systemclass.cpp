@@ -178,6 +178,12 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam
 	    InputClass::GetInstance()->MouseLeftButtonUp((unsigned int)wparam);
 	    return 0;
 		// Any other messages send to the default message handler as our application won't make use of them.
+
+	case WM_MOUSEMOVE:
+	    InputClass::GetInstance()->getMouseX((unsigned int)wparam);
+	    InputClass::GetInstance()->getMouseY((unsigned int)wparam);
+
+	    return 0;
 	default:
 		return DefWindowProc(hwnd, umsg, wparam, lparam);
 	}

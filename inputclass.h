@@ -3,7 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 #ifndef _INPUTCLASS_H_
 #define _INPUTCLASS_H_
-
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: InputClass
 ////////////////////////////////////////////////////////////////////////////////
@@ -18,10 +20,15 @@ public:
     void KeyUp(unsigned int);
     void MouseLeftButtonDown(unsigned int);
     void MouseLeftButtonUp(unsigned int);
+    
+
 
     bool IsKeyDown(unsigned int);
     bool isMouseDown(unsigned int);
 
+
+    int getMouseX(unsigned int);
+    int getMouseY(unsigned int);
     float getdiffY();
     float getdiffX();
 
