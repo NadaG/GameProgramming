@@ -21,6 +21,7 @@ static float zv = 0.0f;
 static float xv = 0.0f;
 static float yv = 0.0f;
 
+static bool isFired = false;
 void ModelCircleClass::Start()
 {
     Collider* col = new Collider(COL_CUBE);
@@ -31,7 +32,6 @@ void ModelCircleClass::Start()
 
 void ModelCircleClass::Update()
 {
-    static bool isFired = false;
 
     if (InputClass::GetInstance()->IsKeyDown(VK_LEFT) &&
 	   !isFired)
@@ -70,7 +70,16 @@ void ModelCircleClass::Update()
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
-    zv = -0.3f;
+    if (model->gettype() == MODEL_CUBE) {
+	   zv = -0.3f;
+    }
+    if (model->gettype() == MODEL_RACKET && InputClass::GetInstance()->isLeftDown() && isFired) {
+	   zv = +0.3f;
+    }
+
     //xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
 
+}
+int ModelCircleClass::gettype() {
+    return MODEL_CIRCLE;
 }

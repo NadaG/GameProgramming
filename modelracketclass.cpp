@@ -14,8 +14,8 @@ bool ModelRacketClass::LoadModel()
 
 void ModelRacketClass::Start()
 {
-   // Collider* col = new Collider(COL_CUBE);
-    //SetComponent(COM_COLLIDER, col);
+    Collider* col = new Collider(COL_CUBE);
+    SetComponent(COM_COLLIDER, col);
     //m_worldPosition = {0.0f,1.0f,1.0f};
     m_worldScale = {1.0f,1.0f,0.01f};
 }
@@ -45,4 +45,7 @@ void ModelRacketClass::OnCollisionStay(ModelClass* model)
 {
   
     
+}
+int ModelRacketClass::gettype() {
+    return MODEL_RACKET;
 }

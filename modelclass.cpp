@@ -311,6 +311,11 @@ void ModelClass::Start()
 {
 }
 
+int ModelClass::gettype()
+{
+    return -1;
+}
+
 const Component* ModelClass::GetComponent(COMPONENT_ID component_id) const
 {
 	return m_components.find(component_id)->second;
