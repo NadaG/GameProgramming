@@ -170,7 +170,13 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam
 
 		InputClass::GetInstance()->KeyUp((unsigned int)wparam);
 		return 0;
+	case WM_LBUTTONDOWN:
+	    InputClass::GetInstance()->MouseLeftButtonDown((unsigned int)wparam);
+	    return 0;
 
+	case WM_LBUTTONUP:
+	    InputClass::GetInstance()->MouseLeftButtonUp((unsigned int)wparam);
+	    return 0;
 		// Any other messages send to the default message handler as our application won't make use of them.
 	default:
 		return DefWindowProc(hwnd, umsg, wparam, lparam);

@@ -10,21 +10,30 @@
 class InputClass
 {
 public:
-	static InputClass* GetInstance();
+    static InputClass* GetInstance();
 
-	void Initialize();
+    void Initialize();
 
-	void KeyDown(unsigned int);
-	void KeyUp(unsigned int);
+    void KeyDown(unsigned int);
+    void KeyUp(unsigned int);
+    void MouseLeftButtonDown(unsigned int);
+    void MouseLeftButtonUp(unsigned int);
 
-	bool IsKeyDown(unsigned int);
+    bool IsKeyDown(unsigned int);
+    bool isMouseDown(unsigned int);
+
+    float getdiffY();
+    float getdiffX();
 
 private:
-	bool m_keys[256];
-	InputClass();
-	~InputClass();
+    bool m_keys[256];
+    bool leftclick;
+    InputClass();
+    ~InputClass();
 
-	static InputClass* m_instance;
+    int Y[2];
+    int X[2];
+    static InputClass* m_instance;
 };
 
 
