@@ -310,7 +310,9 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	rot1 = model1->GetRotation() + model1_col->GetRotation();
 	rot2 = model2->GetRotation() + model2_col->GetRotation();
 
-	Debug::GetInstance()->Log(rot1);
+	Vector3f right = { 1.0f, 0.0f, 0.0f };
+	
+
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// 좌표계 관리 해야함
 	switch (col_type1)
@@ -333,7 +335,8 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 				return false;
 			break;
 		case COL_SPHERE:
-			
+
+
 			if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
 				radius1 + radius2)
 			{

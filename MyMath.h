@@ -7,6 +7,12 @@
 // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const float M_PI = 3.141592653f;
 // namespace 개념을 공부해서 이 및에 부분들을 namespace로 뺄것
+
+// mymath의 모든 함수들은 인자로 정보를 출력하지 않고
+// 리턴으로 정보를 돌려주는 식으로 처리된다!!
+
+class Matrix4f;
+
 class Vector2f
 {
 public:
@@ -54,6 +60,8 @@ public:
 	// 크기
 	const float& GetLength();
 
+	const Vector3f& Transform(const Matrix4f& mat);
+
 	// 각 요소끼리 합하는 것
 	friend const Vector3f& operator+(const Vector3f& a, const Vector3f& b);
 	// 각 요소끼리 곱하는 것
@@ -74,7 +82,30 @@ public:
 // 쿼터니언을 공부해서 4차원 벡터와 좌표계를 사용할것
 class Vector4f
 {
-
 };
+
+class Matrix4f
+{
+public:
+	Matrix4f();
+	Matrix4f(const Matrix4f& mat);
+	~Matrix4f();
+
+	friend const Matrix4f& Matrix4fIdentity();
+	const Matrix4f& Multiply(const Matrix4f& mat);
+
+	const Matrix4f& Translate(const Vector3f& vec);
+	const Matrix4f& Translate(const float& x, const float& y, const float& z);
+
+	const Matrix4f& Rotate(const Vector3f& vec);
+	const Matrix4f& Rotate(const float& x, const float& y, const float& z);
+
+	const Matrix4f& Scale(const Vector3f& vec);
+	const Matrix4f& Scale(const float& x, const float& y, const float& z);
+
+	float m_mat[4][4];
+};
+
+
 
 #endif

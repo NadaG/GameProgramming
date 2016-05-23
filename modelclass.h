@@ -89,15 +89,6 @@ public:
 	void SetName(const string& str){ m_name = str; }
 	const string& GetName(){ return m_name; }
 
-	void Translate(const float& x, const float& y, const float& z);
-	void Translate(const Vector3f& vec);
-
-	void Rotate(const float& x, const float& y, const float& z);
-	void Rotate(const Vector3f& vec);
-
-	void Scaling(const float& x, const float& y, const float& z);
-	void Scaling(const Vector3f& vec);
-
 protected:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
