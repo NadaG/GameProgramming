@@ -294,15 +294,23 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	Vector3f center1, center2, size1, size2, rot1, rot2;
 	float radius1, radius2;
 
+	// 충돌체의 월드좌표계에서의 위치
 	center1 = model1->GetPosition() + model1_col->GetCenter()*model1->GetScale();
 	center2 = model2->GetPosition() + model2_col->GetCenter()*model2->GetScale();
 
+	// 충돌체의 월드좌표계에서의 크기
 	size1 = model1_col->GetSize()*model1->GetScale();
 	size2 = model2_col->GetSize()*model2->GetScale();
 
+	// TODO!!!!!!!!!!!!!! 반지름이 모든 충돌체에 있지는 않을것
+	// 충돌체의 반지름!!!!!!!!!!!
 	radius1 = model1_col->GetRadius();
 	radius2 = model2_col->GetRadius();
 	
+	rot1 = model1->GetRotation() + model1_col->GetRotation();
+	rot2 = model2->GetRotation() + model2_col->GetRotation();
+
+	Debug::GetInstance()->Log(rot1);
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// 좌표계 관리 해야함
 	switch (col_type1)

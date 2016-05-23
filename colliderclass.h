@@ -27,17 +27,20 @@ public:
 	
 	const Vector3f& GetCenter();
 	const Vector3f& GetSize();
+	const Vector3f& GetRotation();
 	const float& GetRadius();
 
 	const COLLIDER_TYPE& GetType();
 
 	void SetCenter(const Vector3f& center);
 	void SetSize(const Vector3f& size);
-	void SetSize(const float& radius);
+	void SetRotation(const Vector3f& rotation);
+	void SetRadius(const float& radius);
 
 private:
 	Vector3f m_center;
 	Vector3f m_size;
+	Vector3f m_rotation;
 
 	float m_radius;
 
