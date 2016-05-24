@@ -23,18 +23,29 @@ void ModelRacketClass::Start()
 void ModelRacketClass::Update()
 {
 
-    float y = InputClass::GetInstance()->getMouseY(WM_MOUSEMOVE);
-    float x = InputClass::GetInstance()->getMouseX(WM_MOUSEMOVE);
+	float x = InputClass::GetInstance()->GetMousePos().m_x;
+	float y = InputClass::GetInstance()->GetMousePos().m_y;
     y /= 64.0f;
     x /= 64.0f;
-    cout << x << " " << y << endl;
+    //cout << x << " " << y << endl;
     m_worldPosition = { x, -y, -1.5f };
 
+	if (InputClass::GetInstance()->GetMouseButtonDown(MOUSE_LEFT))
+		Debug::GetInstance()->Log("QQWER");
 
-    if (InputClass::GetInstance()->isLeftDown()) {
+	if (InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT))
+		Debug::GetInstance()->Log("CCCC");
+
+	if (InputClass::GetInstance()->GetMouseButtonUp(MOUSE_LEFT))
+		Debug::GetInstance()->Log("ZZZZ");
+
+	if (InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT))
+	{
 	   m_worldRotation = {0.0f,-50.0f,10.0f};
     }
-    if (InputClass::GetInstance()->isLeftUp()) {
+
+	if (!InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT))
+	{
 	   m_worldRotation = { 0.0f,0.0f,0.0f };
     }
  

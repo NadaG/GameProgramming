@@ -167,21 +167,26 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam
 		// Check if a key has been released on the keyboard.
 	case WM_KEYUP:
 		// If a key is released then send it to the input object so it can unset the state for that key.
-
 		InputClass::GetInstance()->KeyUp((unsigned int)wparam);
+
 		return 0;
 	case WM_LBUTTONDOWN:
-	    InputClass::GetInstance()->MouseLeftButtonDown((unsigned int)wparam);
+		InputClass::GetInstance()->ButtonDown(MOUSE_LEFT);
 	    return 0;
-
 	case WM_LBUTTONUP:
-	    InputClass::GetInstance()->MouseLeftButtonUp((unsigned int)wparam);
+		InputClass::GetInstance()->ButtonUp(MOUSE_LEFT);
 	    return 0;
 		// Any other messages send to the default message handler as our application won't make use of them.
 
+	case WM_RBUTTONDOWN:
+		InputClass::GetInstance()->ButtonDown(MOUSE_RIGHT);
+		return 0;
+
+	case WM_RBUTTONUP:
+		InputClass::GetInstance()->ButtonUp(MOUSE_RIGHT);
+		return 0;
+
 	case WM_MOUSEMOVE:
-	    InputClass::GetInstance()->getMouseX((unsigned int)wparam);
-	    InputClass::GetInstance()->getMouseY((unsigned int)wparam);
 
 	    return 0;
 	default:

@@ -55,13 +55,15 @@ void ModelCircleClass::Update()
 	   isFired = true;
 	   zv = 0.3f;
     }
-    if (InputClass::GetInstance()->isFirstClick() && !isFired) {
-	   isFired = true;
-	   zv = 0.3f;
-	   xv = InputClass::GetInstance()->getdiffX(); //x는 그냥 그대로
-	   yv = -InputClass::GetInstance()->getdiffY();
 
-    }
+ //   if (InputClass::GetInstance()->isFirstClick() && !isFired) 
+	//{
+	//   isFired = true;
+	//   zv = 0.3f;
+	//   xv = InputClass::GetInstance()->getdiffX(); //x는 그냥 그대로
+	//   yv = -InputClass::GetInstance()->getdiffY();
+ //   }
+
     z += zv;
     x += xv;
     y += yv;
@@ -70,16 +72,20 @@ void ModelCircleClass::Update()
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
-    if (model->gettype() == MODEL_CUBE) {
+    if (model->gettype() == MODEL_CUBE) 
+	{
 	   zv = -0.3f;
     }
-    if (model->gettype() == MODEL_RACKET && InputClass::GetInstance()->isLeftDown() && isFired) {
+    
+	if (model->gettype() == MODEL_RACKET && InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT) && isFired) 
+	{
 	   zv = +0.3f;
     }
 
     //xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
 
 }
-int ModelCircleClass::gettype() {
+int ModelCircleClass::gettype() 
+{
     return MODEL_CIRCLE;
 }

@@ -22,15 +22,19 @@ InputClass* InputClass::GetInstance()
 
 void InputClass::Initialize()
 {
-    int i;
-    leftdown = false;
-    leftup = true;
-    firstclick = false;
     // Initialize all the keys to being released and not pressed.
-    for (i = 0; i<256; i++)
+    for (int i = 0; i<256; i++)
     {
 	   m_keys[i] = false;
     }
+
+	// 고쳐야할 하드코딩
+	for (int i = 0; i < 4; i++)
+	{
+		m_mouse[i] = false;
+		m_mouseDownFlag[i] = false;
+		m_mouseUpFlag[i] = false;
+	}
 
     return;
 }
@@ -57,61 +61,55 @@ bool InputClass::IsKeyDown(unsigned int key)
     // Return what state the key is in (pressed/not pressed).
     return m_keys[key];
 }
-void InputClass::MouseLeftButtonDown(unsigned int input)
+
+void InputClass::ButtonDown(const INPUT_MOUSE_TYPE& t)
 {
-    POINT mouse;
-    ::GetCursorPos(&mouse);
-    cout << "before : " << mouse.y << " " << mouse.x << endl;
-    Y[0] = mouse.y;
-    X[0] = mouse.x;
-    leftdown = true;
-    leftup = false;
-    return;
+	m_mouseDownFlag[t] = true;
 }
-void InputClass::MouseLeftButtonUp(unsigned int input)
+
+void InputClass::ButtonUp(const INPUT_MOUSE_TYPE& t)
 {
-    POINT mouse;
-    ::GetCursorPos(&mouse);
-    cout << "after : " << mouse.y << " " << mouse.x << endl;
-    Y[1] = mouse.y;
-    X[1] = mouse.x;
-    cout << Y[0] - Y[1] << " " << X[0] - X[1] << endl;
-    leftdown = false;
-    leftup = true;
-
-    firstclick = true;
-
-    return;
+	m_mouseUpFlag[t] = true;
 }
 
-float InputClass::getdiffY() {
-    float ret = Y[1] - Y[0];
-    ret /= 6400.0;
-    return ret;
-}
-float InputClass::getdiffX() {
-    float ret = X[1] - X[0];
-    ret /= 6400.0;
-    return ret;
-}
-
-bool InputClass::isFirstClick() {
-    return firstclick;
-}
-bool InputClass::isLeftDown() {
-    return leftdown;
-}
-bool InputClass::isLeftUp() {
-    return leftup;
+const bool& InputClass::GetMouseButtonDown(const INPUT_MOUSE_TYPE& t)
+{
+	if (m_mouseDownFlag[t])
+	{
+		m_mouse[t] = true;
+		m_mouseDownFlag[t] = false;
+		return true;
+	}
+	else
+		return false;
 }
 
-int InputClass::getMouseY(unsigned int input) {
-    POINT cursor;
-    GetCursorPos(&cursor);
-    return cursor.y-540;
+const bool& InputClass::GetMouseButtonUp(const INPUT_MOUSE_TYPE& t)
+{
+	if (m_mouseUpFlag[t])
+	{
+		m_mouse[t] = false;
+		m_mouseUpFlag[t] = false;
+		return true;
+	}
+	else
+		return false;
 }
-int InputClass::getMouseX(unsigned int input) {
-    POINT cursor;
-    GetCursorPos(&cursor);
-    return cursor.x-1060;
+
+const bool& InputClass::GetMouseButton(const INPUT_MOUSE_TYPE& t)
+{
+	if (m_mouse[t])
+		return true;
+	else
+		return false;
+}
+
+const Vector2f& InputClass::GetMousePos()
+{
+	Vector2f ret;
+	POINT cursor;
+	GetCursorPos(&cursor);
+	ret.m_x = cursor.x;
+	ret.m_y = cursor.y;
+	return ret;
 }

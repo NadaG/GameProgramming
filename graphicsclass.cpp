@@ -252,11 +252,11 @@ bool GraphicsClass::InitializeModels()
 	ModelCubeClass* cube3 = new ModelCubeClass;
 	ModelCubeClass* cube4 = new ModelCubeClass;
 	ModelCubeClass* cube5 = new ModelCubeClass;
-	//ModelRacketClass* racket1 = new ModelRacketClass;
+	ModelRacketClass* racket1 = new ModelRacketClass;
 
 	m_Models.push_back(circle);
 	m_Models.push_back(cube);
-	//m_Models.push_back(racket1);
+	m_Models.push_back(racket1);
 	/*m_Models.push_back(cube2);
 	m_Models.push_back(cube3);
 	m_Models.push_back(cube4);
