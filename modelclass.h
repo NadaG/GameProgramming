@@ -17,7 +17,7 @@ using namespace std;
 ///////////////////////
 // MY CLASS INCLUDES //
 ///////////////////////
-#include "textureclass.h"
+#include"textureclass.h"
 #include "inputclass.h"
 #include "debug.h"
 #include "component.h"

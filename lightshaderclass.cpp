@@ -52,7 +52,8 @@ void LightShaderClass::Shutdown()
 
 
 bool LightShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, 
-							  D3DXMATRIX projectionMatrix, ID3D11ShaderResourceView* texture, D3DXVECTOR3 lightDirection, D3DXVECTOR4 ambientColor,
+							  D3DXMATRIX projectionMatrix, ID3D11ShaderResourceView* texture
+							  , D3DXVECTOR3 lightDirection, D3DXVECTOR4 ambientColor,
 							  D3DXVECTOR4 diffuseColor, D3DXVECTOR3 cameraPosition, D3DXVECTOR4 specularColor, float specularPower)
 {
 	bool result;
@@ -189,6 +190,7 @@ bool LightShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* 
 	pixelShaderBuffer = 0;
 
 	// Create a texture sampler state description.
+	// 샘플러 정보를 저장하는 함수
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
     samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -417,6 +419,8 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, D
 	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_cameraBuffer);
 	
 	// Set shader texture resource in the pixel shader.
+	// 텍스쳐 정보를 셰이더에 보내는 함수
+	// 시작 위치, 개수, 텍스쳐배열의 주소
 	deviceContext->PSSetShaderResources(0, 1, &texture);
 
 	// Lock the light constant buffer so it can be written to.
@@ -459,6 +463,8 @@ void LightShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int inde
     deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 
 	// Set the sampler state in the pixel shader.
+	// 샘플러를 설정하는 함수
+	// 시작위치, 샘플러 개수, 샘플러 주소
 	deviceContext->PSSetSamplers(0, 1, &m_sampleState);
 
 	// Render the triangle.

@@ -20,6 +20,7 @@ public:
 	void Log(const int& num);
 	void Log(const float& fnum);
 	void Log(const Vector3f& vec);
+	void Log(const Vector2f& vec);
 
 private:
 	Debug();

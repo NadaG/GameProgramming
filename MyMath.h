@@ -33,7 +33,6 @@ public:
 	friend const float& CrossProduct(const float& a, const float& b, const float& c);
 	friend const float& CrossProduct(const Vector2f& a, const Vector2f& b);
 
-private:
 	float m_x;
 	float m_y;
 };

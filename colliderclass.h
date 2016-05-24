@@ -8,6 +8,8 @@
 #include "d3dclass.h"
 #include "mymath.h"
 
+// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// 타입 변수보다는 상속구조가 좋을거 같다!!!!!!!!!!
 enum COLLIDER_TYPE
 {
 	COL_NONE = 0,
@@ -43,6 +45,7 @@ private:
 	Vector3f m_rotation;
 
 	float m_radius;
+
 
 	COLLIDER_TYPE m_type;
 };

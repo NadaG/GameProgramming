@@ -252,11 +252,11 @@ bool GraphicsClass::InitializeModels()
 	ModelCubeClass* cube3 = new ModelCubeClass;
 	ModelCubeClass* cube4 = new ModelCubeClass;
 	ModelCubeClass* cube5 = new ModelCubeClass;
-	ModelRacketClass* racket1 = new ModelRacketClass;
+	//ModelRacketClass* racket1 = new ModelRacketClass;
 
 	m_Models.push_back(circle);
 	m_Models.push_back(cube);
-	m_Models.push_back(racket1);
+	//m_Models.push_back(racket1);
 	/*m_Models.push_back(cube2);
 	m_Models.push_back(cube3);
 	m_Models.push_back(cube4);
@@ -312,6 +312,8 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	rot1 = model1->GetRotation() + model1_col->GetRotation();
 	rot2 = model2->GetRotation() + model2_col->GetRotation();
 
+	// 월드 좌표계, 충돌체의 센터, 회전, 크기를 이용해서 각각 점의 노말벡터와 위치를 구해낸다.
+	
 	Vector3f right = { 1.0f, 0.0f, 0.0f };
 	
 
@@ -337,7 +339,8 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 				return false;
 			break;
 		case COL_SPHERE:
-
+			// 구해낸 노말벡터와 위치를 이용해
+			// 충돌처리를 할 수 있음... ㅠㅠ
 
 			if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
 				radius1 + radius2)
