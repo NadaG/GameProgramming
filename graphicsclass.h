@@ -14,6 +14,7 @@
 #include "cameraclass.h"
 #include "modelcircleclass.h"
 #include "modelcubeclass.h"
+#include "modelracketclass.h"
 #include "lightshaderclass.h"
 #include "lightclass.h"
 #include "mymath.h"

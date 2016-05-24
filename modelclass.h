@@ -30,6 +30,16 @@ using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 
 // 각각의 오브젝트는 고유한 아이디를 가져야함
+
+enum MODEL_TYPE
+{
+    MODEL_NONE=0,
+    MODEL_CIRCLE=1,
+    MODEL_CUBE=2,
+    MODEL_RACKET=3
+};
+
+
 class ModelClass
 {
 protected:
@@ -47,6 +57,9 @@ public:
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
+
+
+
 	bool Initialize(ID3D11Device*, WCHAR*);
 	void Shutdown();
 	void Render(ID3D11DeviceContext*);
@@ -62,7 +75,7 @@ public:
 	virtual void Update();
 	virtual void OnCollisionStay(ModelClass* model);
 	virtual void Start();
-
+	virtual int gettype();
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// 따로 수학 클래스를 만들어서 관리하면 좋을거 같음
 	// D3DXVECTOR3만으로 하기에는 익숙하지 않은 부분이 많음
@@ -133,6 +146,7 @@ protected:
 	Mesh m_mesh;
 
 	string m_name;
+
 };
 
 #endif

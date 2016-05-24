@@ -25,4 +25,8 @@ void ModelCubeClass::Update()
 
 void ModelCubeClass::OnCollisionStay(ModelClass* model)
 {
+    m_worldScale = { 0.0f,0.0f,0.0f };
+}
+int ModelCubeClass::gettype() {
+    return MODEL_CUBE;
 }
