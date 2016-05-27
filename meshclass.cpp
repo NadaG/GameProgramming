@@ -18,12 +18,11 @@ void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const i
 	float now_radian, per_radian;
 
 	int rings = 10, sectors = 10;
-	float M_PI = 3.14159263f;
-	float radius = 0.01f;
+	float radius = 1.0f;
 
 	float const R = 1. / (float)(rings - 1);
 	float const S = 1. / (float)(sectors - 1);
-	int r, s;
+	int r, s, ind = 0;
 
 	switch (mesh_type)
 	{
@@ -317,9 +316,6 @@ void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const i
 		break;
 
 	case MESH_SHPERE:
-
-		
-
 		for (r = 0; r < rings; r++)
 		{
 			for (s = 0; s < sectors; s++)
@@ -328,28 +324,31 @@ void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const i
 				float const x = cos(2 * M_PI * s * S) * sin(M_PI * r * R);
 				float const z = sin(2 * M_PI * s * S) * sin(M_PI * r * R);
 
-				vertices[s].tu = s*S;
-				vertices[s].tv = s*S;
+				vertices[r*sectors + s].tu = s*S;
+				vertices[r*sectors + s].tv = r*R;
 
-				vertices[s].x = x*radius;
-				vertices[s].y = y*radius;
-				vertices[s].z = z*radius;
+				vertices[r*sectors + s].x = x*radius;
+				vertices[r*sectors + s].y = y*radius;
+				vertices[r*sectors + s].z = z*radius;
 
-				vertices[s].nx = x;
-				vertices[s].ny = y;
-				vertices[s].nz = z;
+				vertices[r*sectors + s].nx = x;
+				vertices[r*sectors + s].ny = y;
+				vertices[r*sectors + s].nz = z;
 			}
 		}
 
-		//sphere_indices.resize(rings * sectors * 4);
+		// 구가 완벽하게 구현되지는 않음
 		for (r = 0; r < rings; r++)
 		{
-			for (s = 0; s < sectors * 4; s += 4)
+			for (s = 0; s < sectors; s++)
 			{
-				indices[s] = r*sectors + s;
-				indices[s + 1] = r*sectors + (s + 1);
-				indices[s + 2] = (r + 1)*sectors + (s + 1);
-				indices[s + 3] = (r + 1)*sectors + s;
+				indices[ind++] = r*sectors + s;
+				indices[ind++] = r*sectors + (s + 1);
+				indices[ind++] = (r + 1)*sectors + (s + 1);
+
+				indices[ind++] = indices[ind - 1];
+				indices[ind++] = indices[ind - 3];
+				indices[ind++] = (r + 1)*sectors + s;
 			}
 		}
 		break;

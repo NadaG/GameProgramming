@@ -30,7 +30,6 @@ using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 
 // 각각의 오브젝트는 고유한 아이디를 가져야함
-
 enum MODEL_TYPE
 {
     MODEL_NONE=0,
@@ -57,9 +56,6 @@ public:
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
-
-
-
 	bool Initialize(ID3D11Device*, WCHAR*);
 	void Shutdown();
 	void Render(ID3D11DeviceContext*);
@@ -76,9 +72,8 @@ public:
 	virtual void OnCollisionStay(ModelClass* model);
 	virtual void Start();
 	virtual int gettype();
-	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// 따로 수학 클래스를 만들어서 관리하면 좋을거 같음
-	// D3DXVECTOR3만으로 하기에는 익숙하지 않은 부분이 많음
+
+	// 따로 만든 Vector3f를 이용해서 구현함
 	const Vector3f& GetPosition() const{ return m_worldPosition; }
 	const Vector3f& GetRotation() const{ return m_worldRotation; }
 	const Vector3f& GetScale() const{ return m_worldScale; }

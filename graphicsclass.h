@@ -15,6 +15,7 @@
 #include "modelcircleclass.h"
 #include "modelcubeclass.h"
 #include "modelracketclass.h"
+#include "modelsphereclass.h"
 #include "lightshaderclass.h"
 #include "lightclass.h"
 #include "mymath.h"

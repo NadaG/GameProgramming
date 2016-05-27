@@ -5,6 +5,7 @@
 #define _MESHCLASS_H_
 
 #include "d3dclass.h"
+#include "mymath.h"
 
 enum MESH_TYPE
 {

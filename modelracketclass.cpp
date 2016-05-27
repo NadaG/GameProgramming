@@ -30,15 +30,6 @@ void ModelRacketClass::Update()
     //cout << x << " " << y << endl;
     m_worldPosition = { x, -y, -1.5f };
 
-	if (InputClass::GetInstance()->GetMouseButtonDown(MOUSE_LEFT))
-		Debug::GetInstance()->Log("QQWER");
-
-	if (InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT))
-		Debug::GetInstance()->Log("CCCC");
-
-	if (InputClass::GetInstance()->GetMouseButtonUp(MOUSE_LEFT))
-		Debug::GetInstance()->Log("ZZZZ");
-
 	if (InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT))
 	{
 	   m_worldRotation = {0.0f,-50.0f,10.0f};
