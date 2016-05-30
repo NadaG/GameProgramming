@@ -16,6 +16,8 @@ cbuffer LightBuffer
     float3 lightDirection;
     float specularPower;
     float4 specularColor;
+	float4 pointLightColor;
+	float4 pointLight;
 };
 
 
@@ -28,6 +30,7 @@ struct PixelInputType
     float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
 	float3 viewDirection : TEXCOORD1;
+	float3 wposition : TEXCOORD2;
 };
 
 
@@ -80,6 +83,14 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 
 	// Add the specular component last to the output color.
     color = saturate(color + specular);
+
+	float3 wptol = pointLight.xyz - input.wposition;
+	
+	wptol = normalize(wptol);
+	
+	float intensity=saturate(dot(input.normal, wptol));
+
+	color = saturate(color + pointLightColor*intensity);
 
     return color;
 }

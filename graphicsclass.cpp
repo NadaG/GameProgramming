@@ -258,7 +258,7 @@ bool GraphicsClass::InitializeModels()
 	m_Models.push_back(circle);
 	m_Models.push_back(cube);
 	m_Models.push_back(racket1);
-	m_Models.push_back(sphere);
+	//m_Models.push_back(sphere);
 	/*m_Models.push_back(cube2);
 	m_Models.push_back(cube3);
 	m_Models.push_back(cube4);
@@ -315,8 +315,6 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	rot2 = model2->GetRotation() + model2_col->GetRotation();
 
 	// 월드 좌표계, 충돌체의 센터, 회전, 크기를 이용해서 각각 점의 노말벡터와 위치를 구해낸다.
-	
-
 
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// 좌표계 관리 해야함

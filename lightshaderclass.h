@@ -41,6 +41,8 @@ private:
 		D3DXVECTOR3 lightDirection;
 		float specularPower;
 		D3DXVECTOR4 specularColor;
+		D3DXVECTOR4 pointLightColor;
+		D3DXVECTOR4 pointLight;
 	};
 
 public:

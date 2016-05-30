@@ -53,7 +53,7 @@ void ModelCircleClass::Update()
 	   !isFired)
     {
 	   isFired = true;
-	   zv = 0.3f;
+	   zv = 0.03f;
     }
 
  //   if (InputClass::GetInstance()->isFirstClick() && !isFired) 
@@ -68,6 +68,7 @@ void ModelCircleClass::Update()
     x += xv;
     y += yv;
     m_worldPosition = { x, y, z };
+	m_worldScale = { 5.0f, 5.0f, 5.0f };
 }
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)

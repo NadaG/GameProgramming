@@ -36,6 +36,7 @@ struct PixelInputType
     float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
 	float3 viewDirection : TEXCOORD1;
+	float3 wposition : TEXCOORD2;
 };
 
 
@@ -47,7 +48,6 @@ PixelInputType LightVertexShader(VertexInputType input)
     PixelInputType output;
 	float4 worldPosition;
 
-
 	// Change the position vector to be 4 units for proper matrix calculations.
     input.position.w = 1.0f;
 
@@ -56,6 +56,7 @@ PixelInputType LightVertexShader(VertexInputType input)
     output.position = mul(output.position, viewMatrix);
     output.position = mul(output.position, projectionMatrix);
     
+	output.wposition = mul(input.position, worldMatrix);
 	// Store the 
 	
 	// coordinates for the pixel shader.
