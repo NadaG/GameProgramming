@@ -1,5 +1,5 @@
 #include"Debug.h"
-
+//dasdasdsad
 using namespace std;
 
 Debug* Debug::m_instance = 0;

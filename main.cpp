@@ -4,6 +4,8 @@
 #include "systemclass.h"
 #include<d3d10.h>
 
+//dsadsadasdsa
+
 #pragma comment( lib, "d3d11.lib" )   // D3D11 라이브러리 
 #pragma comment( lib, "d3dx11.lib" )
 
