@@ -9,6 +9,8 @@ bool ModelRacketClass::LoadModel()
 
     m_mesh.LoadVertices(MESH_CUBE, m_model, m_vertexCount, m_model_indices, m_indexCount);
 
+	m_tag = MODEL_RACKET;
+
     return true;
 }
 
@@ -45,9 +47,4 @@ void ModelRacketClass::Update()
 void ModelRacketClass::OnCollisionStay(ModelClass* model)
 {
 	      
-}
-
-int ModelRacketClass::gettype() 
-{
-    return MODEL_RACKET;
 }

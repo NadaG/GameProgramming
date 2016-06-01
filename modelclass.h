@@ -29,15 +29,15 @@ using namespace std;
 // Class name: ModelClass
 ////////////////////////////////////////////////////////////////////////////////
 
-// 각각의 오브젝트는 고유한 아이디를 가져야함
-enum MODEL_TYPE
+// 모델의 태그
+// 각 게임 오브젝트에 태그를 할당해서 서로 구분
+enum MODEL_TAG
 {
     MODEL_NONE=0,
     MODEL_CIRCLE=1,
     MODEL_CUBE=2,
     MODEL_RACKET=3
 };
-
 
 class ModelClass
 {
@@ -64,15 +64,15 @@ public:
 	ID3D11ShaderResourceView* GetTexture();
 	D3DXMATRIX GetWorldMatrix();
 
-	// 각각의 오브젝트 별로 따로 구현되는 함수들
-	// 스크립트 부분을 여기서 짜도록 하면 될것!
+	// 매트릭스를 동기화하는 함수
 	void SyncMatrix();
 
+	// 각각의 오브젝트 별로 따로 구현되는 함수들
+	// 스크립트 부분을 여기서 짜도록 하면 될것!
 	virtual void Update();
 	virtual void OnCollisionStay(ModelClass* model);
 	virtual void Start();
-	virtual int gettype();
-
+	
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// 자식 좌표계와 부모 좌표계를 잘 만들것!!!!
 
@@ -108,6 +108,9 @@ public:
 
 	void SetName(const string& str){ m_name = str; }
 	const string& GetName(){ return m_name; }
+
+	void SetTag(const MODEL_TAG& tag){ m_tag = tag; }
+	const MODEL_TAG& GetTag(){ return m_tag; }
 
 protected:
 	bool InitializeBuffers(ID3D11Device*);
@@ -157,7 +160,7 @@ protected:
 	Mesh m_mesh;
 
 	string m_name;
-
+	MODEL_TAG m_tag;
 };
 
 #endif

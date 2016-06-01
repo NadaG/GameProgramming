@@ -9,10 +9,8 @@ public:
 	
 	static MyTime* GetInstance();
 
-	void SetStartTime();
-	void SetEndTime();
-
-	const clock_t& GetDeltaTime();
+	void SetDeltaTime(float dtm);
+	float GetDeltaTime();
 	
 private:
 
@@ -23,10 +21,7 @@ private:
 
 	static MyTime* m_instance;
 
-	clock_t m_deltaTime;
-
-	clock_t m_startTime;
-	clock_t m_endTime;
+	float m_deltaTime;
 };
 
 #endif

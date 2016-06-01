@@ -164,7 +164,7 @@ bool GraphicsClass::Frame()
 
 	// 하... 망했다 너무 맘대로다
 	// 보통 어떤식으로 짜는지 모르니까 넘 힘들다 ㅠ
-	MyTime::GetInstance()->SetStartTime();
+	clock_t starttm = clock();
 
 	for (int i = 0; i < m_Models.size(); i++)
 	{
@@ -172,7 +172,7 @@ bool GraphicsClass::Frame()
 		m_Models[i]->SyncMatrix();
 	}
 
-	Debug::GetInstance()->Log(MyTime::GetInstance()->GetDeltaTime());
+	//Debug::GetInstance()->Log(MyTime::GetInstance()->GetDeltaTime());
 
 	InputClass::GetInstance()->ButtonUpEnd(MOUSE_LEFT);
 	InputClass::GetInstance()->ButtonUpEnd(MOUSE_RIGHT);
@@ -204,7 +204,8 @@ bool GraphicsClass::Frame()
 	// Render the graphics scene.
 	result = Render();
 
-	MyTime::GetInstance()->SetEndTime();
+	clock_t endtm = clock();
+	MyTime::GetInstance()->SetDeltaTime(float(endtm - starttm) / CLOCKS_PER_SEC);
 
 	if(!result)
 	{

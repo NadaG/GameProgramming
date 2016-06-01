@@ -9,6 +9,8 @@ bool ModelCubeClass::LoadModel()
 
 	m_mesh.LoadVertices(MESH_CUBE, m_model, m_vertexCount, m_model_indices,m_indexCount);
 
+	m_tag = MODEL_CUBE;
+
 	return true;
 }
 
@@ -26,9 +28,4 @@ void ModelCubeClass::Update()
 void ModelCubeClass::OnCollisionStay(ModelClass* model)
 {
     m_worldScale = { 0.0f,0.0f,0.0f };
-}
-
-int ModelCubeClass::gettype() 
-{
-    return MODEL_CUBE;
 }

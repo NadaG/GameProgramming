@@ -20,6 +20,7 @@ public:
 	void Log(const string& str);
 	void Log(const int& num);
 	void Log(const float& fnum);
+	void Log(const double& dnum);
 	void Log(const Vector3f& vec);
 	void Log(const Vector2f& vec);
 	void Log(const clock_t& t);
@@ -34,3 +35,4 @@ private:
 };
 
 #endif
+

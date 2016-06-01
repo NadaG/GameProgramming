@@ -9,6 +9,8 @@ bool ModelSphereClass::LoadModel()
 
 	m_mesh.LoadVertices(MESH_SHPERE, m_model, m_vertexCount, m_model_indices, m_indexCount);
 
+	m_tag = MODEL_NONE;
+
 	return true;
 }
 
@@ -29,9 +31,4 @@ void ModelSphereClass::Update()
 
 void ModelSphereClass::OnCollisionStay(ModelClass* model)
 {
-}
-
-int ModelSphereClass::gettype() 
-{
-	return -1;
 }
