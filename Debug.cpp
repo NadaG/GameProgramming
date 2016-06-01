@@ -19,6 +19,12 @@ Debug::Debug(const Debug& debug)
 {
 }
 
+
+const Debug& Debug::operator=(const Debug& debug)
+{
+	return debug;
+}
+
 Debug::~Debug()
 {
 }
@@ -49,8 +55,12 @@ void Debug::Log(const Vector3f& vec)
 	cout << "x:" << vec.m_x << " y:" << vec.m_y << " z:" << vec.m_z << endl;
 }
 
-
 void Debug::Log(const Vector2f& vec)
 {
 	cout << "x:" << vec.m_x << " y:" << vec.m_y << endl;
+}
+
+void Debug::Log(const clock_t& t)
+{
+	cout << t / (double)CLOCKS_PER_SEC << "sec" << endl;
 }

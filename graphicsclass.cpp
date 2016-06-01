@@ -164,11 +164,20 @@ bool GraphicsClass::Frame()
 
 	// 하... 망했다 너무 맘대로다
 	// 보통 어떤식으로 짜는지 모르니까 넘 힘들다 ㅠ
+	MyTime::GetInstance()->SetStartTime();
+
 	for (int i = 0; i < m_Models.size(); i++)
 	{
 		m_Models[i]->Update();
 		m_Models[i]->SyncMatrix();
 	}
+
+	Debug::GetInstance()->Log(MyTime::GetInstance()->GetDeltaTime());
+
+	InputClass::GetInstance()->ButtonUpEnd(MOUSE_LEFT);
+	InputClass::GetInstance()->ButtonUpEnd(MOUSE_RIGHT);
+	InputClass::GetInstance()->ButtonDownEnd(MOUSE_LEFT);
+	InputClass::GetInstance()->ButtonDownEnd(MOUSE_RIGHT);
 
 	for (int i = 0; i < m_Models.size(); i++)
 	{
@@ -194,6 +203,9 @@ bool GraphicsClass::Frame()
 
 	// Render the graphics scene.
 	result = Render();
+
+	MyTime::GetInstance()->SetEndTime();
+
 	if(!result)
 	{
 		return false;
@@ -267,8 +279,8 @@ bool GraphicsClass::InitializeModels()
 
 void GraphicsClass::InitializeTransform()
 {
-	m_Models[1]->SetPosition({ 0.0f, 0.0f, 12.5f });
-	m_Models[1]->SetScale({ 5.0f, 5.0f, 1.0f });
+	m_Models[1]->SetWorldPosition({ 0.0f, 0.0f, 12.5f });
+	m_Models[1]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
 
 	/*m_Models[2]->SetPosition({ 0.0f, 5.0f, 10.0f });
 	m_Models[2]->SetScale({ 5.0f, 0.3f, 1.0f });
@@ -299,20 +311,20 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	float radius1, radius2;
 
 	// 충돌체의 월드좌표계에서의 위치
-	center1 = model1->GetPosition() + model1_col->GetCenter()*model1->GetScale();
-	center2 = model2->GetPosition() + model2_col->GetCenter()*model2->GetScale();
+	center1 = model1->GetWorldPosition() + model1_col->GetCenter()*model1->GetWorldScale();
+	center2 = model2->GetWorldPosition() + model2_col->GetCenter()*model2->GetWorldScale();
 
 	// 충돌체의 월드좌표계에서의 크기
-	size1 = model1_col->GetSize()*model1->GetScale();
-	size2 = model2_col->GetSize()*model2->GetScale();
+	size1 = model1_col->GetSize()*model1->GetWorldScale();
+	size2 = model2_col->GetSize()*model2->GetWorldScale();
 
 	// TODO!!!!!!!!!!!!!! 반지름이 모든 충돌체에 있지는 않을것
 	// 충돌체의 반지름!!!!!!!!!!!
 	radius1 = model1_col->GetRadius();
 	radius2 = model2_col->GetRadius();
 	
-	rot1 = model1->GetRotation() + model1_col->GetRotation();
-	rot2 = model2->GetRotation() + model2_col->GetRotation();
+	rot1 = model1->GetWorldRotation() + model1_col->GetRotation();
+	rot2 = model2->GetWorldRotation() + model2_col->GetRotation();
 
 	// 월드 좌표계, 충돌체의 센터, 회전, 크기를 이용해서 각각 점의 노말벡터와 위치를 구해낸다.
 
@@ -341,7 +353,7 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 			// 구해낸 노말벡터와 위치를 이용해
 			// 충돌처리를 할 수 있음... ㅠㅠ
 
-			if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
+			if (GetDistance(model1->GetWorldPosition(), model2->GetWorldPosition()) <
 				radius1 + radius2)
 			{
 				return true;
@@ -361,7 +373,7 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 		case COL_CUBE:
 			return CollisionCheck(model2, model1);
 		case COL_SPHERE:
-			if (GetDistance(model1->GetPosition(), model2->GetPosition()) <
+			if (GetDistance(model1->GetWorldPosition(), model2->GetWorldPosition()) <
 				radius1 + radius2)
 			{
 				return true;

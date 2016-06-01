@@ -19,6 +19,8 @@
 #include "lightshaderclass.h"
 #include "lightclass.h"
 #include "mymath.h"
+#include "inputclass.h"
+#include "mytime.h"
 
 /////////////
 // GLOBALS //

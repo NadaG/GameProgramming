@@ -6,7 +6,8 @@
 #include<iostream>
 #include<stdlib.h>
 
-#include"mymath.h"
+#include "mymath.h"
+#include "mytime.h"
 
 using namespace std;
 
@@ -42,9 +43,16 @@ public:
 	const bool& GetMouseButton(const INPUT_MOUSE_TYPE& t);
 	const Vector2f& GetMousePos();
 
-	// SystemClass에서 호출할 함수
+	// 밑에 전부 SystemClass에서 호출할 함수
 	void ButtonDown(const INPUT_MOUSE_TYPE& t);
 	void ButtonUp(const INPUT_MOUSE_TYPE& t);
+
+	void ButtonDownEnd(const INPUT_MOUSE_TYPE& t);
+	void ButtonUpEnd(const INPUT_MOUSE_TYPE& t);
+
+	void SetButton(const INPUT_MOUSE_TYPE& t);
+	void SetButtonEnd(const INPUT_MOUSE_TYPE& t);
+	//////////////////////////////////////////
 
 private:
     bool m_keys[256];

@@ -6,6 +6,7 @@
 
 #include"d3dclass.h"
 #include"mymath.h"
+#include"mytime.h"
 
 using std::cout;
 using std::endl;
@@ -21,10 +22,12 @@ public:
 	void Log(const float& fnum);
 	void Log(const Vector3f& vec);
 	void Log(const Vector2f& vec);
+	void Log(const clock_t& t);
 
 private:
 	Debug();
 	Debug(const Debug& debug);
+	const Debug& operator=(const Debug& debug);
 	~Debug();
 
 	static Debug* m_instance;

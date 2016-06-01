@@ -168,22 +168,27 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam
 	case WM_KEYUP:
 		// If a key is released then send it to the input object so it can unset the state for that key.
 		InputClass::GetInstance()->KeyUp((unsigned int)wparam);
-
 		return 0;
+
 	case WM_LBUTTONDOWN:
 		InputClass::GetInstance()->ButtonDown(MOUSE_LEFT);
+		InputClass::GetInstance()->SetButton(MOUSE_LEFT);
 	    return 0;
+	
 	case WM_LBUTTONUP:
 		InputClass::GetInstance()->ButtonUp(MOUSE_LEFT);
+		InputClass::GetInstance()->SetButtonEnd(MOUSE_LEFT);
 	    return 0;
 		// Any other messages send to the default message handler as our application won't make use of them.
 
 	case WM_RBUTTONDOWN:
 		InputClass::GetInstance()->ButtonDown(MOUSE_RIGHT);
+		InputClass::GetInstance()->SetButton(MOUSE_RIGHT);
 		return 0;
 
 	case WM_RBUTTONUP:
 		InputClass::GetInstance()->ButtonUp(MOUSE_RIGHT);
+		InputClass::GetInstance()->SetButtonEnd(MOUSE_RIGHT);
 		return 0;
 
 	case WM_MOUSEMOVE:

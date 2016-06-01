@@ -72,14 +72,31 @@ void InputClass::ButtonUp(const INPUT_MOUSE_TYPE& t)
 	m_mouseUpFlag[t] = true;
 }
 
+void InputClass::ButtonDownEnd(const INPUT_MOUSE_TYPE& t)
+{
+	m_mouseDownFlag[t] = false;
+}
+
+void InputClass::ButtonUpEnd(const INPUT_MOUSE_TYPE& t)
+{
+	m_mouseUpFlag[t] = false;
+}
+
+
+void InputClass::SetButton(const INPUT_MOUSE_TYPE& t)
+{
+	m_mouse[t] = true;
+}
+
+void InputClass::SetButtonEnd(const INPUT_MOUSE_TYPE& t)
+{
+	m_mouse[t] = false;
+}
+
 const bool& InputClass::GetMouseButtonDown(const INPUT_MOUSE_TYPE& t)
 {
 	if (m_mouseDownFlag[t])
-	{
-		m_mouse[t] = true;
-		m_mouseDownFlag[t] = false;
 		return true;
-	}
 	else
 		return false;
 }
@@ -87,11 +104,7 @@ const bool& InputClass::GetMouseButtonDown(const INPUT_MOUSE_TYPE& t)
 const bool& InputClass::GetMouseButtonUp(const INPUT_MOUSE_TYPE& t)
 {
 	if (m_mouseUpFlag[t])
-	{
-		m_mouse[t] = false;
-		m_mouseUpFlag[t] = false;
 		return true;
-	}
 	else
 		return false;
 }

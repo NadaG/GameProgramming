@@ -73,14 +73,26 @@ public:
 	virtual void Start();
 	virtual int gettype();
 
-	// 따로 만든 Vector3f를 이용해서 구현함
-	const Vector3f& GetPosition() const{ return m_worldPosition; }
-	const Vector3f& GetRotation() const{ return m_worldRotation; }
-	const Vector3f& GetScale() const{ return m_worldScale; }
+	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// 자식 좌표계와 부모 좌표계를 잘 만들것!!!!
+
+	const Vector3f& GetWorldPosition() const{ return m_worldPosition; }
+	const Vector3f& GetWorldRotation() const{ return m_worldRotation; }
+	const Vector3f& GetWorldScale() const{ return m_worldScale; }
 	
-	void SetPosition(const Vector3f& position){ m_worldPosition = position; }
-	void SetRotation(const Vector3f& rotation){ m_worldRotation = rotation; }
-	void SetScale(const Vector3f& scale){ m_worldScale = scale; }
+	void SetWorldPosition(const Vector3f& position){ m_worldPosition = position; }
+	void SetWorldRotation(const Vector3f& rotation){ m_worldRotation = rotation; }
+	void SetWorldScale(const Vector3f& scale){ m_worldScale = scale; }
+
+	const Vector3f& GetLocalPosition() const{ return m_localPosition; }
+	const Vector3f& GetLocalRotation() const{ return m_localRotation; }
+	const Vector3f& GetLocalScale() const{ return m_localScale; }
+
+	void SetLocalPosition(const Vector3f& position){ m_localPosition = position; }
+	void SetLocalRotation(const Vector3f& rotation){ m_localRotation = rotation; }
+	void SetLocalScale(const Vector3f& scale){ m_localScale = scale; }
+
+	/////////////////////////////////////////////////////////////////////////
 
 	// 오브젝트의 컴포넌트들을 관리하는 함수들
 	const Component* GetComponent(COMPONENT_ID component_id) const;
@@ -130,6 +142,10 @@ protected:
 	map<COMPONENT_ID, Component*> m_components;
 
 	// 이 행렬들을 조작하면 오브젝트의 움직임이 가능하도록 구현함
+	Vector3f m_localPosition;
+	Vector3f m_localScale;
+	Vector3f m_localRotation;
+
 	Vector3f m_worldPosition;
 	Vector3f m_worldScale;
 	Vector3f m_worldRotation;

@@ -49,12 +49,12 @@ void ModelCircleClass::Update()
 	   !isFired)
 	   y -= 0.05f;
 
-    if (InputClass::GetInstance()->IsKeyDown(VK_SPACE) &&
-	   !isFired)
-    {
-	   isFired = true;
-	   zv = 0.03f;
-    }
+	if (InputClass::GetInstance()->GetMouseButtonDown(MOUSE_LEFT) &&
+		!isFired)
+	{
+		isFired = true;
+		zv = 0.3f;
+	}
 
  //   if (InputClass::GetInstance()->isFirstClick() && !isFired) 
 	//{
@@ -64,11 +64,12 @@ void ModelCircleClass::Update()
 	//   yv = -InputClass::GetInstance()->getdiffY();
  //   }
 
+
     z += zv;
     x += xv;
     y += yv;
     m_worldPosition = { x, y, z };
-	m_worldScale = { 5.0f, 5.0f, 5.0f };
+	m_worldScale = { 1.0f, 1.0f, 1.0f };
 }
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)

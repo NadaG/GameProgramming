@@ -97,6 +97,7 @@
     <ClCompile Include="modelracketclass.cpp" />
     <ClCompile Include="modelsphereclass.cpp" />
     <ClCompile Include="mymath.cpp" />
+    <ClCompile Include="mytime.cpp" />
     <ClCompile Include="physics.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="modelracketclass.h" />
     <ClInclude Include="modelsphereclass.h" />
     <ClInclude Include="mymath.h" />
+    <ClInclude Include="mytime.h" />
     <ClInclude Include="physics.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
