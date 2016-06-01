@@ -19,7 +19,6 @@ Debug::Debug(const Debug& debug)
 {
 }
 
-
 const Debug& Debug::operator=(const Debug& debug)
 {
 	return debug;
@@ -39,7 +38,6 @@ void Debug::Log(const string& str)
 	cout << str << endl;
 }
 
-
 void Debug::Log(const int& num)
 {
 	cout << num << endl;
@@ -48,6 +46,11 @@ void Debug::Log(const int& num)
 void Debug::Log(const float& fnum)
 {
 	cout << fnum << endl;
+}
+
+void Debug::Log(const double& dnum)
+{
+	cout << dnum << endl;
 }
 
 void Debug::Log(const Vector3f& vec)
@@ -64,3 +67,4 @@ void Debug::Log(const clock_t& t)
 {
 	cout << t / (double)CLOCKS_PER_SEC << "sec" << endl;
 }
+

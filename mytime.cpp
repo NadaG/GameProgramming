@@ -1,8 +1,10 @@
 #include"mytime.h"
+#include "debug.h"
 
 MyTime* MyTime::m_instance = 0;
 
 MyTime::MyTime()
+:m_deltaTime(0)
 {
 }
 
@@ -21,22 +23,18 @@ MyTime::~MyTime()
 
 MyTime* MyTime::GetInstance()
 {
-	if (m_instance == nullptr)
-		m_instance = new MyTime;
+	if (!m_instance)
+		m_instance = new MyTime();
+
 	return m_instance;
 }
 
-void MyTime::SetStartTime()
+void MyTime::SetDeltaTime(float dtm)
 {
-	m_startTime = clock();
+	m_deltaTime = dtm;
 }
 
-void MyTime::SetEndTime()
+float MyTime::GetDeltaTime()
 {
-	m_endTime = clock();
-}
-
-const clock_t& MyTime::GetDeltaTime()
-{
-	return m_endTime - m_startTime;
+	return m_deltaTime;
 }

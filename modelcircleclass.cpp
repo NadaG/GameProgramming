@@ -27,9 +27,11 @@ void ModelCircleClass::Start()
     Collider* col = new Collider(COL_CUBE);
     SetComponent(COM_COLLIDER, col);
     m_worldRotation = { 0.0f, 180.0f, 0.0f };
-
+	m_tag = MODEL_CIRCLE;
 }
 
+
+float a = 0.0f;
 void ModelCircleClass::Update()
 {
 
@@ -66,22 +68,29 @@ void ModelCircleClass::Update()
 	//   yv = -InputClass::GetInstance()->getdiffY();
  //   }
 
-
     z += zv;
     x += xv;
     y += yv;
     m_worldPosition = { x, y, z };
 	m_worldScale = { 1.0f, 1.0f, 1.0f };
+
+	a += MyTime::GetInstance()->GetDeltaTime();
+	//Debug::GetInstance()->Log(MyTime::GetInstance()->GetDeltaTime());
+	if (a > 1.0)
+	{
+		a = 0.0f;
+		Debug::GetInstance()->Log("QQWER");
+	}
 }
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
-    if (model->gettype() == MODEL_CUBE) 
+    if (model->GetTag() == MODEL_CUBE) 
 	{
 	   zv = -0.3f;
     }
     
-	if (model->gettype() == MODEL_RACKET && InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT) && isFired) 
+	if (model->GetTag() == MODEL_RACKET && InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT) && isFired) 
 	{
 	    float yy = model->GetWorldRotation().m_y;
 	    float xx = model->GetWorldRotation().m_x;
@@ -92,9 +101,4 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
     }
 
     //xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
-
-}
-int ModelCircleClass::gettype() 
-{
-    return MODEL_CIRCLE;
 }

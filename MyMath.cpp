@@ -132,6 +132,22 @@ const Vector3f& Vector3f::CrossProduct(const Vector3f& a)
 	return t;
 }
 
+// 정규화
+const Vector3f& Vector3f::Normalize()
+{
+	Vector3f t;
+	t.m_x = m_x / GetLength();
+	t.m_y = m_y / GetLength();
+	t.m_z = m_z / GetLength();
+	return t;
+}
+
+// 크기
+const float& Vector3f::GetLength()
+{
+	return sqrtf(m_x*m_x + m_y*m_y + m_z*m_z);
+}
+
 const Vector3f& Vector3f::Transform(const Matrix4f& mat)
 {
 	Vector3f vec;

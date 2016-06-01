@@ -52,11 +52,9 @@ public:
 	const float& DotProduct(const Vector3f& a);
 	// 외적
 	const Vector3f& CrossProduct(const Vector3f& a);
-	// 거리
-	//const float& GetDistance(const Vector3f& a);
 	// 정규화
 	const Vector3f& Normalize();
-	// 크기
+	// 크기 반환
 	const float& GetLength();
 
 	const Vector3f& Transform(const Matrix4f& mat);
