@@ -54,6 +54,8 @@ void ModelCircleClass::Update()
 	{
 		isFired = true;
 		zv = 0.3f;
+
+
 	}
 
  //   if (InputClass::GetInstance()->isFirstClick() && !isFired) 
@@ -81,6 +83,11 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
     
 	if (model->gettype() == MODEL_RACKET && InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT) && isFired) 
 	{
+	    float yy = model->GetWorldRotation().m_y;
+	    float xx = model->GetWorldRotation().m_x;
+	    yv += -xx*0.004f;
+	    xv += yy*0.004f;
+	    //x¿Í yÁÂÇ¥°¡ ²¿¿©ÀÖ½¿. ¤Ì¤Ì
 	   zv = +0.3f;
     }
 

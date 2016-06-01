@@ -12,6 +12,8 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <thread>
+#include <chrono>
 using namespace std;
 
 ///////////////////////

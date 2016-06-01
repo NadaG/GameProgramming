@@ -29,6 +29,7 @@ public:
     const float& GetY() const { return m_worldScale.m_y; }
     const float& GetZ() const { return m_worldScale.m_z; }
 
+
 private:
 };
 
