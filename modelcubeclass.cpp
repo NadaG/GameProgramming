@@ -18,14 +18,23 @@ void ModelCubeClass::Start()
 {
 	Collider* col = new Collider(COL_CUBE);
 	SetComponent(COM_COLLIDER, col);
+
+	Matrix4f mat;
+	mat=mat.Scale(2.0f, 2.0f, 2.0f);
+	m_worldPosition = m_worldPosition.Transform(mat);
+	Debug::GetInstance()->Log(m_worldPosition);
 }
 
 void ModelCubeClass::Update()
 {
 	//m_worldPosition = { 0.0f, 5.0f, 10.0f };
+	//m_worldScale = { 500.0f, 500.0f, 1.0f };
 }
 
 void ModelCubeClass::OnCollisionStay(ModelClass* model)
 {
-    m_worldScale = { 0.0f,0.0f,0.0f };
+	if (model->GetTag() == MODEL_CIRCLE)
+	{
+		model->SetVelocity({ model->GetVelocity().m_x, model->GetVelocity().m_y, -model->GetVelocity().m_z });
+	}
 }

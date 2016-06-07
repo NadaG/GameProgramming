@@ -57,7 +57,9 @@ public:
 	// 크기 반환
 	const float& GetLength();
 
+	// 같은 것입니다
 	const Vector3f& Transform(const Matrix4f& mat);
+	const Vector3f& operator*(const Matrix4f& mat);
 
 	// 각 요소끼리 합하는 것
 	friend const Vector3f& operator+(const Vector3f& a, const Vector3f& b);
@@ -68,6 +70,8 @@ public:
 	friend const Vector3f& operator*(const Vector3f& a, const float& b);
 
 	friend const float& GetDistance(const Vector3f& a, const Vector3f& b);
+
+public:
 
 	float m_x;
 	float m_y;

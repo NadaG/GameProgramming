@@ -9,7 +9,7 @@ bool ModelCircleClass::LoadModel()
 
     m_mesh.LoadVertices(MESH_CIRCLE, m_model, m_vertexCount, m_model_indices, m_indexCount);
     
-    m_tag = MODEL_CUBE;
+    m_tag = MODEL_CIRCLE;
     return true;
 }
 
@@ -27,8 +27,9 @@ void ModelCircleClass::Start()
 {
     Collider* col = new Collider(COL_CUBE);
     SetComponent(COM_COLLIDER, col);
-    m_worldRotation = { 0.0f, 180.0f, 0.0f };
 
+    m_worldRotation = { 0.0f, 180.0f, 0.0f };
+	m_velocity = { 0.0f, 0.0f, 0.0f };
 }
 
 void ModelCircleClass::Update()
@@ -54,9 +55,7 @@ void ModelCircleClass::Update()
 		!isFired)
 	{
 		isFired = true;
-		zv = 0.3f;
-
-
+		m_velocity.m_z = 0.3f;
 	}
 
  //   if (InputClass::GetInstance()->isFirstClick() && !isFired) 
@@ -68,9 +67,9 @@ void ModelCircleClass::Update()
  //   }
 
 
-    z += zv;
-    x += xv;
-    y += yv;
+	z += m_velocity.m_z;
+	x += m_velocity.m_x;
+	y += m_velocity.m_y;
     m_worldPosition = { x, y, z };
 	m_worldScale = { 1.0f, 1.0f, 1.0f };
 }
@@ -79,19 +78,18 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
     if (model->GetTag() == MODEL_CUBE) 
 	{
-	   zv = -0.3f;
+
     }
     
 	if (model->GetTag() == MODEL_RACKET && InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT) && isFired) 
 	{
+		///////////일해라 남창현////////////
+		///////////로테이션을 기준으로 노말 구해서 입사, 반사 구현
 	    float yy = model->GetWorldRotation().m_y;
 	    float xx = model->GetWorldRotation().m_x;
-	    yv += -xx*0.004f;
-	    xv += yy*0.004f;
-	    //x와 y좌표가 꼬여있슴. ㅜㅜ
-	   zv = +0.3f;
+	    
+		m_velocity.m_z = 0.3f;
     }
-
     //xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
 
 }

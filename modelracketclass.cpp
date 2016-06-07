@@ -77,7 +77,7 @@ void ModelRacketClass::Update()
     }
     float yy = GetWorldRotation().m_y;
     float xx = GetWorldRotation().m_x;
-    cout << yy << " " << xx << endl;
+    //cout << yy << " " << xx << endl;
 	/*if (InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT))
 		m_worldRotation = { 20.0f, 0.0f, 0.0f };
 	else

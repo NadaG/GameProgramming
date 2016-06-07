@@ -55,8 +55,6 @@ bool ModelClass::Initialize(ID3D11Device* device, WCHAR* textureFilename)
 		return false;
 	}
 
-	Start();
-
 	return true;
 }
 

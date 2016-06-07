@@ -24,6 +24,7 @@ public:
 	void Log(const Vector3f& vec);
 	void Log(const Vector2f& vec);
 	void Log(const clock_t& t);
+	void Log(const Matrix4f& mat);
 
 private:
 	Debug();

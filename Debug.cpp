@@ -68,3 +68,10 @@ void Debug::Log(const clock_t& t)
 	cout << t / (double)CLOCKS_PER_SEC << "sec" << endl;
 }
 
+void Debug::Log(const Matrix4f& mat)
+{
+	cout << "m11: " << mat.m_mat[0][0] << " mat12: " << mat.m_mat[0][1] << " mat13: " << mat.m_mat[0][2] << " mat14: " << mat.m_mat[0][3] << endl;
+	cout << "m21: " << mat.m_mat[1][0] << " mat22: " << mat.m_mat[1][1] << " mat23: " << mat.m_mat[1][2] << " mat24: " << mat.m_mat[1][3] << endl;
+	cout << "m31: " << mat.m_mat[2][0] << " mat32: " << mat.m_mat[2][1] << " mat33: " << mat.m_mat[2][2] << " mat34: " << mat.m_mat[2][3] << endl;
+	cout << "m41: " << mat.m_mat[3][0] << " mat42: " << mat.m_mat[3][1] << " mat43: " << mat.m_mat[3][2] << " mat44: " << mat.m_mat[3][3] << endl;
+}

@@ -114,6 +114,9 @@ public:
 	void SetTag(const MODEL_TAG& tag){ m_tag = tag; }
 	const MODEL_TAG& GetTag(){ return m_tag; }
 
+	void SetVelocity(const Vector3f& velo){ m_velocity = velo; }
+	const Vector3f& GetVelocity(){ return m_velocity; }
+
 protected:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();

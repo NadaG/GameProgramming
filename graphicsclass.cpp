@@ -69,8 +69,12 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 			return false;
 		}
 	}
-
+	
 	InitializeTransform();
+	for (int i = 0; i < m_Models.size(); i++)
+	{
+		m_Models[i]->Start();
+	}
 
 	// Create the light shader object.
 	m_LightShader = new LightShaderClass;
@@ -151,11 +155,6 @@ void GraphicsClass::Shutdown()
 
 	return;
 }
-
-//bool GraphicsClass::Start()
-//{
-//
-//}
 
 // 각 프레임마다 호출되는 함수
 bool GraphicsClass::Frame()
@@ -269,7 +268,8 @@ bool GraphicsClass::InitializeModels()
 	ModelSphereClass* sphere = new ModelSphereClass;
 
 	m_Models.push_back(circle);
-	m_Models.push_back(cube);
+	m_Models.push_back(cube); 
+	m_Models.push_back(cube2);
 	m_Models.push_back(racket1);
 	//m_Models.push_back(sphere);
 	/*m_Models.push_back(cube2);
@@ -281,7 +281,11 @@ bool GraphicsClass::InitializeModels()
 void GraphicsClass::InitializeTransform()
 {
 	m_Models[1]->SetWorldPosition({ 0.0f, 0.0f, 12.5f });
-	m_Models[1]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
+	m_Models[1]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
+
+	m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 10.0f });
+	m_Models[2]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
+	m_Models[2]->SetWorldRotation({ 0.0f, 90.0f, 0.0f });
 
 	/*m_Models[2]->SetPosition({ 0.0f, 5.0f, 10.0f });
 	m_Models[2]->SetScale({ 5.0f, 0.3f, 1.0f });
@@ -315,22 +319,36 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	center1 = model1->GetWorldPosition() + model1_col->GetCenter()*model1->GetWorldScale();
 	center2 = model2->GetWorldPosition() + model2_col->GetCenter()*model2->GetWorldScale();
 
+	rot1 = model1->GetWorldRotation() + model1_col->GetRotation();
+	rot2 = model2->GetWorldRotation() + model2_col->GetRotation();
+
 	// 충돌체의 월드좌표계에서의 크기
 	size1 = model1_col->GetSize()*model1->GetWorldScale();
+	//size1 = size1*rot1;
+	
 	size2 = model2_col->GetSize()*model2->GetWorldScale();
+	//size2 = size2*rot2;
 
 	// TODO!!!!!!!!!!!!!! 반지름이 모든 충돌체에 있지는 않을것
 	// 충돌체의 반지름!!!!!!!!!!!
 	radius1 = model1_col->GetRadius();
 	radius2 = model2_col->GetRadius();
-	
-	rot1 = model1->GetWorldRotation() + model1_col->GetRotation();
-	rot2 = model2->GetWorldRotation() + model2_col->GetRotation();
 
 	// 월드 좌표계, 충돌체의 센터, 회전, 크기를 이용해서 각각 점의 노말벡터와 위치를 구해낸다.
 
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// 좌표계 관리 해야함
+
+	Vector3f Model1Min = { center1.m_x - size1.m_x / 2, center1.m_y - size1.m_y / 2, center1.m_z - size1.m_z / 2 };
+	Vector3f Model1Max = { center1.m_x + size1.m_x / 2, center1.m_y + size1.m_y / 2, center1.m_z + size1.m_z / 2 };
+	Vector3f Model2Min = { center2.m_x - size2.m_x / 2, center2.m_y - size2.m_y / 2, center2.m_z - size2.m_z / 2 };
+	Vector3f Model2Max = { center2.m_x + size2.m_x / 2, center2.m_y + size2.m_y / 2, center2.m_z + size2.m_z / 2 };
+
+	//Matrix4f mat;
+	//mat = mat.Rotate(rot1);
+	//Model1Max = Model1Max.Transform(mat);
+	//Debug::GetInstance()->Log(mat);
+
 	switch (col_type1)
 	{
 	case COL_CUBE:
@@ -338,12 +356,9 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 		switch (col_type2)
 		{
 		case COL_CUBE:
-			if ((center1.m_x + size1.m_x / 2 > center2.m_x - size2.m_x / 2 &&
-				center1.m_x - size1.m_x / 2   < center2.m_x + size2.m_x / 2) &&
-				(center1.m_y + size1.m_y / 2   > center2.m_y - size2.m_y / 2 &&
-				center1.m_y - size1.m_y / 2  < center2.m_y + size2.m_y / 2) &&
-				(center1.m_z + size1.m_z / 2 > center2.m_z - size2.m_z / 2 &&
-				center1.m_z - size1.m_z / 2< center2.m_z + size2.m_z / 2))
+			if ((Model1Max.m_x > Model2Min.m_x && Model1Min.m_x < Model2Max.m_x) &&
+				(Model1Max.m_y > Model2Min.m_y && Model1Min.m_y < Model2Max.m_y) &&
+				(Model1Max.m_z > Model2Min.m_z && Model1Min.m_z < Model2Max.m_z))
 			{
 				return true;
 			}

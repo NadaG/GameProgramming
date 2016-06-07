@@ -157,6 +157,12 @@ const Vector3f& Vector3f::Transform(const Matrix4f& mat)
 	return vec;
 }
 
+// 잘 되는지 모르겠다....
+const Vector3f& Vector3f::operator*(const Matrix4f& mat)
+{
+	return (*this).Transform(mat);
+}
+
 const Vector3f& operator+(const Vector3f& a, const Vector3f& b)
 {
 	Vector3f t;
@@ -243,11 +249,7 @@ const Matrix4f& Matrix4f::Multiply(const Matrix4f& mat)
 
 const Matrix4f& Matrix4f::Translate(const Vector3f& vec)
 {
-	Matrix4f mat;
-	mat.m_mat[0][3] += vec.m_x;
-	mat.m_mat[1][3] += vec.m_y;
-	mat.m_mat[2][3] += vec.m_z;
-	return mat;
+	return Translate(vec.m_x,vec.m_y,vec.m_z);
 }
 
 const Matrix4f& Matrix4f::Translate(const float& x, const float& y, const float& z)
@@ -259,13 +261,13 @@ const Matrix4f& Matrix4f::Translate(const float& x, const float& y, const float&
 	return mat;
 }
 
-// TODO!!!!!!!!!!!!!!!!!!
+// Degree를 넘기시게
 const Matrix4f& Matrix4f::Rotate(const Vector3f& vec)
 {
-	Matrix4f mat;
-	return mat;
+	return Rotate(vec.m_x, vec.m_y, vec.m_z);
 }
 
+// Degree를 넘기시게
 const Matrix4f& Matrix4f::Rotate(const float& x, const float& y, const float& z)
 {
 	Matrix4f mat, t;
@@ -297,19 +299,16 @@ const Matrix4f& Matrix4f::Rotate(const float& x, const float& y, const float& z)
 
 const Matrix4f& Matrix4f::Scale(const Vector3f& vec)
 {
-	Matrix4f mat;
-	mat.m_mat[0][0] = m_mat[0][0] * vec.m_x;
-	mat.m_mat[1][1] = m_mat[1][1] * vec.m_x;
-	mat.m_mat[2][2] = m_mat[2][2] * vec.m_x;
-	return mat;
+	return Scale(vec.m_x,vec.m_y,vec.m_x);
 }
 
 const Matrix4f& Matrix4f::Scale(const float& x, const float& y, const float& z)
 {
 	Matrix4f mat;
-	mat.m_mat[0][0] = m_mat[0][0] * x;
-	mat.m_mat[1][1] = m_mat[1][1] * y;
-	mat.m_mat[2][2] = m_mat[2][2] * z;
+	mat = Matrix4fIdentity();
+	mat.m_mat[0][0] = x;
+	mat.m_mat[1][1] = y;
+	mat.m_mat[2][2] = z;
 	return mat;
 }
 
