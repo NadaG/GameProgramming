@@ -345,8 +345,10 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	Vector3f Model2Max = { center2.m_x + size2.m_x / 2, center2.m_y + size2.m_y / 2, center2.m_z + size2.m_z / 2 };
 
 	Matrix4f mat;
-	mat = mat.Translate({ 0.1f, 0.1f, 0.1f });
-	mat = mat.Scale({ 0.1f, 0.1f, 0.1f });
+	//mat = mat.Translate({ 0.1f, 0.1f, 0.1f });
+	//mat = mat.Scale({ 0.1f, 0.1f, 0.1f });
+	mat = mat.Rotate({ 30.0f, 0.0f, 0.0f });
+	Model2Min = { 0.0f, -5.0f, 10.0f };
 	Model2Min = Model2Min.Transform(mat);
 
 	Debug::GetInstance()->Log(Model2Min);

@@ -3,6 +3,9 @@
 
 // 수학적인 요소들이 들어있는 소스
 #include<cmath>
+#include<iostream>
+
+//#include "debug.h"
 
 // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const float M_PI = 3.141592653f;

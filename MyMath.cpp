@@ -151,9 +151,9 @@ const float& Vector3f::GetLength()
 const Vector3f& Vector3f::Transform(const Matrix4f& mat)
 {
 	Vector3f vec;
-	vec.m_x = m_x*mat.m_mat[0][0] + m_y*mat.m_mat[0][1] + m_z*mat.m_mat[0][2] + 1 * mat.m_mat[0][3];
-	vec.m_y = m_x*mat.m_mat[1][0] + m_y*mat.m_mat[1][1] + m_z*mat.m_mat[1][2] + 1 * mat.m_mat[1][3];
-	vec.m_z = m_x*mat.m_mat[2][0] + m_y*mat.m_mat[2][1] + m_z*mat.m_mat[2][2] + 1 * mat.m_mat[2][3];
+	vec.m_x = m_x*mat.m_mat[0][0] + m_y*mat.m_mat[1][0] + m_z*mat.m_mat[2][0] + 1 * mat.m_mat[3][0];
+	vec.m_y = m_x*mat.m_mat[0][1] + m_y*mat.m_mat[1][1] + m_z*mat.m_mat[2][1] + 1 * mat.m_mat[3][1];
+	vec.m_z = m_x*mat.m_mat[0][2] + m_y*mat.m_mat[1][2] + m_z*mat.m_mat[2][2] + 1 * mat.m_mat[3][2];
 	return vec;
 }
 
@@ -258,9 +258,9 @@ const Matrix4f& Matrix4f::Translate(const float& x, const float& y, const float&
 {
 	Matrix4f mat;
 	mat = Matrix4fIdentity();
-	mat.m_mat[0][3] += x;
-	mat.m_mat[1][3] += y;
-	mat.m_mat[2][3] += z;
+	mat.m_mat[3][0] += x;
+	mat.m_mat[3][1] += y;
+	mat.m_mat[3][2] += z;
 	return mat;
 }
 
@@ -277,25 +277,25 @@ const Matrix4f& Matrix4f::Rotate(const float& x, const float& y, const float& z)
 	mat = Matrix4fIdentity();
 
 	mat.m_mat[1][1] = cosf(Deg2Rad(x));
-	mat.m_mat[1][2] = -sinf(Deg2Rad(x));
-	mat.m_mat[2][1] = sinf(Deg2Rad(x));
+	mat.m_mat[2][1] = -sinf(Deg2Rad(x));
+	mat.m_mat[1][2] = sinf(Deg2Rad(x));
 	mat.m_mat[2][2] = cosf(Deg2Rad(x));
 
 	t = Matrix4fIdentity();
 
-	t.m_mat[0][0] = cosf(Deg2Rad(y));
+	/*t.m_mat[0][0] = cosf(Deg2Rad(y));
 	t.m_mat[2][0] = -sinf(Deg2Rad(y));
 	t.m_mat[0][2] = sinf(Deg2Rad(y));
 	t.m_mat[2][2] = cosf(Deg2Rad(y));
 	mat = mat.Multiply(t);
 
 	t = Matrix4fIdentity();
+
 	t.m_mat[0][0] = cosf(Deg2Rad(z));
 	t.m_mat[0][1] = -sinf(Deg2Rad(z));
 	t.m_mat[1][0] = sinf(Deg2Rad(z));
 	t.m_mat[2][1] = cosf(Deg2Rad(z));
-
-	mat = mat.Multiply(t);
+	mat = mat.Multiply(t);*/
 
 	return mat;
 }
