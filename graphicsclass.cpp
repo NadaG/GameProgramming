@@ -290,16 +290,16 @@ void GraphicsClass::InitializeTransform()
 	m_Models[1]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
 
 	m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 10.0f });
-	m_Models[2]->SetWorldScale({ 1.0f, 10.0f, 10.0f });
+	m_Models[2]->SetWorldScale({ 0.000001f, 10.0f, 30.0f });
 
 	m_Models[3]->SetWorldPosition({ 5.0f, 0.0f, 10.0f });
-	m_Models[3]->SetWorldScale({ 1.0f, 10.0f, 10.0f });
+	m_Models[3]->SetWorldScale({ 0.000001f, 10.0f, 30.0f });
 	
 	m_Models[4]->SetWorldPosition({ 0.0f, 5.0f, 10.0f });
-	m_Models[4]->SetWorldScale({ 10.0f, 1.0f, 10.0f });
+	m_Models[4]->SetWorldScale({ 10.0f, 0.000001f, 30.0f });
 
 	m_Models[5]->SetWorldPosition({ 0.0f, -5.0f, 10.0f });
-	m_Models[5]->SetWorldScale({ 10.0f, 1.0f, 10.0f });
+	m_Models[5]->SetWorldScale({ 10.0f, 0.000001f, 30.0f });
 }
 
 bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
