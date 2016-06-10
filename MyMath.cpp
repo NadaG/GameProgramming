@@ -151,9 +151,9 @@ const float& Vector3f::GetLength()
 const Vector3f& Vector3f::Transform(const Matrix4f& mat)
 {
 	Vector3f vec;
-	vec.m_x = m_x*mat.m_mat[0][0] + m_y*mat.m_mat[1][0] + m_z*mat.m_mat[2][0];
-	vec.m_y = m_x*mat.m_mat[0][1] + m_y*mat.m_mat[1][1] + m_z*mat.m_mat[2][1];
-	vec.m_z = m_x*mat.m_mat[0][2] + m_y*mat.m_mat[1][2] + m_z*mat.m_mat[2][2];
+	vec.m_x = m_x*mat.m_mat[0][0] + m_y*mat.m_mat[0][1] + m_z*mat.m_mat[0][2] + 1 * mat.m_mat[0][3];
+	vec.m_y = m_x*mat.m_mat[1][0] + m_y*mat.m_mat[1][1] + m_z*mat.m_mat[1][2] + 1 * mat.m_mat[1][3];
+	vec.m_z = m_x*mat.m_mat[2][0] + m_y*mat.m_mat[2][1] + m_z*mat.m_mat[2][2] + 1 * mat.m_mat[2][3];
 	return vec;
 }
 
@@ -201,8 +201,10 @@ const float& GetDistance(const Vector3f& a, const Vector3f& b)
 		(a.m_z - b.m_z)*(a.m_z - b.m_z));
 }
 
+// TODO!!!!!!!!!!!! √ ±‚»≠
 Matrix4f::Matrix4f()
 {
+
 }
 
 Matrix4f::Matrix4f(const Matrix4f& mat)
@@ -255,6 +257,7 @@ const Matrix4f& Matrix4f::Translate(const Vector3f& vec)
 const Matrix4f& Matrix4f::Translate(const float& x, const float& y, const float& z)
 {
 	Matrix4f mat;
+	mat = Matrix4fIdentity();
 	mat.m_mat[0][3] += x;
 	mat.m_mat[1][3] += y;
 	mat.m_mat[2][3] += z;

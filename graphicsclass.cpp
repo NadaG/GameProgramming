@@ -62,7 +62,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Initialize the model object.
 	for (int i = 0; i < m_Models.size(); i++)
 	{
-		result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
+		result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/earth.dds");
 		if (!result)
 		{
 			MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -269,8 +269,8 @@ bool GraphicsClass::InitializeModels()
 
 	m_Models.push_back(circle);
 	m_Models.push_back(cube); 
-	m_Models.push_back(cube2);
-	m_Models.push_back(racket1);
+	//m_Models.push_back(cube2);
+	//m_Models.push_back(racket1);
 	//m_Models.push_back(sphere);
 	/*m_Models.push_back(cube2);
 	m_Models.push_back(cube3);
@@ -283,9 +283,9 @@ void GraphicsClass::InitializeTransform()
 	m_Models[1]->SetWorldPosition({ 0.0f, 0.0f, 12.5f });
 	m_Models[1]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
 
-	m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 10.0f });
-	m_Models[2]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
-	m_Models[2]->SetWorldRotation({ 0.0f, 90.0f, 0.0f });
+	//m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 10.0f });
+	//m_Models[2]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
+	//m_Models[2]->SetWorldRotation({ 0.0f, 90.0f, 0.0f });
 
 	/*m_Models[2]->SetPosition({ 0.0f, 5.0f, 10.0f });
 	m_Models[2]->SetScale({ 5.0f, 0.3f, 1.0f });
@@ -344,6 +344,12 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	Vector3f Model2Min = { center2.m_x - size2.m_x / 2, center2.m_y - size2.m_y / 2, center2.m_z - size2.m_z / 2 };
 	Vector3f Model2Max = { center2.m_x + size2.m_x / 2, center2.m_y + size2.m_y / 2, center2.m_z + size2.m_z / 2 };
 
+	Matrix4f mat;
+	mat = mat.Translate({ 0.1f, 0.1f, 0.1f });
+	mat = mat.Scale({ 0.1f, 0.1f, 0.1f });
+	Model2Min = Model2Min.Transform(mat);
+
+	Debug::GetInstance()->Log(Model2Min);
 	//Matrix4f mat;
 	//mat = mat.Rotate(rot1);
 	//Model1Max = Model1Max.Transform(mat);

@@ -1,57 +1,12 @@
-﻿빌드 시작: 2016-06-08 오전 5:51:58
+﻿빌드 시작: 2016-06-10 오후 4:41:25
      1>2 노드의 "C:\Users\Nada\Desktop\GameProgrammingProject\GameProgrammingProject\GameProgrammingProject.vcxproj" 프로젝트(Build 대상)입니다.
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt colliderclass.cpp component.cpp meshclass.cpp mymath.cpp physics.cpp
-         mymath.cpp
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(5): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(10): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(71): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(76): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(122): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(132): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(142): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(148): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(157): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(172): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(180): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(189): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(201): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(229): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(247): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(261): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(297): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\mymath.cpp(312): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-         코드를 생성하고 있습니다...
-         건너뛰고 있습니다... (관련된 변경 내용 없음)
-         physics.cpp
-         meshclass.cpp
-         component.cpp
-         colliderclass.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.lib" /MACHINE:X86 Debug\cameraclass.obj
-         Debug\colliderclass.obj
-         Debug\component.obj
-         Debug\d3dclass.obj
-         Debug\debug.obj
-         Debug\graphicsclass.obj
-         Debug\inputclass.obj
-         Debug\lightclass.obj
-         Debug\lightshaderclass.obj
-         Debug\main.obj
-         Debug\meshclass.obj
-         Debug\modelcircleclass.obj
-         Debug\modelclass.obj
-         Debug\modelcubeclass.obj
-         Debug\modelracketclass.obj
-         Debug\modelsphereclass.obj
-         Debug\mymath.obj
-         Debug\mytime.obj
-         Debug\physics.obj
-         Debug\systemclass.obj
-         Debug\textureclass.obj
-         GameProgrammingProject.vcxproj -> C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.exe
-     1>"C:\Users\Nada\Desktop\GameProgrammingProject\GameProgrammingProject\GameProgrammingProject.vcxproj" 프로젝트를 빌드했습니다(Build 대상).
+     1>FxCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\fxc.exe /nologo /E"main" /T ps_4_0_level_9_1 /Fo "C:\Users\Nada\Desktop\GameProgrammingProject\Debug\PixelShader1.cso" /Od /Zi PixelShader1.hlsl 
+     1>C:\Users\Nada\Desktop\GameProgrammingProject\GameProgrammingProject\PixelShader1.hlsl(11,18-54): error X3523: DX9-style intrinsics are disabled when not in dx9 compatibility mode.
+         
+         compilation failed; no code produced
+     1>"C:\Users\Nada\Desktop\GameProgrammingProject\GameProgrammingProject\GameProgrammingProject.vcxproj" 프로젝트를 빌드했습니다(Build 대상). - 실패
 
-빌드했습니다.
+빌드하지 못했습니다.
 
-경과 시간: 00:00:00.68
+경과 시간: 00:00:00.56

@@ -32,7 +32,7 @@ bool LightShaderClass::Initialize(ID3D11Device* device, HWND hwnd)
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"./light.vs", L"./light.ps");
+	result = InitializeShader(device, hwnd, L"./VertexShader1.hlsl", L"./PixelShader1.hlsl");
 	if(!result)
 	{
 		return false;
@@ -94,7 +94,7 @@ bool LightShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* 
 	pixelShaderBuffer = 0;
 
     // Compile the vertex shader code.
-	result = D3DX11CompileFromFile(vsFilename, NULL, NULL, "LightVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL, 
+	result = D3DX11CompileFromFile(vsFilename, NULL, NULL, "main", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL, 
 								   &vertexShaderBuffer, &errorMessage, NULL);
 	if(FAILED(result))
 	{
@@ -113,7 +113,7 @@ bool LightShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* 
 	}
 
     // Compile the pixel shader code.
-	result = D3DX11CompileFromFile(psFilename, NULL, NULL, "LightPixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL, 
+	result = D3DX11CompileFromFile(psFilename, NULL, NULL, "main", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL, 
 								   &pixelShaderBuffer, &errorMessage, NULL);
 	if(FAILED(result))
 	{

@@ -149,4 +149,12 @@
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexShader1.hlsl">
+      <Filter>리소스 파일</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader1.hlsl">
+      <Filter>리소스 파일</Filter>
+    </FxCompile>
+  </ItemGroup>
 </Project>
