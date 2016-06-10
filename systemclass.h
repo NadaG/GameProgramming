@@ -22,7 +22,7 @@
 ///////////////////////
 #include "inputclass.h"
 #include "graphicsclass.h"
-
+#include "soundclass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: SystemClass
@@ -38,6 +38,7 @@ public:
 	void Shutdown();
 	void Run();
 
+	HWND gethwnd();
 	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
 private:
@@ -51,6 +52,7 @@ private:
 	HWND m_hwnd;
 
 	GraphicsClass* m_Graphics;
+	SoundClass* m_Sound;
 };
 
 
@@ -64,6 +66,4 @@ static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 // GLOBALS //
 /////////////
 static SystemClass* ApplicationHandle = 0;
-
-
 #endif

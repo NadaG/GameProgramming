@@ -1,4 +1,10 @@
 #include"modelcircleclass.h"
+#include "soundclass.h"
+#include "systemclass.h"
+#include<mmsystem.h>
+
+#pragma comment (lib,"winmm")
+
 
 bool ModelCircleClass::LoadModel()
 {
@@ -34,6 +40,7 @@ void ModelCircleClass::Start()
 
 void ModelCircleClass::Update()
 {
+
 
     if (InputClass::GetInstance()->IsKeyDown(VK_LEFT) &&
 	   !isFired)
@@ -76,6 +83,13 @@ void ModelCircleClass::Update()
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
+    PlaySound(TEXT("./data/hit.wav"), NULL, SND_FILENAME);
+
+    
+    //cout << "A" << endl;
+    //system("pause");
+
+
     if (model->GetTag() == MODEL_CUBE) 
 	{
 
