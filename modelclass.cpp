@@ -69,9 +69,9 @@ void ModelClass::SyncMatrix()
 	D3DXMatrixScaling(&m, m_worldScale.m_x / 2, m_worldScale.m_y / 2, m_worldScale.m_z / 2);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
-	D3DXMatrixRotationYawPitchRoll(&m, m_worldRotation.m_y*M_PI / 180.0f
-		, m_worldRotation.m_x*M_PI / 180.0f
-		, m_worldRotation.m_z*M_PI / 180.0f);
+	D3DXMatrixRotationYawPitchRoll(&m, D3DXToRadian(m_worldRotation.m_y)
+		, D3DXToRadian(m_worldRotation.m_x)
+		, D3DXToRadian(m_worldRotation.m_z));
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
 	D3DXMatrixTranslation(&m, m_worldPosition.m_x, m_worldPosition.m_y, m_worldPosition.m_z);
@@ -367,4 +367,14 @@ ModelClass* ModelClass::GetChild(const int& t) const
 vector<ModelClass*> ModelClass::GetChildren() const
 {
 	return m_children;
+}
+
+void ModelClass::SetDirection(const WALL_DIRECTION& wall_direction)
+{
+	m_wallDirection = wall_direction;
+}
+
+const WALL_DIRECTION& ModelClass::GetDirection() const
+{
+	return m_wallDirection;
 }

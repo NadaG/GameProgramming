@@ -54,7 +54,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     color = ambientColor;
 
 	// Initialize the specular color.
-	specular = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	specular = specularColor;
 
 	// Invert the light direction for calculations.
     lightDir = -lightDirection;

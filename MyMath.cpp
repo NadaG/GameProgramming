@@ -231,88 +231,92 @@ const Matrix4f& Matrix4fIdentity()
 	return mat;
 }
 
-const Matrix4f& Matrix4f::Multiply(const Matrix4f& mat)
+void Matrix4f::Multiply(Matrix4f& out, const Matrix4f& mat1, const Matrix4f& mat2)
 {
-	Matrix4f m;
+	D3DXMATRIX m1, m2;
+
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			float tmp = 0.0f;
-			for (int k = 0; k < 4; k++)
-			{
-				tmp += m_mat[i][k] * mat.m_mat[k][j];
-			}
-			m.m_mat[i][j] = tmp;
+			m1.m[i][j] = mat1.m_mat[i][j];
+			m2.m[i][j] = mat2.m_mat[i][j];
 		}
 	}
-	return m;
+
+	D3DXMatrixMultiply(&m1, &m1, &m2);
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			out.m_mat[i][j] = m1.m[i][j];
+		}
+	}
 }
 
-const Matrix4f& Matrix4f::Translate(const Vector3f& vec)
+void Translate(Matrix4f& mat, const Vector3f& vec)
 {
-	return Translate(vec.m_x,vec.m_y,vec.m_z);
+	Translate(mat, vec.m_x,vec.m_y,vec.m_z);
 }
 
-const Matrix4f& Matrix4f::Translate(const float& x, const float& y, const float& z)
+void Translate(Matrix4f& mat, const float& x, const float& y, const float& z)
 {
-	Matrix4f mat;
-	mat = Matrix4fIdentity();
-	mat.m_mat[3][0] += x;
-	mat.m_mat[3][1] += y;
-	mat.m_mat[3][2] += z;
-	return mat;
+	D3DXMATRIX ma = Matrix4fToD3DXMATRIX(mat);
+	D3DXMatrixTranslation(&ma, x, y, z);
+	mat = D3DXMATRIXToMatrix4f(ma);
 }
 
 // Degree를 넘기시게
-const Matrix4f& Matrix4f::Rotate(const Vector3f& vec)
+void Rotate(Matrix4f& mat, const Vector3f& vec)
 {
-	return Rotate(vec.m_x, vec.m_y, vec.m_z);
+	Rotate(mat, vec.m_x, vec.m_y, vec.m_z);
 }
 
 // Degree를 넘기시게
-const Matrix4f& Matrix4f::Rotate(const float& x, const float& y, const float& z)
+void Rotate(Matrix4f& mat, const float& x, const float& y, const float& z)
 {
-	Matrix4f mat, t;
-	mat = Matrix4fIdentity();
-
-	mat.m_mat[1][1] = cosf(Deg2Rad(x));
-	mat.m_mat[2][1] = -sinf(Deg2Rad(x));
-	mat.m_mat[1][2] = sinf(Deg2Rad(x));
-	mat.m_mat[2][2] = cosf(Deg2Rad(x));
-
-	t = Matrix4fIdentity();
-
-	/*t.m_mat[0][0] = cosf(Deg2Rad(y));
-	t.m_mat[2][0] = -sinf(Deg2Rad(y));
-	t.m_mat[0][2] = sinf(Deg2Rad(y));
-	t.m_mat[2][2] = cosf(Deg2Rad(y));
-	mat = mat.Multiply(t);
-
-	t = Matrix4fIdentity();
-
-	t.m_mat[0][0] = cosf(Deg2Rad(z));
-	t.m_mat[0][1] = -sinf(Deg2Rad(z));
-	t.m_mat[1][0] = sinf(Deg2Rad(z));
-	t.m_mat[2][1] = cosf(Deg2Rad(z));
-	mat = mat.Multiply(t);*/
-
-	return mat;
+	D3DXMATRIX ma = Matrix4fToD3DXMATRIX(mat);
+	D3DXMatrixRotationYawPitchRoll(&ma, Deg2Rad(y), Deg2Rad(x), Deg2Rad(z));
+	mat = D3DXMATRIXToMatrix4f(ma);
 }
 
-const Matrix4f& Matrix4f::Scale(const Vector3f& vec)
+void Scale(Matrix4f& mat, const Vector3f& vec)
 {
-	return Scale(vec.m_x,vec.m_y,vec.m_x);
+	Scale(mat, vec.m_x,vec.m_y,vec.m_x);
 }
 
-const Matrix4f& Matrix4f::Scale(const float& x, const float& y, const float& z)
+void Scale(Matrix4f& mat, const float& x, const float& y, const float& z)
 {
-	Matrix4f mat;
-	mat = Matrix4fIdentity();
-	mat.m_mat[0][0] = x;
-	mat.m_mat[1][1] = y;
-	mat.m_mat[2][2] = z;
-	return mat;
+	D3DXMATRIX ma = Matrix4fToD3DXMATRIX(mat);
+	D3DXMatrixScaling(&ma, x, y, z);
+	mat = D3DXMATRIXToMatrix4f(ma);
+}
+
+const D3DXMATRIX& Matrix4fToD3DXMATRIX(const Matrix4f& mat)
+{
+	D3DXMATRIX ma;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			ma.m[i][j] = mat.m_mat[i][j];
+		}
+	}
+	return ma;
+}
+
+const Matrix4f& D3DXMATRIXToMatrix4f(const D3DXMATRIX& mat)
+{
+	Matrix4f ma;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			ma.m_mat[i][j] = mat.m[i][j];
+		}
+	}
+	return ma;
 }
 
 

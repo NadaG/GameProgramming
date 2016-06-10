@@ -102,7 +102,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Light->SetAmbientColor(0.15f, 0.15f, 0.15f, 1.0f);
 	m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
 	m_Light->SetDirection(0.0f, 0.0f, 1.0f);
-	m_Light->SetSpecularColor(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Light->SetSpecularColor(0.0f, 0.0f, 0.0f, 1.0f);
 	m_Light->SetSpecularPower(32.0f);
 
 	return true;
@@ -268,14 +268,20 @@ bool GraphicsClass::InitializeModels()
 	ModelSphereClass* sphere = new ModelSphereClass;
 
 	m_Models.push_back(circle);
+
 	m_Models.push_back(cube); 
-	//m_Models.push_back(cube2);
-	//m_Models.push_back(racket1);
-	//m_Models.push_back(sphere);
-	/*m_Models.push_back(cube2);
+	cube->SetDirection(FRONT_BACK);
+	m_Models.push_back(cube2);
+	cube2->SetDirection(LEFT_RIGHT);
+	
 	m_Models.push_back(cube3);
+	cube3->SetDirection(LEFT_RIGHT);
 	m_Models.push_back(cube4);
-	m_Models.push_back(cube5);*/
+	cube4->SetDirection(UP_DOWN);
+	m_Models.push_back(cube5);
+	cube5->SetDirection(UP_DOWN);
+
+	m_Models.push_back(racket1);
 }
 
 void GraphicsClass::InitializeTransform()
@@ -283,23 +289,17 @@ void GraphicsClass::InitializeTransform()
 	m_Models[1]->SetWorldPosition({ 0.0f, 0.0f, 12.5f });
 	m_Models[1]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
 
-	//m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 10.0f });
-	//m_Models[2]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
-	//m_Models[2]->SetWorldRotation({ 0.0f, 90.0f, 0.0f });
+	m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 10.0f });
+	m_Models[2]->SetWorldScale({ 1.0f, 10.0f, 10.0f });
 
-	/*m_Models[2]->SetPosition({ 0.0f, 5.0f, 10.0f });
-	m_Models[2]->SetScale({ 5.0f, 0.3f, 1.0f });
+	m_Models[3]->SetWorldPosition({ 5.0f, 0.0f, 10.0f });
+	m_Models[3]->SetWorldScale({ 1.0f, 10.0f, 10.0f });
 	
-	m_Models[3]->SetPosition({ 0.0f, -5.0f, 10.0f });
-	m_Models[3]->SetScale({ 5.0f, 0.3f, 1.0f });
-	
-	m_Models[4]->SetPosition({ 5.0f, 0.0f, 10.0f });
-	m_Models[4]->SetScale({ 5.0f, 0.3f, 1.0f });
-	m_Models[4]->SetRotation({ 0.0f, 0.0f, 90.0f });
+	m_Models[4]->SetWorldPosition({ 0.0f, 5.0f, 10.0f });
+	m_Models[4]->SetWorldScale({ 10.0f, 1.0f, 10.0f });
 
-	m_Models[5]->SetPosition({ -5.0f, 0.0f, 10.0f });
-	m_Models[5]->SetScale({ 5.0f, 0.3f, 1.0f });
-	m_Models[5]->SetRotation({ 0.0f, 0.0f, -90.0f });*/
+	m_Models[5]->SetWorldPosition({ 0.0f, -5.0f, 10.0f });
+	m_Models[5]->SetWorldScale({ 10.0f, 1.0f, 10.0f });
 }
 
 bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
@@ -316,18 +316,19 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	float radius1, radius2;
 
 	// 충돌체의 월드좌표계에서의 위치
-	center1 = model1->GetWorldPosition() + model1_col->GetCenter()*model1->GetWorldScale();
-	center2 = model2->GetWorldPosition() + model2_col->GetCenter()*model2->GetWorldScale();
 
-	rot1 = model1->GetWorldRotation() + model1_col->GetRotation();
-	rot2 = model2->GetWorldRotation() + model2_col->GetRotation();
+	center1 = model1->GetWorldPosition();
+	center2 = model2->GetWorldPosition();
+
+	//Debug::GetInstance()->Log(center2);
+
+	rot1 = model1->GetWorldRotation();
+	rot2 = model2->GetWorldRotation();
 
 	// 충돌체의 월드좌표계에서의 크기
-	size1 = model1_col->GetSize()*model1->GetWorldScale();
-	//size1 = size1*rot1;
-	
-	size2 = model2_col->GetSize()*model2->GetWorldScale();
-	//size2 = size2*rot2;
+	size1 = model1->GetWorldScale();
+	size2 = model2->GetWorldScale();
+
 
 	// TODO!!!!!!!!!!!!!! 반지름이 모든 충돌체에 있지는 않을것
 	// 충돌체의 반지름!!!!!!!!!!!
@@ -343,19 +344,6 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 	Vector3f Model1Max = { center1.m_x + size1.m_x / 2, center1.m_y + size1.m_y / 2, center1.m_z + size1.m_z / 2 };
 	Vector3f Model2Min = { center2.m_x - size2.m_x / 2, center2.m_y - size2.m_y / 2, center2.m_z - size2.m_z / 2 };
 	Vector3f Model2Max = { center2.m_x + size2.m_x / 2, center2.m_y + size2.m_y / 2, center2.m_z + size2.m_z / 2 };
-
-	Matrix4f mat;
-	//mat = mat.Translate({ 0.1f, 0.1f, 0.1f });
-	//mat = mat.Scale({ 0.1f, 0.1f, 0.1f });
-	mat = mat.Rotate({ 30.0f, 0.0f, 0.0f });
-	Model2Min = { 0.0f, -5.0f, 10.0f };
-	Model2Min = Model2Min.Transform(mat);
-
-	Debug::GetInstance()->Log(Model2Min);
-	//Matrix4f mat;
-	//mat = mat.Rotate(rot1);
-	//Model1Max = Model1Max.Transform(mat);
-	//Debug::GetInstance()->Log(mat);
 
 	switch (col_type1)
 	{

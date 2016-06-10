@@ -1,7 +1,7 @@
-﻿빌드 시작: 2016-06-10 오후 5:36:09
+﻿빌드 시작: 2016-06-10 오후 10:53:28
      1>2 노드의 "C:\Users\Nada\Desktop\GameProgrammingProject\GameProgrammingProject\GameProgrammingProject.vcxproj" 프로젝트(Build 대상)입니다.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt colliderclass.cpp component.cpp debug.cpp graphicsclass.cpp inputclass.cpp main.cpp meshclass.cpp modelcircleclass.cpp modelclass.cpp modelcubeclass.cpp modelracketclass.cpp modelsphereclass.cpp mymath.cpp mytime.cpp physics.cpp systemclass.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt component.cpp graphicsclass.cpp
          graphicsclass.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : 매크로 재정의
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50002) : 'DXGI_STATUS_OCCLUDED'의 이전 정의를 참조하십시오.
@@ -69,23 +69,9 @@
      1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\graphicsclass.cpp(183): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
      1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\graphicsclass.cpp(235): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
          코드를 생성하고 있습니다...
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\graphicsclass.cpp(279): warning C4715: 'GraphicsClass::InitializeModels' : 모든 제어 경로에서 값을 반환하지는 않습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogrammingproject\graphicsclass.cpp(285): warning C4715: 'GraphicsClass::InitializeModels' : 모든 제어 경로에서 값을 반환하지는 않습니다.
          건너뛰고 있습니다... (관련된 변경 내용 없음)
          component.cpp
-         systemclass.cpp
-         physics.cpp
-         mytime.cpp
-         mymath.cpp
-         modelsphereclass.cpp
-         modelracketclass.cpp
-         modelcubeclass.cpp
-         modelclass.cpp
-         modelcircleclass.cpp
-         meshclass.cpp
-         main.cpp
-         inputclass.cpp
-         debug.cpp
-         colliderclass.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Nada\Desktop\GameProgrammingProject\Debug\GameProgrammingProject.lib" /MACHINE:X86 Debug\cameraclass.obj
          Debug\colliderclass.obj
@@ -113,4 +99,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:02.17
+경과 시간: 00:00:01.83

@@ -19,6 +19,7 @@ void ModelRacketClass::Start()
     SetComponent(COM_COLLIDER, col);
     //m_worldPosition = {0.0f,1.0f,1.0f};
     m_worldScale = {1.0f,1.0f,0.01f};
+	m_worldRotation = { 0.0f, 0.0f, 0.0f };
 }
 
 void ModelRacketClass::Update()
@@ -83,6 +84,7 @@ void ModelRacketClass::Update()
 	else
 		m_worldRotation = { 0.0f, 0.0f, 0.0f };
  */
+	
     //m_worldPosition = { 0.0f, 5.0f, 10.0f };
 }
 

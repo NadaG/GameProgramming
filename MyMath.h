@@ -6,6 +6,7 @@
 #include<iostream>
 
 //#include "debug.h"
+#include "d3dclass.h"
 
 // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const float M_PI = 3.141592653f;
@@ -96,16 +97,19 @@ public:
 	~Matrix4f();
 
 	friend const Matrix4f& Matrix4fIdentity();
-	const Matrix4f& Multiply(const Matrix4f& mat);
+	void Multiply(Matrix4f& out, const Matrix4f& mat1, const Matrix4f& mat2);
 
-	const Matrix4f& Translate(const Vector3f& vec);
-	const Matrix4f& Translate(const float& x, const float& y, const float& z);
+	friend void Translate(Matrix4f& mat, const Vector3f& vec);
+	friend void Translate(Matrix4f& mat, const float& x, const float& y, const float& z);
 
-	const Matrix4f& Rotate(const Vector3f& vec);
-	const Matrix4f& Rotate(const float& x, const float& y, const float& z);
+	friend void Rotate(Matrix4f& mat, const Vector3f& vec);
+	friend void Rotate(Matrix4f& mat, const float& x, const float& y, const float& z);
 
-	const Matrix4f& Scale(const Vector3f& vec);
-	const Matrix4f& Scale(const float& x, const float& y, const float& z);
+	friend void Scale(Matrix4f& mat, const Vector3f& vec);
+	friend void Scale(Matrix4f& mat, const float& x, const float& y, const float& z);
+
+	friend const D3DXMATRIX& Matrix4fToD3DXMATRIX(const Matrix4f& mat);
+	friend const Matrix4f& D3DXMATRIXToMatrix4f(const D3DXMATRIX& mat);
 
 	float m_mat[4][4];
 };

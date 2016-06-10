@@ -41,6 +41,13 @@ enum MODEL_TAG
     MODEL_RACKET=3
 };
 
+enum WALL_DIRECTION
+{
+	LEFT_RIGHT = 0,
+	UP_DOWN = 1,
+	FRONT_BACK = 2
+};
+
 class ModelClass
 {
 protected:
@@ -117,6 +124,9 @@ public:
 	void SetVelocity(const Vector3f& velo){ m_velocity = velo; }
 	const Vector3f& GetVelocity(){ return m_velocity; }
 
+	void SetDirection(const WALL_DIRECTION& wall_direction);
+	const WALL_DIRECTION& GetDirection() const;
+
 protected:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
@@ -129,6 +139,8 @@ protected:
 	void ReleaseModel();
 
 protected:
+
+	WALL_DIRECTION m_wallDirection;
 
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;

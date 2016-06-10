@@ -7,7 +7,7 @@ bool ModelCubeClass::LoadModel()
 	m_indexCount = m_vertexCount;
 	m_model_indices = new int[m_indexCount];
 
-	m_mesh.LoadVertices(MESH_CUBE, m_model, m_vertexCount, m_model_indices,m_indexCount);
+	m_mesh.LoadVertices(MESH_CUBE, m_model, m_vertexCount, m_model_indices, m_indexCount);
 
 	m_tag = MODEL_CUBE;
 
@@ -18,11 +18,6 @@ void ModelCubeClass::Start()
 {
 	Collider* col = new Collider(COL_CUBE);
 	SetComponent(COM_COLLIDER, col);
-
-	Matrix4f mat;
-	mat=mat.Scale(2.0f, 2.0f, 2.0f);
-	m_worldPosition = m_worldPosition.Transform(mat);
-	Debug::GetInstance()->Log(m_worldPosition);
 }
 
 void ModelCubeClass::Update()
@@ -35,6 +30,7 @@ void ModelCubeClass::OnCollisionStay(ModelClass* model)
 {
 	if (model->GetTag() == MODEL_CIRCLE)
 	{
-		model->SetVelocity({ model->GetVelocity().m_x, model->GetVelocity().m_y, -model->GetVelocity().m_z });
+		//model->SetVelocity({ model->GetVelocity().m_x, model->GetVelocity().m_y, -model->GetVelocity().m_z });
 	}
 }
+
