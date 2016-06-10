@@ -7,6 +7,7 @@ SystemClass::SystemClass()
 {
 	//m_Input = 0;
 	m_Graphics = 0;
+	m_Sound = 0;
 }
 
 
@@ -56,7 +57,10 @@ bool SystemClass::Initialize()
 	{
 		return false;
 	}
-	
+	m_Sound = new SoundClass;
+	if (!m_Sound) { return false; }
+	result = m_Sound->Initialize(m_hwnd);
+	if (!result) { return false; }
 	return true;
 }
 
@@ -125,6 +129,7 @@ void SystemClass::Run()
 }
 
 
+
 bool SystemClass::Frame()
 {
 	bool result;
@@ -148,6 +153,7 @@ bool SystemClass::Frame()
 
 LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)
 {
+
 	switch (umsg)
 	{
 	case WM_CREATE:
@@ -270,6 +276,7 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
 						    WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_POPUP,
 						    posX, posY, screenWidth, screenHeight, NULL, NULL, m_hinstance, NULL);
 
+
 	// Bring the window up on the screen and set it as main focus.
 	ShowWindow(m_hwnd, SW_SHOW);
 	SetForegroundWindow(m_hwnd);
@@ -306,7 +313,7 @@ void SystemClass::ShutdownWindows()
 
 	return;
 }
-
+HWND SystemClass::gethwnd() { return m_hwnd; }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 {
