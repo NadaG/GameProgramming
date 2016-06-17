@@ -37,53 +37,45 @@ void ModelRacketClass::Update()
     m_worldPosition = { x, -y, -1.5f };
     int flag = 0;
     
-    float rand1 = (rand() % 60 + 70) / 100.0f;
-    float rand2 = (rand() % 60 + 70) / 100.0f;
-    float rand3 = (rand() % 50) / 100.0f;
-    if (rand() % 2) { rand3 *= -1; }
-    float rand4 = (rand() % 50) / 100.0f;
-    if (rand() % 2) { rand4 *= -1; }
-    float rand5 = (rand() % 50) / 100.0f;
-    if (rand() % 2) { rand5 *= -1; }
     if (InputClass::GetInstance()->IsKeyDown(97))//1 
     {
-	   m_worldRotation = { -20.0f*rand1, 20.0f*rand2, rand5 };
+	   m_worldRotation = { -20.0f, 20.0f, 0.0f };
     }
     else if (InputClass::GetInstance()->IsKeyDown(98))//2 
     {
-	   m_worldRotation = { -20.0f*rand1, rand4, rand5 };
+	   m_worldRotation = { -20.0f, 0.0f, 0.0f };
     }
     else if (InputClass::GetInstance()->IsKeyDown(99))//3
     {
-	   m_worldRotation = { -20.0f*rand1, -20.0f*rand2, rand5 };
+	   m_worldRotation = { -20.0f, -20.0f, 0.0f };
     }
     else if (InputClass::GetInstance()->IsKeyDown(100))//4
     {
-	   m_worldRotation = { rand3, 20.0f*rand2, rand5 };
+	   m_worldRotation = { 1.0f, 20.0f, 0.0f };
     }
     else if (InputClass::GetInstance()->IsKeyDown(101))//5
     {
-	   m_worldRotation = { rand3, rand4, rand5 };
+	   m_worldRotation = { 1.0f, 0.0f, 0.0f };
     }
     else if (InputClass::GetInstance()->IsKeyDown(102))//6
     {
-	   m_worldRotation = { rand3, -20.0f*rand2, rand5 };
+	   m_worldRotation = { 1.0f, -20.0f, 0.0f };
     }
     else if (InputClass::GetInstance()->IsKeyDown(103))//7 
     {
-	   m_worldRotation = { 20.0f*rand1, 20.0f*rand2, rand5 };
+	   m_worldRotation = { 20.0f, 20.0f, 0.0f };
     }
     else if (InputClass::GetInstance()->IsKeyDown(104))//8
     {
-	   m_worldRotation = { 20.0f*rand1, rand4, rand5 };
+	   m_worldRotation = { 20.0f, 0.0f, 0.0f };
     }
     else if (InputClass::GetInstance()->IsKeyDown(105))//9
     {
-	   m_worldRotation = { 20.0f*rand1, -20.0f*rand2, rand5 };
+	   m_worldRotation = { 20.0f, -20.0f, 0.0f };
     }
     else //아무것도 없쪙
     {
-	   m_worldRotation = { rand3, rand4, rand5 };
+	   m_worldRotation = { 0.0f, 0.0f, 0.0f };
     }
     float yy = GetWorldRotation().m_y;
     float xx = GetWorldRotation().m_x;
