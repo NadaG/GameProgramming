@@ -1,8 +1,8 @@
-﻿빌드 시작: 2016-06-18 오전 12:50:36
+﻿빌드 시작: 2016-06-18 오전 3:48:46
      1>2 노드의 "C:\Users\Nada\Desktop\GameProgrammingProject\GameProgramming\GameProgrammingProject.vcxproj" 프로젝트(Build 대상)입니다.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt modelclass.cpp mymath.cpp
-         mymath.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt meshclass.cpp modelsphereclass.cpp
+         modelsphereclass.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : 매크로 재정의
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50002) : 'DXGI_STATUS_OCCLUDED'의 이전 정의를 참조하십시오.
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : 매크로 재정의
@@ -59,23 +59,7 @@
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50355) : 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'의 이전 정의를 참조하십시오.
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND' : 매크로 재정의
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50364) : 'D3D10_ERROR_FILE_NOT_FOUND'의 이전 정의를 참조하십시오.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(5): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(10): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(74): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(79): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(125): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(135): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(145): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(151): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(160): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(175): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(183): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(192): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(204): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(234): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(309): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\mymath.cpp(322): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-         modelclass.cpp
+         meshclass.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : 매크로 재정의
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50002) : 'DXGI_STATUS_OCCLUDED'의 이전 정의를 참조하십시오.
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : 매크로 재정의
@@ -132,11 +116,12 @@
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50355) : 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'의 이전 정의를 참조하십시오.
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND' : 매크로 재정의
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50364) : 'D3D10_ERROR_FILE_NOT_FOUND'의 이전 정의를 참조하십시오.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelclass.cpp(75): warning C4244: '인수' : 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelclass.cpp(360): warning C4018: '>=' : signed 또는 unsigned가 일치하지 않습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelclass.cpp(363): warning C4018: '<' : signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\meshclass.cpp(37): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\meshclass.cpp(37): warning C4101: 'b' :참조되지 않은 지역 변수입니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\meshclass.cpp(37): warning C4101: 'd' :참조되지 않은 지역 변수입니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\meshclass.cpp(37): warning C4101: 'c' :참조되지 않은 지역 변수입니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\meshclass.cpp(97): warning C4101: 'input' :참조되지 않은 지역 변수입니다.
          코드를 생성하고 있습니다...
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelclass.cpp(368): warning C4715: 'ModelClass::GetChild' : 모든 제어 경로에서 값을 반환하지는 않습니다.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Nada\Desktop\GameProgrammingProject\GameProgramming\Debug\GameProgrammingProject.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Nada\Desktop\GameProgrammingProject\GameProgramming\Debug\GameProgrammingProject.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Nada\Desktop\GameProgrammingProject\GameProgramming\Debug\GameProgrammingProject.lib" /MACHINE:X86 Debug\cameraclass.obj
          Debug\colliderclass.obj
@@ -165,4 +150,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:03.12
+경과 시간: 00:00:03.04

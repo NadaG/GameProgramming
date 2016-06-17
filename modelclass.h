@@ -35,10 +35,11 @@ using namespace std;
 // 각 게임 오브젝트에 태그를 할당해서 서로 구분
 enum MODEL_TAG
 {
-    MODEL_NONE=0,
-    MODEL_CIRCLE=1,
-    MODEL_CUBE=2,
-    MODEL_RACKET=3
+	MODEL_NONE = 0,
+	MODEL_CIRCLE = 1,
+	MODEL_CUBE = 2,
+	MODEL_RACKET = 3,
+	MODEL_SPHERE = 4
 };
 
 enum WALL_DIRECTION

@@ -1,5 +1,6 @@
 #include "modelracketclass.h"
 #include<iostream>
+
 bool ModelRacketClass::LoadModel()
 {
     m_vertexCount = 36;
@@ -7,7 +8,7 @@ bool ModelRacketClass::LoadModel()
     m_indexCount = m_vertexCount;
     m_model_indices = new int[m_indexCount];
 
-    m_mesh.LoadVertices(MESH_CUBE, m_model, m_vertexCount, m_model_indices, m_indexCount);
+    m_mesh.LoadVertices(MESH_CUBE, m_model, m_model_indices);
 
     return true;
 }

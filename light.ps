@@ -78,7 +78,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     }
 
     // Multiply the texture pixel and the input color to get the textured result.
-    color = textureColor;
+    color = color*textureColor;
 
 	//color = saturate(color + specular);
 

@@ -41,7 +41,6 @@ bool ModelClass::Initialize(ID3D11Device* device, WCHAR* textureFilename)
 		return false;
 	}
 
-	Debug::GetInstance()->Log(m_model[0].tu);
 	// Initialize the vertex and index buffers.
 	result = InitializeBuffers(device);
 	if(!result)
@@ -146,7 +145,6 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 		vertices[i].texture.m_x = m_model[i].tu;
 		vertices[i].texture.m_y = m_model[i].tv;
 		vertices[i].normal = Vector3f(m_model[i].nx, m_model[i].ny, m_model[i].nz);
-		Debug::GetInstance()->Log(vertices[i].texture);
 	}
 
 	for (int i = 0; i < m_indexCount; i++)
@@ -239,7 +237,7 @@ void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
     // Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.
-	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	deviceContext->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	return;
 }

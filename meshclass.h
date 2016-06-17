@@ -29,8 +29,7 @@ public:
 	Mesh(const Mesh&);
 	~Mesh();
 
-	void LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const int& v_n
-		,int* indices, const int& i_n);
+	void LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, int* indices);
 
 private:
 

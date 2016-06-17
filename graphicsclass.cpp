@@ -79,6 +79,9 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		case MODEL_RACKET:
 			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
 			break;
+		case MODEL_SPHERE:
+			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/earth.dds");
+			break;
 		default:
 			break; 
 		}
@@ -270,9 +273,6 @@ bool GraphicsClass::Render()
 bool GraphicsClass::InitializeModels()
 {
 	ModelCircleClass* circle = new ModelCircleClass;
-	if (!circle)
-		return false;
-
 	ModelCubeClass* cube = new ModelCubeClass;
 	ModelCubeClass* cube2 = new ModelCubeClass;
 	ModelCubeClass* cube3 = new ModelCubeClass;
@@ -296,6 +296,9 @@ bool GraphicsClass::InitializeModels()
 	cube5->SetDirection(UP_DOWN);
 
 	m_Models.push_back(racket1);
+	m_Models.push_back(sphere);
+
+	return true;
 }
 
 void GraphicsClass::InitializeTransform()

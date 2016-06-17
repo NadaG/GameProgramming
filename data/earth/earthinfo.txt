@@ -1,0 +1,1 @@
+Vertex Count: 12288

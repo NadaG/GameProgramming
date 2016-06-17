@@ -8,12 +8,13 @@
 
 bool ModelCircleClass::LoadModel()
 {
+	m_triNum *= 10;
     m_vertexCount = m_triNum * 3;
     m_model = new ModelType[m_vertexCount];
     m_indexCount = m_vertexCount;
     m_model_indices = new int[m_indexCount];
 
-    m_mesh.LoadVertices(MESH_CIRCLE, m_model, m_vertexCount, m_model_indices, m_indexCount);
+    m_mesh.LoadVertices(MESH_CIRCLE, m_model, m_model_indices);
     
     return true;
 }
@@ -85,12 +86,6 @@ void ModelCircleClass::Update()
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
-    
-
-    
-    //cout << "A" << endl;
-    //system("pause");
-
 
     if (model->GetTag() == MODEL_CUBE) 
 	{
@@ -98,9 +93,7 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 	    float adv2 = (rand()%10+300) / 300.0; // 1.0~1.03
 	   // PlaySound(TEXT("./data/hit.wav"), NULL, SND_FILENAME);
 	    sndPlaySoundA("./data/hit.wav", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
-
-	    cout << model->GetDirection() << " "<<adv<<endl;
-	    cout << m_velocity.m_x << " " << m_velocity.m_y << " " << m_velocity.m_z << endl;
+		
 	    switch (model->GetDirection())
 		{
 
@@ -126,7 +119,6 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 		///////////로테이션을 기준으로 노말 구해서 입사, 반사 구현
 	    float yy = model->GetWorldRotation().m_y;
 	    float xx = model->GetWorldRotation().m_x;
-	    cout << "A" << endl;
 	    if (rand() % 2) {
 		   yy += rand() % 10;
 	    }
@@ -139,7 +131,7 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 	    else {
 		   xx -= rand() % 10;
 	    }
-	    cout << yy << " " << xx << endl;
+
 		//m_velocity.m_z = 0.3f;
 		m_velocity.m_z = -m_velocity.m_z;
 		m_velocity.m_x = yy*0.002f;

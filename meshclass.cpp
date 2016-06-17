@@ -1,4 +1,24 @@
 #include "meshclass.h"
+#include<fstream>
+
+using namespace std;
+
+bool LoadModel(char* filename, ModelType* vertices, const int& v_n,
+	int* indices, const int& i_n);
+bool ReadFileCounts(char*, int&, int&, int&, int&);
+bool LoadDataStructures(char*, char* out, int, int, int, int);
+
+struct VertexType
+{
+	float x, y, z;
+};
+
+struct FaceType
+{
+	int vIndex1, vIndex2, vIndex3;
+	int tIndex1, tIndex2, tIndex3;
+	int nIndex1, nIndex2, nIndex3;
+};
 
 Mesh::Mesh()
 {
@@ -12,348 +32,330 @@ Mesh::~Mesh()
 {
 }
 
-void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const int& v_n,
-	int* indices, const int& i_n)
+void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, int* indices)
 {
-	float now_radian, per_radian;
-
-	int rings = 10, sectors = 10;
-	float radius = 1.0f;
-
-	float const R = 1. / (float)(rings - 1);
-	float const S = 1. / (float)(sectors - 1);
-	int r, s, ind = 0;
+	int a, b, c, d;
 
 	switch (mesh_type)
 	{
 	case MESH_NONE:
 		break;
 	case MESH_CUBE:
-
-		// 좌상단
-		vertices[0].x = -1.0f;
-		vertices[0].y = 1.0f;
-		vertices[0].z = -1.0f;
-		vertices[0].tu = 0.0f;
-		vertices[0].tv = 0.0f;
-		vertices[0].nx = 0.0f;
-		vertices[0].ny = 0.0f;
-		vertices[0].nz = -1.0f;
-
-		// 우상단
-		vertices[1].x = 1.0f;
-		vertices[1].y = 1.0f;
-		vertices[1].z = -1.0f;
-		vertices[1].tu = 1.0f;
-		vertices[1].tv = 0.0f;
-		vertices[1].nx = 0.0f;
-		vertices[1].ny = 0.0f;
-		vertices[1].nz = -1.0f;
-
-		// 좌하단
-		vertices[2].x = -1.0f;
-		vertices[2].y = -1.0f;
-		vertices[2].z = -1.0f;
-		vertices[2].tu = 0.0f;
-		vertices[2].tv = 1.0f;
-		vertices[2].nx = 0.0f;
-		vertices[2].ny = 0.0f;
-		vertices[2].nz = -1.0f;
-
-		vertices[3] = vertices[2];
-		vertices[4] = vertices[1];
-
-		// 우하단
-		vertices[5].x = 1.0f;
-		vertices[5].y = -1.0f;
-		vertices[5].z = -1.0f;
-		vertices[5].tu = 1.0f;
-		vertices[5].tv = 1.0f;
-		vertices[5].nx = 0.0f;
-		vertices[5].ny = 0.0f;
-		vertices[5].nz = -1.0f;
-
-		// 좌상단
-		vertices[6].x = 1.0f;
-		vertices[6].y = 1.0f;
-		vertices[6].z = -1.0f;
-		vertices[6].tu = 0.0f;
-		vertices[6].tv = 0.0f;
-		vertices[6].nx = 1.0f;
-		vertices[6].ny = 0.0f;
-		vertices[6].nz = 0.0f;
-
-		// 우상단
-		vertices[7].x = 1.0f;
-		vertices[7].y = 1.0f;
-		vertices[7].z = 1.0f;
-		vertices[7].tu = 1.0f;
-		vertices[7].tv = 0.0f;
-		vertices[7].nx = 1.0f;
-		vertices[7].ny = 0.0f;
-		vertices[7].nz = 0.0f;
-
-		// 좌하단
-		vertices[8].x = 1.0f;
-		vertices[8].y = -1.0f;
-		vertices[8].z = -1.0f;
-		vertices[8].tu = 0.0f;
-		vertices[8].tv = 1.0f;
-		vertices[8].nx = 1.0f;
-		vertices[8].ny = 0.0f;
-		vertices[8].nz = 0.0f;
-
-		vertices[9] = vertices[8];
-		vertices[10] = vertices[7];
-
-		vertices[11].x = 1.0f;
-		vertices[11].y = -1.0f;
-		vertices[11].z = 1.0f;
-		vertices[11].tu = 1.0f;
-		vertices[11].tv = 1.0f;
-		vertices[11].nx = 1.0f;
-		vertices[11].ny = 0.0f;
-		vertices[11].nz = 0.0f;
-
-		vertices[12].x = 1.0f;
-		vertices[12].y = 1.0f;
-		vertices[12].z = 1.0f;
-		vertices[12].tu = 0.0f;
-		vertices[12].tv = 0.0f;
-		vertices[12].nx = 0.0f;
-		vertices[12].ny = 0.0f;
-		vertices[12].nz = 1.0f;
-
-		vertices[13].x = -1.0f;
-		vertices[13].y = 1.0f;
-		vertices[13].z = 1.0f;
-		vertices[13].tu = 1.0f;
-		vertices[13].tv = 0.0f;
-		vertices[13].nx = 0.0f;
-		vertices[13].ny = 0.0f;
-		vertices[13].nz = 1.0f;
-
-		vertices[14].x = 1.0f;
-		vertices[14].y = -1.0f;
-		vertices[14].z = 1.0f;
-		vertices[14].tu = 0.0f;
-		vertices[14].tv = 1.0f;
-		vertices[14].nx = 0.0f;
-		vertices[14].ny = 0.0f;
-		vertices[14].nz = 1.0f;
-
-		vertices[15] = vertices[14];
-		vertices[16] = vertices[13];
-
-		vertices[17].x = -1.0f;
-		vertices[17].y = -1.0f;
-		vertices[17].z = 1.0f;
-		vertices[17].tu = 1.0f;
-		vertices[17].tv = 1.0f;
-		vertices[17].nx = 0.0f;
-		vertices[17].ny = 0.0f;
-		vertices[17].nz = 1.0f;
-
-		vertices[18].x = -1.0f;
-		vertices[18].y = 1.0f;
-		vertices[18].z = 1.0f;
-		vertices[18].tu = 0.0f;
-		vertices[18].tv = 0.0f;
-		vertices[18].nx = -1.0f;
-		vertices[18].ny = 0.0f;
-		vertices[18].nz = 0.0f;
-
-		vertices[19].x = -1.0f;
-		vertices[19].y = 1.0f;
-		vertices[19].z = -1.0f;
-		vertices[19].tu = 1.0f;
-		vertices[19].tv = 0.0f;
-		vertices[19].nx = -1.0f;
-		vertices[19].ny = 0.0f;
-		vertices[19].nz = 0.0f;
-
-		vertices[20].x = -1.0f;
-		vertices[20].y = -1.0f;
-		vertices[20].z = 1.0f;
-		vertices[20].tu = 0.0f;
-		vertices[20].tv = 1.0f;
-		vertices[20].nx = -1.0f;
-		vertices[20].ny = 0.0f;
-		vertices[20].nz = 0.0f;
-
-		vertices[21] = vertices[20];
-		vertices[22] = vertices[19];
-
-		vertices[23].x = -1.0f;
-		vertices[23].y = -1.0f;
-		vertices[23].z = -1.0f;
-		vertices[23].tu = 1.0f;
-		vertices[23].tv = 1.0f;
-		vertices[23].nx = -1.0f;
-		vertices[23].ny = 0.0f;
-		vertices[23].nz = 0.0f;
-
-		vertices[24].x = -1.0f;
-		vertices[24].y = 1.0f;
-		vertices[24].z = 1.0f;
-		vertices[24].tu = 0.0f;
-		vertices[24].tv = 0.0f;
-		vertices[24].nx = 0.0f;
-		vertices[24].ny = 1.0f;
-		vertices[24].nz = 0.0f;
-
-		vertices[25].x = 1.0f;
-		vertices[25].y = 1.0f;
-		vertices[25].z = 1.0f;
-		vertices[25].tu = 1.0f;
-		vertices[25].tv = 0.0f;
-		vertices[25].nx = 0.0f;
-		vertices[25].ny = 1.0f;
-		vertices[25].nz = 0.0f;
-
-		vertices[26].x = -1.0f;
-		vertices[26].y = 1.0f;
-		vertices[26].z = -1.0f;
-		vertices[26].tu = 0.0f;
-		vertices[26].tv = 1.0f;
-		vertices[26].nx = 0.0f;
-		vertices[26].ny = 1.0f;
-		vertices[26].nz = 0.0f;
-
-		vertices[27] = vertices[26];
-		vertices[28] = vertices[25];
-
-		vertices[29].x = 1.0f;
-		vertices[29].y = 1.0f;
-		vertices[29].z = -1.0f;
-		vertices[29].tu = 1.0f;
-		vertices[29].tv = 1.0f;
-		vertices[29].nx = 0.0f;
-		vertices[29].ny = 1.0f;
-		vertices[29].nz = 0.0f;
-
-		vertices[30].x = -1.0f;
-		vertices[30].y = -1.0f;
-		vertices[30].z = -1.0f;
-		vertices[30].tu = 0.0f;
-		vertices[30].tv = 0.0f;
-		vertices[30].nx = 0.0f;
-		vertices[30].ny = -1.0f;
-		vertices[30].nz = 0.0f;
-
-		vertices[31].x = 1.0f;
-		vertices[31].y = -1.0f;
-		vertices[31].z = -1.0f;
-		vertices[31].tu = 1.0f;
-		vertices[31].tv = 0.0f;
-		vertices[31].nx = 0.0f;
-		vertices[31].ny = -1.0f;
-		vertices[31].nz = 0.0f;
-
-		vertices[32].x = -1.0f;
-		vertices[32].y = -1.0f;
-		vertices[32].z = 1.0f;
-		vertices[32].tu = 0.0f;
-		vertices[32].tv = 1.0f;
-		vertices[32].nx = 0.0f;
-		vertices[32].ny = -1.0f;
-		vertices[32].nz = 0.0f;
-
-		vertices[33] = vertices[32];
-		vertices[34] = vertices[31];
-
-		vertices[35].x = 1.0f;
-		vertices[35].y = -1.0f;
-		vertices[35].z = 1.0f;
-		vertices[35].tu = 1.0f;
-		vertices[35].tv = 1.0f;
-		vertices[35].nx = 0.0f;
-		vertices[35].ny = -1.0f;
-		vertices[35].nz = 0.0f;
-
-		for (int i = 0; i < i_n; i++)
+		LoadModel("./data/cube.txt", vertices, 36, indices, 36);
+		for (int i = 0; i < 36; i++)
 			indices[i] = i;
 		break;
+
 	case MESH_CIRCLE:
-
-		per_radian = 2 * 3.141592 / (v_n / 3);
-		now_radian = 0;
-		for (int i = 0; i < v_n; i += 3)
-		{
-			vertices[i].x = 0.0f;
-			vertices[i].y = 0.0f;
-			vertices[i].z = 0.0f;
-			vertices[i].tu = 0.0f;
-			vertices[i].tv = 0.0f;
-			vertices[i].nx = 0.0f;
-			vertices[i].ny = 0.0f;
-			vertices[i].nz = -1.0f;
-
-			vertices[i + 1].x = cosf(now_radian);
-			vertices[i + 1].y = sinf(now_radian);
-			vertices[i + 1].z = 0.0f;
-			vertices[i + 1].tu = 0.0f;
-			vertices[i + 1].tv = 0.0f;
-			vertices[i + 1].nx = 0.0f;
-			vertices[i + 1].ny = 0.0f;
-			vertices[i + 1].nz = -1.0f;
-
-			vertices[i + 2].x = cosf(now_radian + per_radian);
-			vertices[i + 2].y = sinf(now_radian + per_radian);
-			vertices[i + 2].z = 0.0f;
-			vertices[i + 2].tu = 0.0f;
-			vertices[i + 2].tv = 0.0f;
-			vertices[i + 2].nx = 0.0f;
-			vertices[i + 2].ny = 0.0f;
-			vertices[i + 2].nz = -1.0f;
-
-			now_radian += per_radian;
-		}
-
-		for (int i = 0; i < i_n; i++)
+		LoadModel("./data/cube.txt", vertices, 36, indices, 36);
+		for (int i = 0; i < 36; i++)
 			indices[i] = i;
-
 		break;
 
 	case MESH_SHPERE:
-		for (r = 0; r < rings; r++)
+		/*LoadModel("./data/sphere.txt", vertices, 30000, indices, 30000);
+		for (int i = 0; i < 30000; i++)
 		{
-			for (s = 0; s < sectors; s++)
-			{
-				float const y = sin(-M_PI / 2 + M_PI * r * R);
-				float const x = cos(2 * M_PI * s * S) * sin(M_PI * r * R);
-				float const z = sin(2 * M_PI * s * S) * sin(M_PI * r * R);
+			vertices[i].x /= 100.0f;
+			vertices[i].y /= 100.0f;
+			vertices[i].z /= 100.0f;
+		}*/
 
-				vertices[r*sectors + s].tu = s*S;
-				vertices[r*sectors + s].tv = r*R;
 
-				vertices[r*sectors + s].x = x*radius;
-				vertices[r*sectors + s].y = y*radius;
-				vertices[r*sectors + s].z = z*radius;
-
-				vertices[r*sectors + s].nx = x;
-				vertices[r*sectors + s].ny = y;
-				vertices[r*sectors + s].nz = z;
-			}
+		//ReadFileCounts("./data/earth/earth.obj",a,b,c,d);
+		//LoadDataStructures("./data/earth/earth.obj","./data/earth/earth.txt", a, b, c, d);
+		LoadModel("./data/earth/earth.txt", vertices, 12288, indices, 12288);
+		for (int i = 0; i < 12288; i++)
+		{
+			vertices[i].x /= 100.0f;
+			vertices[i].y /= 100.0f;
+			vertices[i].z /= 100.0f;
 		}
 
-		// 구가 완벽하게 구현되지는 않음
-		for (r = 0; r < rings; r++)
+		for (int i = 0, v = 0; i < 12288 * 2; i += 6, v += 3)
 		{
-			for (s = 0; s < sectors; s++)
-			{
-				indices[ind++] = r*sectors + s;
-				indices[ind++] = r*sectors + (s + 1);
-				indices[ind++] = (r + 1)*sectors + (s + 1);
-
-				indices[ind++] = indices[ind - 1];
-				indices[ind++] = indices[ind - 3];
-				indices[ind++] = (r + 1)*sectors + s;
-			}
+			indices[i] = v;
+			indices[i + 1] = v + 1;
+			indices[i + 2] = v + 2;
+			indices[i + 3] = v;
+			indices[i + 4] = v + 2;
+			indices[i + 5] = v + 5;
 		}
 		break;
+
 	default:
 		break;
 	}
 
+}
+
+
+bool LoadModel(char* filename, ModelType* vertices, const int& v_n,
+	int* indices, const int& i_n)
+{
+	ifstream fin;
+	char input;
+
+	// Open the model file.
+	fin.open(filename);
+
+	// If it could not open the file then exit.
+	if (fin.fail())
+	{
+		return false;
+	}
+
+	// Read in the vertex data.
+	for (int i = 0; i < v_n; i++)
+	{
+		fin >> vertices[i].x >> vertices[i].y >> vertices[i].z;
+		fin >> vertices[i].tu >> vertices[i].tv;
+		fin >> vertices[i].nx >> vertices[i].ny >> vertices[i].nz;
+	}
+
+	// Close the model file.
+	fin.close();
+
+	return true;
+}
+
+
+
+
+bool ReadFileCounts(char* filename, int& vertexCount, int& textureCount, int& normalCount, int& faceCount)
+{
+	ifstream fin;
+	char input;
+
+	// Initialize the counts.
+	vertexCount = 0;
+	textureCount = 0;
+	normalCount = 0;
+	faceCount = 0;
+
+	// Open the file.
+	fin.open(filename);
+
+	// Check if it was successful in opening the file.
+	if (fin.fail() == true)
+	{
+		return false;
+	}
+
+	// Read from the file and continue to read until the end of the file is reached.
+	fin.get(input);
+	while (!fin.eof())
+	{
+		// If the line starts with 'v' then count either the vertex, the texture coordinates, or the normal vector.
+		if (input == 'v')
+		{
+			fin.get(input);
+			if (input == ' ') { vertexCount++; }
+			if (input == 't') { textureCount++; }
+			if (input == 'n') { normalCount++; }
+		}
+
+		// If the line starts with 'f' then increment the face count.
+		if (input == 'f')
+		{
+			fin.get(input);
+			if (input == ' ') { faceCount++; }
+		}
+
+		// Otherwise read in the remainder of the line.
+		while (input != '\n')
+		{
+			fin.get(input);
+		}
+
+		// Start reading the beginning of the next line.
+		fin.get(input);
+	}
+
+	// Close the file.
+	fin.close();
+
+	return true;
+}
+
+
+bool LoadDataStructures(char* filename, char* outfilename, int vertexCount, int textureCount, int normalCount, int faceCount)
+{
+	VertexType *vertices, *texcoords, *normals;
+	FaceType *faces;
+	ifstream fin;
+	int vertexIndex, texcoordIndex, normalIndex, faceIndex, vIndex, tIndex, nIndex;
+	char input, input2;
+	ofstream fout;
+
+	// Initialize the four data structures.
+	vertices = new VertexType[vertexCount];
+	if (!vertices)
+	{
+		return false;
+	}
+
+	texcoords = new VertexType[textureCount];
+	if (!texcoords)
+	{
+		return false;
+	}
+
+	normals = new VertexType[normalCount];
+	if (!normals)
+	{
+		return false;
+	}
+
+	faces = new FaceType[faceCount];
+	if (!faces)
+	{
+		return false;
+	}
+
+	// Initialize the indexes.
+	vertexIndex = 0;
+	texcoordIndex = 0;
+	normalIndex = 0;
+	faceIndex = 0;
+
+	// Open the file.
+	fin.open(filename);
+
+	// Check if it was successful in opening the file.
+	if (fin.fail() == true)
+	{
+		return false;
+	}
+
+	// Read in the vertices, texture coordinates, and normals into the data structures.
+	// Important: Also convert to left hand coordinate system since Maya uses right hand coordinate system.
+	fin.get(input);
+	while (!fin.eof())
+	{
+		if (input == 'v')
+		{
+			fin.get(input);
+
+			// Read in the vertices.
+			if (input == ' ')
+			{
+				fin >> vertices[vertexIndex].x >> vertices[vertexIndex].y >> vertices[vertexIndex].z;
+
+				// Invert the Z vertex to change to left hand system.
+				vertices[vertexIndex].z = vertices[vertexIndex].z * -1.0f;
+				vertexIndex++;
+			}
+
+			// Read in the texture uv coordinates.
+			if (input == 't')
+			{
+				fin >> texcoords[texcoordIndex].x >> texcoords[texcoordIndex].y;
+
+				// Invert the V texture coordinates to left hand system.
+				texcoords[texcoordIndex].y = 1.0f - texcoords[texcoordIndex].y;
+				texcoordIndex++;
+			}
+
+			// Read in the normals.
+			if (input == 'n')
+			{
+				fin >> normals[normalIndex].x >> normals[normalIndex].y >> normals[normalIndex].z;
+
+				// Invert the Z normal to change to left hand system.
+				normals[normalIndex].z = normals[normalIndex].z * -1.0f;
+				normalIndex++;
+			}
+		}
+
+		// Read in the faces.
+		if (input == 'f')
+		{
+			fin.get(input);
+			if (input == ' ')
+			{
+				// Read the face data in backwards to convert it to a left hand system from right hand system.
+				fin >> faces[faceIndex].vIndex3 >> input2 >> faces[faceIndex].tIndex3 >> input2 >> faces[faceIndex].nIndex3
+					>> faces[faceIndex].vIndex2 >> input2 >> faces[faceIndex].tIndex2 >> input2 >> faces[faceIndex].nIndex2
+					>> faces[faceIndex].vIndex1 >> input2 >> faces[faceIndex].tIndex1 >> input2 >> faces[faceIndex].nIndex1;
+				faceIndex++;
+			}
+		}
+
+		// Read in the remainder of the line.
+		while (input != '\n')
+		{
+			fin.get(input);
+		}
+
+		// Start reading the beginning of the next line.
+		fin.get(input);
+	}
+
+	// Close the file.
+	fin.close();
+
+	// Open the output file.
+	fout.open(outfilename);
+
+	// Write out the file header that our model format uses.
+	fout << "Vertex Count: " << (faceCount * 3) << endl;
+	fout << endl;
+	fout << "Data:" << endl;
+	fout << endl;
+
+	// Now loop through all the faces and output the three vertices for each face.
+	for (int i = 0; i<faceIndex; i++)
+	{
+		vIndex = faces[i].vIndex1 - 1;
+		tIndex = faces[i].tIndex1 - 1;
+		nIndex = faces[i].nIndex1 - 1;
+
+		fout << vertices[vIndex].x << ' ' << vertices[vIndex].y << ' ' << vertices[vIndex].z << ' '
+			<< texcoords[tIndex].x << ' ' << texcoords[tIndex].y << ' '
+			<< normals[nIndex].x << ' ' << normals[nIndex].y << ' ' << normals[nIndex].z << endl;
+
+		vIndex = faces[i].vIndex2 - 1;
+		tIndex = faces[i].tIndex2 - 1;
+		nIndex = faces[i].nIndex2 - 1;
+
+		fout << vertices[vIndex].x << ' ' << vertices[vIndex].y << ' ' << vertices[vIndex].z << ' '
+			<< texcoords[tIndex].x << ' ' << texcoords[tIndex].y << ' '
+			<< normals[nIndex].x << ' ' << normals[nIndex].y << ' ' << normals[nIndex].z << endl;
+
+		vIndex = faces[i].vIndex3 - 1;
+		tIndex = faces[i].tIndex3 - 1;
+		nIndex = faces[i].nIndex3 - 1;
+
+		fout << vertices[vIndex].x << ' ' << vertices[vIndex].y << ' ' << vertices[vIndex].z << ' '
+			<< texcoords[tIndex].x << ' ' << texcoords[tIndex].y << ' '
+			<< normals[nIndex].x << ' ' << normals[nIndex].y << ' ' << normals[nIndex].z << endl;
+	}
+
+	// Close the output file.
+	fout.close();
+
+	// Release the four data structures.
+	if (vertices)
+	{
+		delete[] vertices;
+		vertices = 0;
+	}
+	if (texcoords)
+	{
+		delete[] texcoords;
+		texcoords = 0;
+	}
+	if (normals)
+	{
+		delete[] normals;
+		normals = 0;
+	}
+	if (faces)
+	{
+		delete[] faces;
+		faces = 0;
+	}
+
+	return true;
 }
