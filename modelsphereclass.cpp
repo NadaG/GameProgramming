@@ -9,7 +9,6 @@ bool ModelSphereClass::LoadModel()
 
 	m_mesh.LoadVertices(MESH_SHPERE, m_model, m_vertexCount, m_model_indices, m_indexCount);
 
-	m_tag = MODEL_NONE;
 
 	return true;
 }
@@ -18,6 +17,8 @@ void ModelSphereClass::Start()
 {
 	Collider* col = new Collider(COL_SPHERE);
 	SetComponent(COM_COLLIDER, col);
+
+	m_tag = MODEL_NONE;
 }
 
 static float y = 0.0f;

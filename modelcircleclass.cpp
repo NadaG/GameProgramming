@@ -15,7 +15,6 @@ bool ModelCircleClass::LoadModel()
 
     m_mesh.LoadVertices(MESH_CIRCLE, m_model, m_vertexCount, m_model_indices, m_indexCount);
     
-    m_tag = MODEL_CIRCLE;
     return true;
 }
 
@@ -37,6 +36,8 @@ void ModelCircleClass::Start()
 	m_worldPosition = { 0.0f, 0.0f, 0.0f };
     m_worldRotation = { 0.0f, 180.0f, 0.0f };
 	m_velocity = { 0.0f, 0.0f, 0.0f };
+
+	m_tag = MODEL_CIRCLE;
 }
 
 void ModelCircleClass::Update()

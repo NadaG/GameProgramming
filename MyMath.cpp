@@ -11,7 +11,10 @@ const float& Deg2Rad(const float& degree)
 }
 
 Vector2f::Vector2f()
-{}
+{
+	m_x = 0.0f;
+	m_y = 0.0f;
+}
 
 Vector2f::Vector2f(const float& x, const float& y)
 {

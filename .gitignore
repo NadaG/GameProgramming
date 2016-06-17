@@ -1,2 +1,5 @@
 Debug/
 *.opendb
+*.opensdf
+*.sdf
+*.v12.suo

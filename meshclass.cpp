@@ -284,7 +284,7 @@ void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const i
 			vertices[i].y = 0.0f;
 			vertices[i].z = 0.0f;
 			vertices[i].tu = 0.0f;
-			vertices[i].tv = 1.0f;
+			vertices[i].tv = 0.0f;
 			vertices[i].nx = 0.0f;
 			vertices[i].ny = 0.0f;
 			vertices[i].nz = -1.0f;
@@ -301,7 +301,7 @@ void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, const i
 			vertices[i + 2].x = cosf(now_radian + per_radian);
 			vertices[i + 2].y = sinf(now_radian + per_radian);
 			vertices[i + 2].z = 0.0f;
-			vertices[i + 2].tu = 1.0f;
+			vertices[i + 2].tu = 0.0f;
 			vertices[i + 2].tv = 0.0f;
 			vertices[i + 2].nx = 0.0f;
 			vertices[i + 2].ny = 0.0f;

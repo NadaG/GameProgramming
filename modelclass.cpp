@@ -41,6 +41,7 @@ bool ModelClass::Initialize(ID3D11Device* device, WCHAR* textureFilename)
 		return false;
 	}
 
+	Debug::GetInstance()->Log(m_model[0].tu);
 	// Initialize the vertex and index buffers.
 	result = InitializeBuffers(device);
 	if(!result)
@@ -142,8 +143,10 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	for (int i = 0; i < m_vertexCount; i++)
 	{
 		vertices[i].position = Vector3f(m_model[i].x, m_model[i].y, m_model[i].z);
-		vertices[i].texture = Vector2f(m_model[i].tu, m_model[i].tv);
+		vertices[i].texture.m_x = m_model[i].tu;
+		vertices[i].texture.m_y = m_model[i].tv;
 		vertices[i].normal = Vector3f(m_model[i].nx, m_model[i].ny, m_model[i].nz);
+		Debug::GetInstance()->Log(vertices[i].texture);
 	}
 
 	for (int i = 0; i < m_indexCount; i++)

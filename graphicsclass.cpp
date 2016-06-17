@@ -58,22 +58,36 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		MessageBox(hwnd, L"Initialize models failed", L"Error", MB_OK);
 		return false;
 	}
-
-	// Initialize the model object.
-	for (int i = 0; i < m_Models.size(); i++)
-	{
-		result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/earth.dds");
-		if (!result)
-		{
-			MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
-			return false;
-		}
-	}
 	
 	InitializeTransform();
 	for (int i = 0; i < m_Models.size(); i++)
 	{
 		m_Models[i]->Start();
+	}
+
+	// Initialize the model object.
+	for (int i = 0; i < m_Models.size(); i++)
+	{
+		switch (m_Models[i]->GetTag())
+		{
+		case MODEL_CIRCLE:
+			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
+			break;
+		case MODEL_CUBE:
+			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/earth.dds");
+			break;
+		case MODEL_RACKET:
+			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
+			break;
+		default:
+			break; 
+		}
+
+		if (!result)
+		{
+			MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
+			return false;
+		}
 	}
 
 	// Create the light shader object.

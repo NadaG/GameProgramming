@@ -9,7 +9,6 @@ bool ModelRacketClass::LoadModel()
 
     m_mesh.LoadVertices(MESH_CUBE, m_model, m_vertexCount, m_model_indices, m_indexCount);
 
-    m_tag = MODEL_RACKET;
     return true;
 }
 
@@ -20,6 +19,8 @@ void ModelRacketClass::Start()
     //m_worldPosition = {0.0f,1.0f,1.0f};
     m_worldScale = {1.0f,1.0f,0.01f};
 	m_worldRotation = { 0.0f, 0.0f, 0.0f };
+
+	m_tag = MODEL_RACKET;
 }
 
 void ModelRacketClass::Update()

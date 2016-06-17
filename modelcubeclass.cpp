@@ -9,8 +9,6 @@ bool ModelCubeClass::LoadModel()
 
 	m_mesh.LoadVertices(MESH_CUBE, m_model, m_vertexCount, m_model_indices, m_indexCount);
 
-	m_tag = MODEL_CUBE;
-
 	return true;
 }
 
@@ -18,6 +16,8 @@ void ModelCubeClass::Start()
 {
 	Collider* col = new Collider(COL_CUBE);
 	SetComponent(COM_COLLIDER, col);
+
+	m_tag = MODEL_CUBE;
 }
 
 void ModelCubeClass::Update()
