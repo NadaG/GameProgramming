@@ -49,9 +49,9 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	textureColor = shaderTexture.Sample(SampleType, input.tex);
 
 	color = ambientColor;
-	specular = specularColor;
-
+	
 	lightDir = -lightDirection;
+	lightDir = normalize(lightDir);
 
     lightIntensity = saturate(dot(input.normal, lightDir));
 
@@ -65,15 +65,17 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     }
 
     color = color*textureColor;
-	color = saturate(color + specular);
+	color = saturate(color + specular * specularColor);
 
-	//float3 wptol = pointLight.xyz - input.wposition;
+	float3 wptol = pointLight.xyz - input.wposition;
+	float distance = length(wptol);
+	wptol = normalize(wptol);
 	
-	//wptol = normalize(wptol);
-	
-	//float intensity=saturate(dot(input.normal, wptol));
+	float PointLightIntensity = saturate(dot(input.normal, wptol));
 
-	//color = saturate(color + pointLightColor*intensity);
+	PointLightIntensity/=(1.0f + 0.5f*distance + 0.05f*distance*distance);
+
+	color = saturate(color + pointLightColor*PointLightIntensity);
 
     return color;
 }

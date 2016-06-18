@@ -438,8 +438,8 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, D
 	dataPtr2->lightDirection = lightDirection;
 	dataPtr2->specularColor = specularColor;
 	dataPtr2->specularPower = specularPower;
-	dataPtr2->pointLight = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 0.0f);
-	dataPtr2->pointLightColor = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
+	dataPtr2->pointLight = D3DXVECTOR4(0.0f, 0.0f, 3.0f, 0.0f);
+	dataPtr2->pointLightColor = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
 
 	// Unlock the light constant buffer.
 	deviceContext->Unmap(m_lightBuffer, 0);

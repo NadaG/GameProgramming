@@ -108,18 +108,16 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 
-	// Create the light object.
 	m_Light = new LightClass;
 	if(!m_Light)
 	{
 		return false;
 	}
 
-	// Initialize the light object.
 	m_Light->SetAmbientColor(0.15f, 0.15f, 0.15f, 1.0f);
-	m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-	m_Light->SetDirection(0.0f, 0.0f, 1.0f);
-	m_Light->SetSpecularColor(0.0f, 0.0f, 0.0f, 1.0f);
+	m_Light->SetDiffuseColor(0.7f, 0.7f, 0.7f, 1.0f);
+	m_Light->SetDirection(0.0f, 1.0f, 1.0f);
+	m_Light->SetSpecularColor(1.0f, 1.0f, 1.0f, 1.0f);
 	m_Light->SetSpecularPower(32.0f);
 
 	return true;
@@ -263,6 +261,7 @@ bool GraphicsClass::Render()
 			result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
 				m_Models[i]->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 				m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+			
 			break;
 		case MODEL_RACKET:
 			result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
@@ -331,16 +330,16 @@ void GraphicsClass::InitializeTransform()
 	m_Models[1]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
 
 	m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 10.0f });
-	m_Models[2]->SetWorldScale({ 0.000001f, 10.0f, 30.0f });
+	m_Models[2]->SetWorldScale({ 1.0f, 10.0f, 30.0f });
 
 	m_Models[3]->SetWorldPosition({ 5.0f, 0.0f, 10.0f });
-	m_Models[3]->SetWorldScale({ 0.000001f, 10.0f, 30.0f });
+	m_Models[3]->SetWorldScale({ 1.0f, 10.0f, 30.0f });
 	
 	m_Models[4]->SetWorldPosition({ 0.0f, 5.0f, 10.0f });
-	m_Models[4]->SetWorldScale({ 10.0f, 0.000001f, 30.0f });
+	m_Models[4]->SetWorldScale({ 10.0f, 1.0f, 30.0f });
 
 	m_Models[5]->SetWorldPosition({ 0.0f, -5.0f, 10.0f });
-	m_Models[5]->SetWorldScale({ 10.0f, 0.000001f, 30.0f });
+	m_Models[5]->SetWorldScale({ 10.0f, 1.0f, 30.0f });
 }
 
 bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)

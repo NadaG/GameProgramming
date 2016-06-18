@@ -69,6 +69,7 @@ void ModelClass::SyncMatrix()
 	D3DXMatrixScaling(&m, m_worldScale.m_x / 2, m_worldScale.m_y / 2, m_worldScale.m_z / 2);
 	D3DXMatrixMultiply(&m_worldMatrix, &m_worldMatrix, &m);
 
+	
 	D3DXMatrixRotationYawPitchRoll(&m, D3DXToRadian(m_worldRotation.m_y)
 		, D3DXToRadian(m_worldRotation.m_x)
 		, D3DXToRadian(m_worldRotation.m_z));
@@ -141,10 +142,14 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	// Load the vertex array and index array with data.
 	for (int i = 0; i < m_vertexCount; i++)
 	{
-		vertices[i].position = Vector3f(m_model[i].x, m_model[i].y, m_model[i].z);
+		vertices[i].position.m_x = m_model[i].x;
+		vertices[i].position.m_y = m_model[i].y;
+		vertices[i].position.m_z = m_model[i].z;
 		vertices[i].texture.m_x = m_model[i].tu;
 		vertices[i].texture.m_y = m_model[i].tv;
-		vertices[i].normal = Vector3f(m_model[i].nx, m_model[i].ny, m_model[i].nz);
+		vertices[i].normal.m_x = m_model[i].nx;
+		vertices[i].normal.m_y = m_model[i].ny;
+		vertices[i].normal.m_z = m_model[i].nz;
 	}
 
 	for (int i = 0; i < m_indexCount; i++)
