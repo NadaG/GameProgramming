@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include"modelcircleclass.h"
 #include "soundclass.h"
 #include "systemclass.h"
@@ -82,9 +83,28 @@ void ModelCircleClass::Update()
     m_worldPosition = { x, y, z };
 	m_worldScale = { 1.0f, 1.0f, 1.0f };
 }
+int collflag = 0;
+DWORD beforetime=0;
+
+void calctime() {
+    cout << "A" << endl;
+    DWORD currtime = GetTickCount();
+    if (collflag == 0) { collflag = 1;}
+    if (collflag == 1) {
+	   DWORD sub = currtime - beforetime;
+	   if (sub < 20) { return; }
+	   else {
+		  collflag = 0;
+		  beforetime = currtime;
+	   }
+    }
+}
+
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
+    calctime();
+    if (collflag == 1) { return; }
 
     if (model->GetTag() == MODEL_CUBE) 
 	{
@@ -97,8 +117,27 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 		{
 
 		case FRONT_BACK:
-		    m_velocity.m_z = -m_velocity.m_z*adv2;
+		    
+		    cout << "A" << endl;
+		    if (model->GetWorldPosition().m_z <9.0f && model->GetWorldPosition().m_z>7.0f) {
+			   model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
+			   m_velocity.m_z = -m_velocity.m_z*adv2;
+			   collflag = 1;
+		    }
 		    myscore++;
+		    if (model->GetWorldPosition().m_z > 9.0f) {
+			   HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+			   char q[200] = { 0, }; 
+
+			   sprintf(q, "Game Over.\nScore : %d", myscore);
+			   wchar_t wtext[200];
+			   mbstowcs(wtext, q, strlen(q) + 1);//Plus null
+			   LPWSTR query = wtext;
+		
+			   MessageBox(hWnd,query,TEXT("게임 종료"), MB_OK);
+			   exit(1);
+		    }
+
 			break;
 		case LEFT_RIGHT:
 			m_velocity.m_x = -m_velocity.m_x*adv;

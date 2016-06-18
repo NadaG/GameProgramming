@@ -320,6 +320,9 @@ bool GraphicsClass::InitializeModels()
 	m_Models.push_back(cube5);
 	cube5->SetDirection(UP_DOWN);
 
+
+	//cube 6,7,8,9는 부술것.
+	//cube1은 닿으면 게임종료.
 	m_Models.push_back(cube6);
 	cube6->SetDirection(FRONT_BACK);
 	m_Models.push_back(cube7);
