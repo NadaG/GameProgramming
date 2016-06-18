@@ -53,25 +53,13 @@ void Mesh::LoadVertices(const MESH_TYPE& mesh_type, ModelType* vertices, int* in
 		break;
 
 	case MESH_SHPERE:
-		/*LoadModel("./data/sphere.txt", vertices, 30000, indices, 30000);
-		for (int i = 0; i < 30000; i++)
-		{
-			vertices[i].x /= 100.0f;
-			vertices[i].y /= 100.0f;
-			vertices[i].z /= 100.0f;
-		}*/
-
-
-		//ReadFileCounts("./data/earth/earth.obj",a,b,c,d);
-		//LoadDataStructures("./data/earth/earth.obj","./data/earth/earth.txt", a, b, c, d);
 		LoadModel("./data/earth/earth.txt", vertices, 12288, indices, 12288);
 		for (int i = 0; i < 12288; i++)
 		{
-			vertices[i].x /= 100.0f;
-			vertices[i].y /= 100.0f;
-			vertices[i].z /= 100.0f;
+			vertices[i].x /= 355.038f;
+			vertices[i].y /= 355.038f;
+			vertices[i].z /= 355.038f;
 		}
-
 		for (int i = 0, v = 0; i < 12288 * 2; i += 6, v += 3)
 		{
 			indices[i] = v;

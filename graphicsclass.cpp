@@ -252,9 +252,33 @@ bool GraphicsClass::Render()
 	for (int i = 0; i < m_Models.size(); i++)
 	{
 		m_Models[i]->Render(m_D3D->GetDeviceContext());
-		result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
-			m_Models[i]->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
-			m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+		switch (m_Models[i]->GetTag())
+		{
+		case MODEL_CIRCLE:
+			result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
+				m_Models[i]->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+				m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+			break;
+		case MODEL_CUBE:
+			result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
+				m_Models[i]->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+				m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+			break;
+		case MODEL_RACKET:
+			result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
+				m_Models[i]->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+				m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+			break;
+		case MODEL_SPHERE:
+			result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
+				m_Models[i]->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+				m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+			break;
+		default:
+			result = true;
+			break;
+		}
+		
 		if (!result)
 		{
 			return false;
@@ -279,7 +303,7 @@ bool GraphicsClass::InitializeModels()
 	ModelCubeClass* cube4 = new ModelCubeClass;
 	ModelCubeClass* cube5 = new ModelCubeClass;
 	ModelRacketClass* racket1 = new ModelRacketClass;
-	ModelSphereClass* sphere = new ModelSphereClass;
+	//ModelSphereClass* sphere = new ModelSphereClass;
 
 	m_Models.push_back(circle);
 
@@ -296,7 +320,7 @@ bool GraphicsClass::InitializeModels()
 	cube5->SetDirection(UP_DOWN);
 
 	m_Models.push_back(racket1);
-	m_Models.push_back(sphere);
+	//m_Models.push_back(sphere);
 
 	return true;
 }

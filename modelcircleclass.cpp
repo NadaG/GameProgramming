@@ -8,13 +8,12 @@
 
 bool ModelCircleClass::LoadModel()
 {
-	m_triNum *= 10;
-    m_vertexCount = m_triNum * 3;
-    m_model = new ModelType[m_vertexCount];
-    m_indexCount = m_vertexCount;
-    m_model_indices = new int[m_indexCount];
+	m_vertexCount = 12288;
+	m_model = new ModelType[m_vertexCount];
+	m_indexCount = m_vertexCount * 2;
+	m_model_indices = new int[m_indexCount];
 
-    m_mesh.LoadVertices(MESH_CIRCLE, m_model, m_model_indices);
+	m_mesh.LoadVertices(MESH_SHPERE, m_model, m_model_indices);
     
     return true;
 }
@@ -35,10 +34,10 @@ void ModelCircleClass::Start()
     SetComponent(COM_COLLIDER, col);
 
 	m_worldPosition = { 0.0f, 0.0f, 0.0f };
-    m_worldRotation = { 0.0f, 180.0f, 0.0f };
+    m_worldRotation = { 0.0f, 0.0f, 0.0f };
 	m_velocity = { 0.0f, 0.0f, 0.0f };
 
-	m_tag = MODEL_CIRCLE;
+	m_tag = MODEL_SPHERE;
 }
 
 void ModelCircleClass::Update()
