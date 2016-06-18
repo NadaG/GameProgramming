@@ -99,7 +99,6 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 		case FRONT_BACK:
 		    m_velocity.m_z = -m_velocity.m_z*adv2;
 		    myscore++;
-		    cout << myscore << endl;
 			break;
 		case LEFT_RIGHT:
 			m_velocity.m_x = -m_velocity.m_x*adv;

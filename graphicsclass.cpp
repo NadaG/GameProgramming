@@ -16,7 +16,6 @@ GraphicsClass::GraphicsClass(const GraphicsClass& other)
 {
 }
 
-
 GraphicsClass::~GraphicsClass()
 {
 }
@@ -301,8 +300,11 @@ bool GraphicsClass::InitializeModels()
 	ModelCubeClass* cube3 = new ModelCubeClass;
 	ModelCubeClass* cube4 = new ModelCubeClass;
 	ModelCubeClass* cube5 = new ModelCubeClass;
+	ModelCubeClass* cube6 = new ModelCubeClass;
+	ModelCubeClass* cube7 = new ModelCubeClass;
+	ModelCubeClass* cube8 = new ModelCubeClass;
+	ModelCubeClass* cube9 = new ModelCubeClass;
 	ModelRacketClass* racket1 = new ModelRacketClass;
-	//ModelSphereClass* sphere = new ModelSphereClass;
 
 	m_Models.push_back(circle);
 
@@ -318,8 +320,16 @@ bool GraphicsClass::InitializeModels()
 	m_Models.push_back(cube5);
 	cube5->SetDirection(UP_DOWN);
 
+	m_Models.push_back(cube6);
+	cube6->SetDirection(FRONT_BACK);
+	m_Models.push_back(cube7);
+	cube7->SetDirection(FRONT_BACK);
+	m_Models.push_back(cube8);
+	cube8->SetDirection(FRONT_BACK);
+	m_Models.push_back(cube9);
+	cube9->SetDirection(FRONT_BACK);
+
 	m_Models.push_back(racket1);
-	//m_Models.push_back(sphere);
 
 	return true;
 }
@@ -340,6 +350,18 @@ void GraphicsClass::InitializeTransform()
 
 	m_Models[5]->SetWorldPosition({ 0.0f, -5.0f, 10.0f });
 	m_Models[5]->SetWorldScale({ 10.0f, 1.0f, 30.0f });
+
+	m_Models[6]->SetWorldPosition({ -2.5f, 2.5f, 8.0f });
+	m_Models[6]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
+
+	m_Models[7]->SetWorldPosition({ 2.5f, 2.5f, 8.0f });
+	m_Models[7]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
+
+	m_Models[8]->SetWorldPosition({ 2.5f, -2.5f, 8.0f });
+	m_Models[8]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
+
+	m_Models[9]->SetWorldPosition({ -2.5f, -2.5f, 8.0f });
+	m_Models[9]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
 }
 
 bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
