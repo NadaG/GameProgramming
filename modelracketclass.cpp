@@ -18,7 +18,7 @@ void ModelRacketClass::Start()
     Collider* col = new Collider(COL_CUBE);
     SetComponent(COM_COLLIDER, col);
     //m_worldPosition = {0.0f,1.0f,1.0f};
-    m_worldScale = {1.0f,1.0f,0.01f};
+    m_worldScale = {1.0f,1.0f,0.2f};
 	m_worldRotation = { 0.0f, 0.0f, 0.0f };
 
 	m_tag = MODEL_RACKET;
@@ -57,7 +57,7 @@ void ModelRacketClass::Update()
     }
     else if (InputClass::GetInstance()->IsKeyDown(101))//5
     {
-	   m_worldRotation = { 1.0f, 0.0f, 0.0f };
+	   m_worldRotation = { 0.0f, 0.0f, 0.0f };
     }
     else if (InputClass::GetInstance()->IsKeyDown(102))//6
     {
