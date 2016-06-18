@@ -19,8 +19,23 @@ SystemClass::SystemClass(const SystemClass& other)
 SystemClass::~SystemClass()
 {
 }
+std::wstring s2ws(const std::string s)
+{
+    int len;
+    int slength = (int)s.length() + 1;
+    len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
+    wchar_t* buf = new wchar_t[len];
+    MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
+    std::wstring r(buf);
+    delete[] buf;
+    return r;
+}
+LRESULT CALLBACK WndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
+{
+  
 
-
+    return(DefWindowProc(hWnd, iMessage, wParam, lParam));
+}
 bool SystemClass::Initialize()
 {
 	int screenWidth, screenHeight;
@@ -317,6 +332,16 @@ HWND SystemClass::gethwnd() { return m_hwnd; }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 {
+    HWND hWnd = FindWindow(NULL, TEXT("TextOut"));
+    string sval = "Á¡¼ö : ";
+    sval += to_string(myscore);
+    sval += "Á¡";
+    int size = sval.length();
+    wstring wval = s2ws(sval);
+    LPCWSTR val = wval.c_str();
+    HDC hdc = GetDC(hWnd);
+    TextOut(hdc, 0, 30, val, size - 3);
+    ReleaseDC(hWnd, hdc);
 	switch (umessage)
 	{
 	case WM_DESTROY:

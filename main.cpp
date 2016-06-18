@@ -8,31 +8,8 @@
 #pragma comment( lib, "d3d11.lib" )   // D3D11 라이브러리 
 #pragma comment( lib, "d3dx11.lib" )
 int myscore = 0;
-std::wstring s2ws(const std::string s)
-{
-    int len;
-    int slength = (int)s.length() + 1;
-    len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
-    wchar_t* buf = new wchar_t[len];
-    MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
-    std::wstring r(buf);
-    delete[] buf;
-    return r;
-}
-LRESULT CALLBACK WndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
-{
-    string sval = "점수 : ";
-    sval+= to_string(myscore);
-    sval += "점";
-    int size = sval.length();
-    wstring wval = s2ws(sval);
-    LPCWSTR val = wval.c_str();
-    HDC hdc = GetDC(hWnd);
-	   TextOut(hdc, 0,30, val, size-3);
-	   ReleaseDC(hWnd, hdc);
 
-    return(DefWindowProc(hWnd, iMessage, wParam, lParam));
-}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
     HINSTANCE g_hInst;
@@ -53,7 +30,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
     WndClass.lpszMenuName = NULL;
     WndClass.style = CS_HREDRAW | CS_VREDRAW;
     RegisterClass(&WndClass);
-    hWnd = CreateWindow(lpszClass, TEXT("AA"), WS_OVERLAPPEDWINDOW, 560, 790, 800, 100, NULL, (HMENU)NULL, hInstance, NULL);
+    hWnd = CreateWindow(lpszClass, TEXT("TextOut"), WS_POPUP, 560, 840, 800, 100, NULL, (HMENU)NULL, hInstance, NULL);
 
     ShowWindow(hWnd, iCmdshow);
 
