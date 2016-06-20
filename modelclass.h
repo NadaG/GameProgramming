@@ -134,6 +134,9 @@ public:
 	void SetDirection(const WALL_DIRECTION& wall_direction);
 	const WALL_DIRECTION& GetDirection() const;
 
+	void SetBelongStage(const int& stage){ m_belongStage = stage; }
+	const int& GetBelongStage(){ return m_belongStage; }
+
 protected:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
@@ -185,6 +188,8 @@ protected:
 
 	string m_name;
 	MODEL_TAG m_tag;
+
+	int m_belongStage;
 };
 
 

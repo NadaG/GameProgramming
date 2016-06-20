@@ -34,11 +34,18 @@ bool ModelClass::InitializeByTag(ID3D11Device* device, MODEL_TAG tag)
 	bool result = true;
 	switch (tag)
 	{
-	case MODEL_CIRCLE:
-		result = Initialize(device, L"./data/seafloor.dds");
-		break;
 	case MODEL_CUBE:
-		result = Initialize(device, L"./data/earth.dds");
+		if (m_belongStage == 1)
+		{
+			if (m_wallDirection == LEFT_RIGHT)
+				result = Initialize(device, L"./data/stage1/sky1.dds");
+			else
+				result = Initialize(device, L"./data/stage1/sky2.dds");
+		}
+		if (m_belongStage == 2)
+			result = Initialize(device, L"./data/stage2/volcano1.dds");
+		if (m_belongStage == 3)
+			result = Initialize(device, L"./data/stage3/space1.dds");
 		break;
 	case MODEL_RACKET:
 		result = Initialize(device, L"./data/seafloor.dds");

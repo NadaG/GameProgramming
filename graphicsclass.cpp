@@ -256,7 +256,6 @@ bool GraphicsClass::Render()
 			result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
 				m_Models[i]->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 				m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
-			
 			break;
 		case MODEL_RACKET:
 			result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Models[i]->GetIndexCount(), m_Models[i]->GetWorldMatrix(), viewMatrix, projectionMatrix,
@@ -298,22 +297,22 @@ bool GraphicsClass::InitializeModels()
 	for (int i = 0; i < MaxStageNum * 2; i++)
 	{
 		ModelCubeClass* cube = new ModelCubeClass;
+		cube->SetDirection(LEFT_RIGHT);
 		m_Models.push_back(cube);
-		m_Models[i]->SetDirection(LEFT_RIGHT);
 	}
 
 	for (int i = MaxStageNum * 2; i < MaxStageNum * 4; i++)
 	{
 		ModelCubeClass* cube = new ModelCubeClass;
+		cube->SetDirection(UP_DOWN);
 		m_Models.push_back(cube);
-		m_Models[i]->SetDirection(UP_DOWN);
 	}
 
 	for (int i = MaxStageNum * 4; i < 44; i++)
 	{
 		ModelCubeClass* cube = new ModelCubeClass;
+		cube->SetDirection(FRONT_BACK);
 		m_Models.push_back(cube);
-		m_Models[i]->SetDirection(FRONT_BACK);
 	}
 
 	return true;
@@ -325,24 +324,29 @@ void GraphicsClass::InitializeTransform()
 	{
 		m_Models[i]->SetWorldPosition({ -5.0f, 0.0f, 20.0f - 100 * ((i - StartIndexNum) / 2) });
 		m_Models[i]->SetWorldScale({ 1.0f, 10.0f, 50.0f });
+		m_Models[i]->SetBelongStage((i - StartIndexNum) / 2 + 1);
 
 		m_Models[i + 1]->SetWorldPosition({ 5.0f, 0.0f, 20.0f - 100 * ((i - StartIndexNum) / 2) });
 		m_Models[i + 1]->SetWorldScale({ 1.0f, 10.0f, 50.0f });
+		m_Models[i + 1]->SetBelongStage((i - StartIndexNum) / 2 + 1);
 	}
 
 	for (int i = StartIndexNum + MaxStageNum * 2; i < StartIndexNum + MaxStageNum * 4; i += 2)
 	{
 		m_Models[i]->SetWorldPosition({ 0.0f, 5.0f, 20.0f - 100 * ((i - (StartIndexNum + MaxStageNum * 2)) / 2) });
 		m_Models[i]->SetWorldScale({ 10.0f, 1.0f, 50.0f });
+		m_Models[i]->SetBelongStage((i - (StartIndexNum + MaxStageNum * 2)) / 2 + 1);
 
 		m_Models[i + 1]->SetWorldPosition({ 0.0f, -5.0f, 20.0f - 100 * ((i - (StartIndexNum + MaxStageNum * 2)) / 2) });
 		m_Models[i + 1]->SetWorldScale({ 10.0f, 1.0f, 50.0f });
+		m_Models[i + 1]->SetBelongStage((i - (StartIndexNum + MaxStageNum * 2)) / 2 + 1);
 	}
 
 	for (int i = StartIndexNum + MaxStageNum * 4; i < StartIndexNum + MaxStageNum * 4 + 3; i++)
 	{
 		m_Models[i]->SetWorldPosition({ 0.0f, 0.0f, 22.5f - 100 * (i - (StartIndexNum + MaxStageNum * 4))});
 		m_Models[i]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
+		m_Models[i]->SetBelongStage((i - (StartIndexNum + MaxStageNum * 4)) + 1);
 	}
 
 	float start_x, start_y;
@@ -358,6 +362,7 @@ void GraphicsClass::InitializeTransform()
 			{
 				m_Models[now]->SetWorldPosition({ start_x + j*width_height, start_y - k*width_height, 10.0f-i*100 });
 				m_Models[now]->SetWorldScale({ width_height, width_height, 1.0f });
+				m_Models[now]->SetBelongStage(i + 1);
 				now++;
 			}
 		}
