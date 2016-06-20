@@ -112,88 +112,86 @@ void calctime() {
     }
 }
 
-<<<<<<< HEAD
 void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 {
 }
 
-=======
 int endcount = 4;
->>>>>>> d006df0dc260dbae43a650f34b32617df9614095
+
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
-    calctime();
-    if (collflag == 1) { return; }
-    myscore++;
-    if (model->GetTag() == MODEL_CUBE) 
+	calctime();
+	if (collflag == 1) { return; }
+	myscore++;
+	if (model->GetTag() == MODEL_CUBE)
 	{
-	    
-	    float adv = ((rand() % 100)+50) / 100.0; // 0.5 ~ 1.5
-	    float adv2 = (rand()%10+300) / 300.0; // 1.0~1.03
-	   // PlaySound(TEXT("./data/hit.wav"), NULL, SND_FILENAME);
-	    sndPlaySoundA("./data/hit.wav", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
-		
-	    switch (model->GetDirection())
+
+		float adv = ((rand() % 100) + 50) / 100.0; // 0.5 ~ 1.5
+		float adv2 = (rand() % 10 + 300) / 300.0; // 1.0~1.03
+		// PlaySound(TEXT("./data/hit.wav"), NULL, SND_FILENAME);
+		sndPlaySoundA("./data/hit.wav", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+
+		switch (model->GetDirection())
 		{
 
 		case FRONT_BACK:
-		    
-		    cout << "A" << endl;
-<<<<<<< HEAD
-		    if (model->GetWorldPosition().m_z <9.0f && model->GetWorldPosition().m_z>7.0f) 
+
+			cout << "A" << endl;
+
+			if (model->GetWorldPosition().m_z <9.0f && model->GetWorldPosition().m_z>7.0f)
 			{
-			   model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
-			   m_velocity.m_z = -m_velocity.m_z*adv2;
-			   collflag = 1;
-		    }
+				model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
+				m_velocity.m_z = -m_velocity.m_z*adv2;
+				collflag = 1;
+			}
 
-		    myscore++;
-		    
-			if (model->GetWorldPosition().m_z > 9.0f) 
+			myscore++;
+
+			if (model->GetWorldPosition().m_z > 9.0f)
 			{
-=======
-		    if (model->GetWorldPosition().m_z <19.0f && model->GetWorldPosition().m_z>17.0f) {
-			   myscore+=9;
+				if (model->GetWorldPosition().m_z <19.0f && model->GetWorldPosition().m_z>17.0f) {
+					myscore += 9;
 
-			   if (model->HP <= 1) { 
-				  myscore += 99;
-				  model->SetWorldScale({ 0.0f, 0.0f, 0.0f}); 
-			   endcount--;
-			   if (endcount <= 0) {
-				  HWND hWnd = FindWindow(NULL, TEXT("Engine"));
-				  char q[200] = { 0, };
+					if (model->HP <= 1) {
+						myscore += 99;
+						model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
+						endcount--;
+						if (endcount <= 0) {
+							HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+							char q[200] = { 0, };
 
-				  sprintf(q, "Game Clear!!.\nScore : %d", myscore);
-				  wchar_t wtext[200];
-				  mbstowcs(wtext, q, strlen(q) + 1);//Plus null
-				  LPWSTR query = wtext;
+							sprintf(q, "Game Clear!!.\nScore : %d", myscore);
+							wchar_t wtext[200];
+							mbstowcs(wtext, q, strlen(q) + 1);//Plus null
+							LPWSTR query = wtext;
 
-				  MessageBox(hWnd, query, TEXT("게임 클리어"), MB_OK);
-				  exit(1);
-			   
+							MessageBox(hWnd, query, TEXT("게임 클리어"), MB_OK);
+							exit(1);
 
-			   }
-			   }
-			   else { model->HP--; }
-			   m_velocity.m_z = -m_velocity.m_z*adv2;
-			   collflag = 1;
-		    }
-		    
-		    if (model->GetWorldPosition().m_z > 19.0f) {
->>>>>>> d006df0dc260dbae43a650f34b32617df9614095
-			   HWND hWnd = FindWindow(NULL, TEXT("Engine"));
-			   char q[200] = { 0, }; 
 
-			   sprintf(q, "Game Over.\nScore : %d", myscore);
-			   wchar_t wtext[200];
-			   mbstowcs(wtext, q, strlen(q) + 1);//Plus null
-			   LPWSTR query = wtext;
-		
-			   MessageBox(hWnd,query,TEXT("게임 종료"), MB_OK);
-			   exit(1);
-		    }
+						}
+					}
+					else { model->HP--; }
+					m_velocity.m_z = -m_velocity.m_z*adv2;
+					collflag = 1;
+				}
 
-			break;
+				if (model->GetWorldPosition().m_z > 19.0f)
+				{
+
+					HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+					char q[200] = { 0, };
+
+					sprintf(q, "Game Over.\nScore : %d", myscore);
+					wchar_t wtext[200];
+					mbstowcs(wtext, q, strlen(q) + 1);//Plus null
+					LPWSTR query = wtext;
+
+					MessageBox(hWnd, query, TEXT("게임 종료"), MB_OK);
+					exit(1);
+				}
+
+				break;
 
 		case LEFT_RIGHT:
 			m_velocity.m_x = -m_velocity.m_x*adv;
@@ -205,36 +203,37 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 
 		default:
 			break;
+			}
 		}
-    }
-    
-	if (model->GetTag() == MODEL_RACKET && InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT) && isFired) 
-	{
-	    sndPlaySoundA("./data/hit.wav", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
-		///////////일해라 남창현////////////
-		///////////로테이션을 기준으로 노말 구해서 입사, 반사 구현
-	    float yy = model->GetWorldRotation().m_y;
-	    float xx = model->GetWorldRotation().m_x;
-	    if (rand() % 2) {
-		   yy += rand() % 10;
-	    }
-	    else {
-		   yy -= rand() % 10;
-	    }
-	    if (rand() % 2) {
-		   xx += rand() % 10;
-	    }
-	    else {
-		   xx -= rand() % 10;
-	    }
 
-		//m_velocity.m_z = 0.3f;
-		m_velocity.m_z = -m_velocity.m_z;
-		m_velocity.m_x = yy*0.003f;
-		m_velocity.m_y = -xx*0.003f;
-    }
-    //xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
+		if (model->GetTag() == MODEL_RACKET && InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT) && isFired)
+		{
+			sndPlaySoundA("./data/hit.wav", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
+			///////////일해라 남창현////////////
+			///////////로테이션을 기준으로 노말 구해서 입사, 반사 구현
+			float yy = model->GetWorldRotation().m_y;
+			float xx = model->GetWorldRotation().m_x;
+			if (rand() % 2) {
+				yy += rand() % 10;
+			}
+			else {
+				yy -= rand() % 10;
+			}
+			if (rand() % 2) {
+				xx += rand() % 10;
+			}
+			else {
+				xx -= rand() % 10;
+			}
 
+			//m_velocity.m_z = 0.3f;
+			m_velocity.m_z = -m_velocity.m_z;
+			m_velocity.m_x = yy*0.003f;
+			m_velocity.m_y = -xx*0.003f;
+		}
+		//xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
+
+	}
 }
 
 void ModelCircleClass::OnCollisionExit(ModelClass* model)
