@@ -23,7 +23,7 @@ bool ModelCircleClass::LoadModel()
 // 변수 관리 잘할 것
 static float x = 0.0f;
 static float y = 0.0f;
-static float z = -1.0f;
+static float z = 5.0f;
 static float zv = 0.0f;
 static float xv = 0.0f;
 static float yv = 0.0f;
@@ -43,6 +43,18 @@ void ModelCircleClass::Start()
 
 void ModelCircleClass::Update()
 {
+    if (GetWorldPosition().m_z < -8.0f) {
+	   HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+	   char q[200] = { 0, };
+
+	   sprintf(q, "Game Over.\nScore : %d", myscore);
+	   wchar_t wtext[200];
+	   mbstowcs(wtext, q, strlen(q) + 1);//Plus null
+	   LPWSTR query = wtext;
+
+	   MessageBox(hWnd, query, TEXT("게임 종료"), MB_OK);
+	   exit(1);
+    }
 
 
     if (InputClass::GetInstance()->IsKeyDown(VK_LEFT) &&
@@ -65,7 +77,7 @@ void ModelCircleClass::Update()
 		!isFired)
 	{
 		isFired = true;
-		m_velocity.m_z = 0.3f;
+		m_velocity.m_z = -0.2f;
 	}
 
  //   if (InputClass::GetInstance()->isFirstClick() && !isFired) 
@@ -92,7 +104,7 @@ void calctime() {
     if (collflag == 0) { collflag = 1;}
     if (collflag == 1) {
 	   DWORD sub = currtime - beforetime;
-	   if (sub < 20) { return; }
+	   if (sub < 75) { return; }
 	   else {
 		  collflag = 0;
 		  beforetime = currtime;
@@ -100,17 +112,22 @@ void calctime() {
     }
 }
 
+<<<<<<< HEAD
 void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 {
 }
 
+=======
+int endcount = 4;
+>>>>>>> d006df0dc260dbae43a650f34b32617df9614095
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
     calctime();
     if (collflag == 1) { return; }
-
+    myscore++;
     if (model->GetTag() == MODEL_CUBE) 
 	{
+	    
 	    float adv = ((rand() % 100)+50) / 100.0; // 0.5 ~ 1.5
 	    float adv2 = (rand()%10+300) / 300.0; // 1.0~1.03
 	   // PlaySound(TEXT("./data/hit.wav"), NULL, SND_FILENAME);
@@ -122,6 +139,7 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 		case FRONT_BACK:
 		    
 		    cout << "A" << endl;
+<<<<<<< HEAD
 		    if (model->GetWorldPosition().m_z <9.0f && model->GetWorldPosition().m_z>7.0f) 
 			{
 			   model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
@@ -133,6 +151,36 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 		    
 			if (model->GetWorldPosition().m_z > 9.0f) 
 			{
+=======
+		    if (model->GetWorldPosition().m_z <19.0f && model->GetWorldPosition().m_z>17.0f) {
+			   myscore+=9;
+
+			   if (model->HP <= 1) { 
+				  myscore += 99;
+				  model->SetWorldScale({ 0.0f, 0.0f, 0.0f}); 
+			   endcount--;
+			   if (endcount <= 0) {
+				  HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+				  char q[200] = { 0, };
+
+				  sprintf(q, "Game Clear!!.\nScore : %d", myscore);
+				  wchar_t wtext[200];
+				  mbstowcs(wtext, q, strlen(q) + 1);//Plus null
+				  LPWSTR query = wtext;
+
+				  MessageBox(hWnd, query, TEXT("게임 클리어"), MB_OK);
+				  exit(1);
+			   
+
+			   }
+			   }
+			   else { model->HP--; }
+			   m_velocity.m_z = -m_velocity.m_z*adv2;
+			   collflag = 1;
+		    }
+		    
+		    if (model->GetWorldPosition().m_z > 19.0f) {
+>>>>>>> d006df0dc260dbae43a650f34b32617df9614095
 			   HWND hWnd = FindWindow(NULL, TEXT("Engine"));
 			   char q[200] = { 0, }; 
 
@@ -182,8 +230,8 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 
 		//m_velocity.m_z = 0.3f;
 		m_velocity.m_z = -m_velocity.m_z;
-		m_velocity.m_x = yy*0.002f;
-		m_velocity.m_y = -xx*0.002f;
+		m_velocity.m_x = yy*0.003f;
+		m_velocity.m_y = -xx*0.003f;
     }
     //xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
 

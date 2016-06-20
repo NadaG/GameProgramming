@@ -358,31 +358,31 @@ bool GraphicsClass::InitializeModels()
 
 void GraphicsClass::InitializeTransform()
 {
-	m_Models[1]->SetWorldPosition({ 0.0f, 0.0f, 12.5f });
+	m_Models[1]->SetWorldPosition({ 0.0f, 0.0f, 22.5f });
 	m_Models[1]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
 
-	m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 10.0f });
-	m_Models[2]->SetWorldScale({ 1.0f, 10.0f, 30.0f });
+	m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 20.0f });
+	m_Models[2]->SetWorldScale({ 1.0f, 10.0f, 50.0f });
 
-	m_Models[3]->SetWorldPosition({ 5.0f, 0.0f, 10.0f });
-	m_Models[3]->SetWorldScale({ 1.0f, 10.0f, 30.0f });
+	m_Models[3]->SetWorldPosition({ 5.0f, 0.0f, 20.0f });
+	m_Models[3]->SetWorldScale({ 1.0f, 10.0f, 50.0f });
 	
-	m_Models[4]->SetWorldPosition({ 0.0f, 5.0f, 10.0f });
-	m_Models[4]->SetWorldScale({ 10.0f, 1.0f, 30.0f });
+	m_Models[4]->SetWorldPosition({ 0.0f, 5.0f, 20.0f });
+	m_Models[4]->SetWorldScale({ 10.0f, 1.0f, 50.0f });
 
-	m_Models[5]->SetWorldPosition({ 0.0f, -5.0f, 10.0f });
-	m_Models[5]->SetWorldScale({ 10.0f, 1.0f, 30.0f });
+	m_Models[5]->SetWorldPosition({ 0.0f, -5.0f, 20.0f });
+	m_Models[5]->SetWorldScale({ 10.0f, 1.0f, 50.0f });
 
-	m_Models[6]->SetWorldPosition({ -2.5f, 2.5f, 8.0f });
+	m_Models[6]->SetWorldPosition({ -2.5f, 2.5f, 18.0f });
 	m_Models[6]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
 
-	m_Models[7]->SetWorldPosition({ 2.5f, 2.5f, 8.0f });
+	m_Models[7]->SetWorldPosition({ 2.5f, 2.5f, 18.0f });
 	m_Models[7]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
 
-	m_Models[8]->SetWorldPosition({ 2.5f, -2.5f, 8.0f });
+	m_Models[8]->SetWorldPosition({ 2.5f, -2.5f, 18.0f });
 	m_Models[8]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
 
-	m_Models[9]->SetWorldPosition({ -2.5f, -2.5f, 8.0f });
+	m_Models[9]->SetWorldPosition({ -2.5f, -2.5f, 18.0f });
 	m_Models[9]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
 }
 

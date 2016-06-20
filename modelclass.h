@@ -65,6 +65,7 @@ protected:
 	int m_id;
 
 public:
+    int HP;
 	ModelClass();
 	ModelClass(const ModelClass&);
 	~ModelClass();
