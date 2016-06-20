@@ -12,6 +12,7 @@ int myscore = 0;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
+    srand((unsigned int)time(NULL));
     HINSTANCE g_hInst;
     LPCWSTR lpszClass = TEXT("TextOut");
     HWND hWnd;

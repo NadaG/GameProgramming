@@ -27,10 +27,24 @@ static float z = 5.0f;
 static float zv = 0.0f;
 static float xv = 0.0f;
 static float yv = 0.0f;
-
+int am = 0;
 int stage = 0;
 float bz = (stage)*100.0f;
 static bool isFired = false;
+void cheat() {
+    stage++;
+
+    GraphicsClass::GetInstance()->s_StageNum++;
+    GraphicsClass::GetInstance()->ToNextStage(GraphicsClass::GetInstance()->s_StageNum);
+    HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+    string s = "./data/";
+    s += to_string(stage);
+    s += ".wav";
+    const char* cp = s.c_str();
+    SoundClass::GetInstance()->Shutdown();
+    SoundClass::GetInstance()->Initialize(hWnd, cp);
+}
+
 void ModelCircleClass::Start()
 {
 	Collider* col = new Collider(COL_CUBE);
@@ -45,7 +59,16 @@ void ModelCircleClass::Start()
 
 	x = 0.0f;
 	y = 0.0f;
-	z = 5.0f + ((-100) * (GraphicsClass::GetInstance()->s_StageNum - 1));
+	z = 5.0f;
+}
+
+void ModelCircleClass::WorldPositionInitialize()
+{
+    x = 0.0f;
+    y = 0.0f;
+    z = 5.0f + ((-100) * (GraphicsClass::GetInstance()->s_StageNum - 1));
+    m_worldRotation = { 0.0f, 0.0f, 0.0f };
+    m_velocity = { 0.0f, 0.0f, 0.0f };
 }
 
 void ModelCircleClass::Update()
@@ -64,9 +87,10 @@ void ModelCircleClass::Update()
 	   exit(1);
     }
 
-	if (InputClass::GetInstance()->IsKeyDown(VK_LEFT) &&
-		!isFired)
-		x -= 0.05f;
+    if (InputClass::GetInstance()->IsKeyDown(VK_LEFT) &&
+	   !isFired) {
+	   x -= 0.05f;
+    }
 
 	if (InputClass::GetInstance()->IsKeyDown(VK_RIGHT) &&
 		!isFired)
@@ -83,11 +107,18 @@ void ModelCircleClass::Update()
 	if (InputClass::GetInstance()->GetMouseButtonDown(MOUSE_LEFT) &&
 		!isFired)
 	{
+	    
 		isFired = true;
-		z = 5.0f + ((-100) * (GraphicsClass::GetInstance()->s_StageNum - 1));
+		//z = 5.0f + ((-100) * (GraphicsClass::GetInstance()->s_StageNum - 1));
 		m_velocity.m_z = -0.15f;
+	}	
+	if (InputClass::GetInstance()->GetMouseButtonDown(MOUSE_RIGHT) &&am<=1) {
+	    am++;
+	    cout << "ASDASD" << endl;
+	    cheat();
 	}
 
+	Debug::GetInstance()->Log(m_worldPosition);
 	//   if (InputClass::GetInstance()->isFirstClick() && !isFired) 
 	//{
 	//   isFired = true;
@@ -109,12 +140,12 @@ int stagestart = 1;
 DWORD beforetime = 0;
 int endcount[3] = {4,9,16};
 void calctime() {
-	cout << "A" << endl;
+	//cout << "A" << endl;
 	DWORD currtime = GetTickCount();
 	if (collflag == 0) { collflag = 1; }
 	if (collflag == 1) {
 		DWORD sub = currtime - beforetime;
-		if (sub < 10) { 
+		if (sub < 1) { 
 		    return; }
 		else {
 			collflag = 0;
@@ -130,21 +161,18 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
     float adv = ((rand() % 100) + 50) / 100.0; // 0.5 ~ 1.5
     float adv2 = (rand() % 10 + 300) / 300.0; // 1.0~1.03
     bz = (stage)*100.0f;
-
-    cout << "BZ : " << bz << ", " << model->GetWorldPosition().m_z << endl;
-    cout << 10.0f - bz << endl;
-
     calctime();
-    cout << "FLAG : " << collflag << endl;
-    if (collflag == 1) { return; }
+    //if (collflag == 1) { return; }
+
     if (model->GetTag() == MODEL_CUBE) {
 
-
+	   cout << "DIR : "<<" "<<model->GetDirection() << endl;
 
 	   sndPlaySoundA("./data/hit.wav", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 	   switch (model->GetDirection()) {
 	   case FRONT_BACK:
-		  m_velocity.m_z = -abs(m_velocity.m_z)*adv2;
+		  //m_velocity.m_z = -abs(m_velocity.m_z)*adv2;
+		  m_velocity.m_z = -abs(m_velocity.m_z);
 		 // if (model->GetWorldPosition().m_z> 9.0f-bz && model->GetWorldPosition().m_z<11.0f-bz) {
 		  if(!model->backwall){
 		  model->HP--;
@@ -157,7 +185,7 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 				if (endcount[stage] <= 0) {
 				    ////////////////////////
 				    stagestart = 0;
-				    cout << "ABCDE" << endl;
+				    //cout << "ABCDE" << endl;
 				    stage++;
 				    collflag = 0;
 				    beforetime = 0;
@@ -192,12 +220,22 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 		  break;
 
 	   case LEFT_RIGHT:
-		  m_velocity.m_x = -m_velocity.m_x*adv;
+		  if (m_velocity.m_x < 0) {
+			 m_velocity.m_x = abs(m_velocity.m_x);
+		  }
+		  else {
+			 m_velocity.m_x = -abs(m_velocity.m_x);
+		  }
 		  myscore++;
 		  break;
 
 	   case UP_DOWN:
-		  m_velocity.m_y = -m_velocity.m_y*adv;
+		  if (m_velocity.m_y < 0) {
+			 m_velocity.m_y = abs(m_velocity.m_y);
+		  }
+		  else {
+			 m_velocity.m_y = -abs(m_velocity.m_y);
+		  }
 		  myscore++;
 		  break;
 
@@ -239,6 +277,7 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
+    /*
     if (stagestart == 0) { return; }
     cout << "STAY" << endl;
     collflag = 0;
@@ -275,7 +314,7 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 	   myscore++;
 	   break;
 
-    }
+    }*/
 }
 
 void ModelCircleClass::OnCollisionExit(ModelClass* model)

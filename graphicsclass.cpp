@@ -363,7 +363,7 @@ void GraphicsClass::InitializeTransform()
 		{
 			for (int k = 0; k < i + 2; k++)
 			{
-				m_Models[now]->SetWorldPosition({ start_x + j*width_height, start_y - k*width_height, 17.0f-i*100 });
+				m_Models[now]->SetWorldPosition({ start_x + j*width_height, start_y - k*width_height, 18.0f-i*100 });
 				m_Models[now]->SetWorldScale({ width_height, width_height, 1.0f });
 				m_Models[now]->SetBelongStage(i + 1);
 				now++;
@@ -506,6 +506,7 @@ void GraphicsClass::Destroy(ModelClass* model)
 	{
 		if (*itr == model)
 		{
+		    //(*itr)->SetWorldScale({ 0.0f, 0.0f, 0.0f});
 			m_Models.erase(itr);
 			break;
 		}
@@ -531,35 +532,22 @@ void GraphicsClass::ToNextStage(const int& stage)
 	case 2:
 		for (int i = 0; i < m_Models.size(); i++)
 		{
-			if (m_Models[i]->GetTag() != MODEL_CUBE)
+			if (m_Models[i]->GetTag() == MODEL_SPHERE)
 			{
-				tmp_vec.push_back(m_Models[i]);
+			    ((ModelCircleClass*)m_Models[i])->WorldPositionInitialize();
 			}
 		}
-
-		for (int i = 0; i < tmp_vec.size(); i++)
-		{
-			m_Models.push_back(tmp_vec[i]);
-			m_Models[i]->Start();
-		}
-
+	    
 		m_Camera->SetPosition(0.0f, 0.0f, -110.0f);
 		break;
 	case 3:
-		for (int i = 0; i < m_Models.size(); i++)
-		{
-			if (m_Models[i]->GetTag() != MODEL_CUBE)
-			{
-				tmp_vec.push_back(m_Models[i]);
-			}
-		}
-
-		for (int i = 0; i < tmp_vec.size(); i++)
-		{
-			m_Models.push_back(tmp_vec[i]);
-			m_Models[i]->Start();
-		}
-
+	    for (int i = 0; i < m_Models.size(); i++)
+	    {
+		   if (m_Models[i]->GetTag() == MODEL_SPHERE)
+		   {
+			  ((ModelCircleClass*)m_Models[i])->WorldPositionInitialize();
+		   }
+	    }
 		m_Camera->SetPosition(0.0f, 0.0f, -210.0f);
 		break;
 	default:
