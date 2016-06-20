@@ -36,6 +36,15 @@ void ModelRacketClass::Update()
     x /= 64.0f;
 
     //cout << x << " " << y << endl;
+	if (x > 4.0f)
+		x = 4.0f;
+	if (x < -4.0f)
+		x = -4.0f;
+	if (y>4.0f)
+		y = 4.0f;
+	if (y < -4.0f)
+		y = -4.0f;
+
     m_worldPosition = { x, -y, -1.5f };
     int flag = 0;
     
@@ -103,5 +112,4 @@ void ModelRacketClass::OnCollisionExit(ModelClass* model)
 
 void ModelRacketClass::OnCollisionStay(ModelClass* model)
 {
-	      
 }

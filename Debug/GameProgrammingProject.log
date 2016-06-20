@@ -1,8 +1,8 @@
-﻿빌드 시작: 2016-06-20 오후 2:28:34
+﻿빌드 시작: 2016-06-20 오후 3:09:41
      1>2 노드의 "C:\Users\Nada\Desktop\GameProgrammingProject\GameProgramming\GameProgrammingProject.vcxproj" 프로젝트(Build 대상)입니다.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt modelcircleclass.cpp
-         modelcircleclass.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt modelracketclass.cpp
+         modelracketclass.cpp
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED' : 매크로 재정의
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50002) : 'DXGI_STATUS_OCCLUDED'의 이전 정의를 참조하십시오.
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED' : 매크로 재정의
@@ -59,10 +59,8 @@
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50355) : 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'의 이전 정의를 참조하십시오.
      1>c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND' : 매크로 재정의
                  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50364) : 'D3D10_ERROR_FILE_NOT_FOUND'의 이전 정의를 참조하십시오.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelcircleclass.h(30): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelcircleclass.h(31): warning C4172: 지역 변수 또는 임시 변수의 주소를 반환하고 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelcircleclass.cpp(129): warning C4244: '초기화 중' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelcircleclass.cpp(130): warning C4244: '초기화 중' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelracketclass.cpp(31): warning C4244: '초기화 중' : 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>c:\users\nada\desktop\gameprogrammingproject\gameprogramming\modelracketclass.cpp(32): warning C4244: '초기화 중' : 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Nada\Desktop\GameProgrammingProject\GameProgramming\Debug\GameProgrammingProject.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Nada\Desktop\GameProgrammingProject\GameProgramming\Debug\GameProgrammingProject.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Nada\Desktop\GameProgrammingProject\GameProgramming\Debug\GameProgrammingProject.lib" /MACHINE:X86 Debug\cameraclass.obj
          Debug\colliderclass.obj
@@ -91,4 +89,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:02.78
+경과 시간: 00:00:01.90
