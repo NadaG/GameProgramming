@@ -51,7 +51,18 @@ void ModelCircleClass::Start()
 void ModelCircleClass::Update()
 {
     bz = (stage)*100.0f;
+    if (GetWorldPosition().m_z<-8.0f-bz) {
+	   HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+	   char q[200] = { 0, };
 
+	   sprintf(q, "Game Over.\nScore : %d", myscore);
+	   wchar_t wtext[200];
+	   mbstowcs(wtext, q, strlen(q) + 1);//Plus null
+	   LPWSTR query = wtext;
+
+	   MessageBox(hWnd, query, TEXT("게임 종료"), MB_OK);
+	   exit(1);
+    }
 
 	if (InputClass::GetInstance()->IsKeyDown(VK_LEFT) &&
 		!isFired)
@@ -102,7 +113,7 @@ void calctime() {
 	if (collflag == 0) { collflag = 1; }
 	if (collflag == 1) {
 		DWORD sub = currtime - beforetime;
-		if (sub < 50) { 
+		if (sub < 20) { 
 		    return; }
 		else {
 			collflag = 0;
@@ -132,11 +143,13 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 	   sndPlaySoundA("./data/hit.wav", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 	   switch (model->GetDirection()) {
 	   case FRONT_BACK:
-		  m_velocity.m_z = -m_velocity.m_z*adv2;
+		  m_velocity.m_z = -abs(m_velocity.m_z)*adv2;
 		  if (model->GetWorldPosition().m_z> 9.0f-bz && model->GetWorldPosition().m_z<11.0f-bz) {
 			 model->HP--;
 			 if (model->HP <= 0) {
 				model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
+				GraphicsClass::GetInstance()->Destroy(model);
+			
 				myscore += 100;
 				endcount[stage]--;
 				if (endcount[stage] <= 0) {
@@ -146,6 +159,7 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 				    stage++;
 				    collflag = 0;
 				    beforetime = 0;
+				    
 				    GraphicsClass::GetInstance()->s_StageNum++;
 				    GraphicsClass::GetInstance()->ToNextStage(GraphicsClass::GetInstance()->s_StageNum);
 				    
@@ -208,7 +222,7 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 			xx -= rand() % 10;
 		}
 
-		m_velocity.m_z = -m_velocity.m_z;
+		m_velocity.m_z = abs(m_velocity.m_z);
 		m_velocity.m_x = yy*0.003f;
 		m_velocity.m_y = -xx*0.003f;
 	}
