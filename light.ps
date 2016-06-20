@@ -21,7 +21,7 @@ cbuffer LightBuffer
 	float4 pointLightColor2;
 	float4 pointLight2;
 	float4 pointLightColor3;
-	float4 pointLightColor3;
+	float4 pointLight3;
 };
 
 
@@ -71,7 +71,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     color = color*textureColor;
 	color = saturate(color + specular * specularColor);
 
-	float3 wptol = pointLight.xyz - input.wposition;
+	float3 wptol = pointLight1.xyz - input.wposition;
 	float distance = length(wptol);
 	wptol = normalize(wptol);
 	
@@ -79,7 +79,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 
 	PointLightIntensity/=(1.0f + 0.5f*distance + 0.05f*distance*distance);
 
-	color = saturate(color + pointLightColor*PointLightIntensity);
+	color = saturate(color + pointLightColor1*PointLightIntensity);
 
     return color;
 }
