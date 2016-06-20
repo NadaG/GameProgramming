@@ -6,7 +6,7 @@
 SystemClass::SystemClass()
 {
 	//m_Input = 0;
-	m_Graphics = 0;
+	//m_Graphics = 0;
 	m_Sound = 0;
 }
 
@@ -41,7 +41,6 @@ bool SystemClass::Initialize()
 	int screenWidth, screenHeight;
 	bool result;
 
-
 	// Initialize the width and height of the screen to zero before sending the variables into the function.
 	screenWidth = 0;
 	screenHeight = 0;
@@ -60,14 +59,14 @@ bool SystemClass::Initialize()
 	
 	InputClass::GetInstance()->Initialize();
 	// Create the graphics object.  This object will handle rendering all the graphics for this application.
-	m_Graphics = new GraphicsClass;
-	if(!m_Graphics)
+	//m_Graphics = new GraphicsClass;
+	/*if(!m_Graphics)
 	{
 		return false;
-	}
+	}*/
 
 	// Initialize the graphics object.
-	result = m_Graphics->Initialize(screenWidth, screenHeight, m_hwnd);
+	result = GraphicsClass::GetInstance()->Initialize(screenWidth, screenHeight, m_hwnd);
 	if(!result)
 	{
 		return false;
@@ -83,12 +82,12 @@ bool SystemClass::Initialize()
 void SystemClass::Shutdown()
 {
 	// Release the graphics object.
-	if(m_Graphics)
+	/*if(m_Graphics)
 	{
 		m_Graphics->Shutdown();
 		delete m_Graphics;
 		m_Graphics = 0;
-	}
+	}*/
 
 	// Release the input object.
 	/*if(m_Input)
@@ -156,7 +155,7 @@ bool SystemClass::Frame()
 	}
 
 	// Do the frame processing for the graphics object.
-	result = m_Graphics->Frame();
+	result = GraphicsClass::GetInstance()->Frame();
 	if(!result)
 	{
 		return false;

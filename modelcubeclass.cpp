@@ -6,7 +6,7 @@ bool ModelCubeClass::LoadModel()
 	m_model = new ModelType[m_vertexCount];
 	m_indexCount = m_vertexCount;
 	m_model_indices = new int[m_indexCount];
-	HP = 3;
+	HP = 1;
 	m_mesh.LoadVertices(MESH_CUBE, m_model, m_model_indices);
 
 	return true;

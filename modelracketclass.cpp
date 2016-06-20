@@ -1,4 +1,5 @@
 #include "modelracketclass.h"
+#include "systemclass.h"
 #include<iostream>
 
 bool ModelRacketClass::LoadModel()
@@ -44,8 +45,8 @@ void ModelRacketClass::Update()
 		y = 4.0f;
 	if (y < -4.0f)
 		y = -4.0f;
-
-    m_worldPosition = { x, -y, -1.5f };
+	
+	m_worldPosition = { x, -y, -1.5f + (-100)*(GraphicsClass::GetInstance()->s_StageNum-1) };
     int flag = 0;
     
     if (InputClass::GetInstance()->IsKeyDown(97))//1 

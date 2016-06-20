@@ -3,24 +3,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "graphicsclass.h"
 
+GraphicsClass* GraphicsClass::m_instance = new GraphicsClass;
 
 GraphicsClass::GraphicsClass()
 {
-	m_D3D = 0;
-	m_Camera = 0;
-	m_LightShader = 0;
-	m_Light = 0;
-	for (int i = 0; i < 1000; i++)
-	{
-		for (int j = 0; j < 1000; j++)
-		{
-			isCollisionChecked[i][j] = false;
-		}
-	}
 }
 
-GraphicsClass::GraphicsClass(const GraphicsClass& other)
+GraphicsClass* GraphicsClass::GetInstance()
 {
+	return m_instance;
 }
 
 GraphicsClass::~GraphicsClass()
@@ -30,7 +21,7 @@ GraphicsClass::~GraphicsClass()
 bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
 	bool result;
-
+	
 	// Create the Direct3D object.
 	m_D3D = new D3DClass;
 	if(!m_D3D)
@@ -75,23 +66,6 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	for (int i = 0; i < m_Models.size(); i++)
 	{
 		result = m_Models[i]->InitializeByTag(m_D3D->GetDevice(), m_Models[i]->GetTag());
-		/*switch (m_Models[i]->GetTag())
-		{
-		case MODEL_CIRCLE:
-			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
-			break;
-		case MODEL_CUBE:
-			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/earth.dds");
-			break;
-		case MODEL_RACKET:
-			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
-			break;
-		case MODEL_SPHERE:
-			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/earth.dds");
-			break;
-		default:
-			break; 
-		}*/
 
 		if (!result)
 		{
@@ -152,12 +126,9 @@ void GraphicsClass::Shutdown()
 
 	for (int i = 0; i < m_Models.size(); i++)
 	{
-		if (m_Models[i])
-		{
-			m_Models[i]->Shutdown();
-			delete m_Models[i];
-			m_Models[i] = 0;
-		}
+		m_Models[i]->Shutdown();
+		delete m_Models[i];
+		m_Models[i] = 0;
 	}
 
 	// Release the camera object.
@@ -212,6 +183,8 @@ bool GraphicsClass::Frame()
 					if (isCollisionChecked[i][j] && isCollisionChecked[j][i])
 					{
 						m_Models[i]->OnCollisionStay(m_Models[j]);
+						if (m_Models.size() <= 2)
+							return true;
 						m_Models[j]->OnCollisionStay(m_Models[i]);
 					}
 					else
@@ -219,6 +192,10 @@ bool GraphicsClass::Frame()
 						isCollisionChecked[i][j] = true;
 						isCollisionChecked[j][i] = true;
 						m_Models[i]->OnCollisionEnter(m_Models[j]);
+						if (m_Models.size() <= 2)
+						{
+							return true;
+						}
 						m_Models[j]->OnCollisionEnter(m_Models[i]);
 					}
 				}
@@ -311,79 +288,93 @@ bool GraphicsClass::Render()
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // 여기서 미리 위치와 회전 스케일을 정할것
+
+const int StartIndexNum = 2;
+const int MaxStageNum = 3;
 bool GraphicsClass::InitializeModels()
 {
-	ModelCircleClass* circle = new ModelCircleClass;
-	ModelCubeClass* cube = new ModelCubeClass;
-	ModelCubeClass* cube2 = new ModelCubeClass;
-	ModelCubeClass* cube3 = new ModelCubeClass;
-	ModelCubeClass* cube4 = new ModelCubeClass;
-	ModelCubeClass* cube5 = new ModelCubeClass;
-	ModelCubeClass* cube6 = new ModelCubeClass;
-	ModelCubeClass* cube7 = new ModelCubeClass;
-	ModelCubeClass* cube8 = new ModelCubeClass;
-	ModelCubeClass* cube9 = new ModelCubeClass;
-	ModelRacketClass* racket1 = new ModelRacketClass;
+	InitializeRacketAndCircle();
 
-	m_Models.push_back(circle);
+	for (int i = 0; i < MaxStageNum * 2; i++)
+	{
+		ModelCubeClass* cube = new ModelCubeClass;
+		m_Models.push_back(cube);
+		m_Models[i]->SetDirection(LEFT_RIGHT);
+	}
 
-	m_Models.push_back(cube); 
-	cube->SetDirection(FRONT_BACK);
-	m_Models.push_back(cube2);
-	cube2->SetDirection(LEFT_RIGHT);
-	
-	m_Models.push_back(cube3);
-	cube3->SetDirection(LEFT_RIGHT);
-	m_Models.push_back(cube4);
-	cube4->SetDirection(UP_DOWN);
-	m_Models.push_back(cube5);
-	cube5->SetDirection(UP_DOWN);
+	for (int i = MaxStageNum * 2; i < MaxStageNum * 4; i++)
+	{
+		ModelCubeClass* cube = new ModelCubeClass;
+		m_Models.push_back(cube);
+		m_Models[i]->SetDirection(UP_DOWN);
+	}
 
-
-	//cube 6,7,8,9는 부술것.
-	//cube1은 닿으면 게임종료.
-	m_Models.push_back(cube6);
-	cube6->SetDirection(FRONT_BACK);
-	m_Models.push_back(cube7);
-	cube7->SetDirection(FRONT_BACK);
-	m_Models.push_back(cube8);
-	cube8->SetDirection(FRONT_BACK);
-	m_Models.push_back(cube9);
-	cube9->SetDirection(FRONT_BACK);
-
-	m_Models.push_back(racket1);
+	for (int i = MaxStageNum * 4; i < 44; i++)
+	{
+		ModelCubeClass* cube = new ModelCubeClass;
+		m_Models.push_back(cube);
+		m_Models[i]->SetDirection(FRONT_BACK);
+	}
 
 	return true;
 }
 
 void GraphicsClass::InitializeTransform()
 {
-	m_Models[1]->SetWorldPosition({ 0.0f, 0.0f, 22.5f });
-	m_Models[1]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
+	for (int i = StartIndexNum; i < StartIndexNum + MaxStageNum * 2; i += 2)
+	{
+		m_Models[i]->SetWorldPosition({ -5.0f, 0.0f, 20.0f - 100 * ((i - StartIndexNum) / 2) });
+		m_Models[i]->SetWorldScale({ 1.0f, 10.0f, 50.0f });
 
-	m_Models[2]->SetWorldPosition({ -5.0f, 0.0f, 20.0f });
-	m_Models[2]->SetWorldScale({ 1.0f, 10.0f, 50.0f });
+		m_Models[i + 1]->SetWorldPosition({ 5.0f, 0.0f, 20.0f - 100 * ((i - StartIndexNum) / 2) });
+		m_Models[i + 1]->SetWorldScale({ 1.0f, 10.0f, 50.0f });
+	}
 
-	m_Models[3]->SetWorldPosition({ 5.0f, 0.0f, 20.0f });
-	m_Models[3]->SetWorldScale({ 1.0f, 10.0f, 50.0f });
+	for (int i = StartIndexNum + MaxStageNum * 2; i < StartIndexNum + MaxStageNum * 4; i += 2)
+	{
+		m_Models[i]->SetWorldPosition({ 0.0f, 5.0f, 20.0f - 100 * ((i - (StartIndexNum + MaxStageNum * 2)) / 2) });
+		m_Models[i]->SetWorldScale({ 10.0f, 1.0f, 50.0f });
+
+		m_Models[i + 1]->SetWorldPosition({ 0.0f, -5.0f, 20.0f - 100 * ((i - (StartIndexNum + MaxStageNum * 2)) / 2) });
+		m_Models[i + 1]->SetWorldScale({ 10.0f, 1.0f, 50.0f });
+	}
+
+	for (int i = StartIndexNum + MaxStageNum * 4; i < StartIndexNum + MaxStageNum * 4 + 3; i++)
+	{
+		m_Models[i]->SetWorldPosition({ 0.0f, 0.0f, 22.5f - 100 * (i - (StartIndexNum + MaxStageNum * 4))});
+		m_Models[i]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
+	}
+
+	float start_x, start_y;
+	int now = 17;
+	for (int i = 0; i < 3; i++)
+	{
+		float width_height = 10.0f / (i + 2);
+		start_x = -5.0f + (width_height / 2);
+		start_y = 5.0f - (width_height / 2);
+		for (int j = 0; j < i + 2; j++)
+		{
+			for (int k = 0; k < i + 2; k++)
+			{
+				m_Models[now]->SetWorldPosition({ start_x + j*width_height, start_y - k*width_height, 10.0f-i*100 });
+				m_Models[now]->SetWorldScale({ width_height, width_height, 1.0f });
+				now++;
+			}
+		}
+	}
+}
+
+void GraphicsClass::InitializeRacketAndCircle()
+{
+	ModelCircleClass* circle = new ModelCircleClass;
+	ModelRacketClass* racket1 = new ModelRacketClass;
+	m_Models.push_back(circle);
+	m_Models.push_back(racket1);
 	
-	m_Models[4]->SetWorldPosition({ 0.0f, 5.0f, 20.0f });
-	m_Models[4]->SetWorldScale({ 10.0f, 1.0f, 50.0f });
+}
 
-	m_Models[5]->SetWorldPosition({ 0.0f, -5.0f, 20.0f });
-	m_Models[5]->SetWorldScale({ 10.0f, 1.0f, 50.0f });
-
-	m_Models[6]->SetWorldPosition({ -2.5f, 2.5f, 18.0f });
-	m_Models[6]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
-
-	m_Models[7]->SetWorldPosition({ 2.5f, 2.5f, 18.0f });
-	m_Models[7]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
-
-	m_Models[8]->SetWorldPosition({ 2.5f, -2.5f, 18.0f });
-	m_Models[8]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
-
-	m_Models[9]->SetWorldPosition({ -2.5f, -2.5f, 18.0f });
-	m_Models[9]->SetWorldScale({ 5.0f, 5.0f, 1.0f });
+void GraphicsClass::InitializeRacketAndCircleTransform()
+{
 }
 
 bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
@@ -515,8 +506,55 @@ void GraphicsClass::Destroy(ModelClass* model)
 
 void GraphicsClass::DestroyAll()
 {
-	while (!m_Models.empty())
+	/*while (!m_Models.empty())
+	{*/
+	m_Models.clear();
+	//}
+}
+
+
+void GraphicsClass::ToNextStage(const int& stage)
+{
+	vector<ModelClass*> tmp_vec;
+	switch (stage)
 	{
-		m_Models.pop_back();
+	case 1:
+		break;
+	case 2:
+		for (int i = 0; i < m_Models.size(); i++)
+		{
+			if (m_Models[i]->GetTag() != MODEL_CUBE)
+			{
+				tmp_vec.push_back(m_Models[i]);
+			}
+		}
+
+		for (int i = 0; i < tmp_vec.size(); i++)
+		{
+			m_Models.push_back(tmp_vec[i]);
+			m_Models[i]->Start();
+		}
+
+		m_Camera->SetPosition(0.0f, 0.0f, -110.0f);
+		break;
+	case 3:
+		for (int i = 0; i < m_Models.size(); i++)
+		{
+			if (m_Models[i]->GetTag() != MODEL_CUBE)
+			{
+				tmp_vec.push_back(m_Models[i]);
+			}
+		}
+
+		for (int i = 0; i < tmp_vec.size(); i++)
+		{
+			m_Models.push_back(tmp_vec[i]);
+			m_Models[i]->Start();
+		}
+
+		m_Camera->SetPosition(0.0f, 0.0f, -210.0f);
+		break;
+	default:
+		break;
 	}
 }

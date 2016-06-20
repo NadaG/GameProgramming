@@ -36,16 +36,22 @@ void ModelCircleClass::Start()
 	Collider* col = new Collider(COL_CUBE);
 	SetComponent(COM_COLLIDER, col);
 
-	m_worldPosition = { 0.0f, 0.0f, 0.0f };
 	m_worldRotation = { 0.0f, 0.0f, 0.0f };
 	m_velocity = { 0.0f, 0.0f, 0.0f };
+	m_worldPosition = { 0.0f, 0.0f, 0.0f };
 
 	m_tag = MODEL_SPHERE;
+	isFired = false;
+
+	x = 0.0f;
+	y = 0.0f;
+	z = 5.0f + ((-100) * (GraphicsClass::GetInstance()->s_StageNum - 1));
 }
 
 void ModelCircleClass::Update()
 {
-	if (GetWorldPosition().m_z < -8.0f) {
+	if (GetWorldPosition().m_z < -8.0f) 
+	{
 		HWND hWnd = FindWindow(NULL, TEXT("Engine"));
 		char q[200] = { 0, };
 
@@ -97,6 +103,7 @@ void ModelCircleClass::Update()
 	m_worldPosition = { x, y, z };
 	m_worldScale = { 1.0f, 1.0f, 1.0f };
 }
+
 int collflag = 0;
 DWORD beforetime = 0;
 
@@ -131,14 +138,12 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 
 		switch (model->GetDirection())
 		{
-
 		case FRONT_BACK:
-
-			cout << "A" << endl;
 
 			if (model->GetWorldPosition().m_z <9.0f && model->GetWorldPosition().m_z>7.0f)
 			{
 				model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
+				
 				m_velocity.m_z = -m_velocity.m_z*adv2;
 				collflag = 1;
 			}
@@ -147,29 +152,38 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 
 			if (model->GetWorldPosition().m_z > 9.0f)
 			{
-				if (model->GetWorldPosition().m_z <19.0f && model->GetWorldPosition().m_z>17.0f) {
+				if (model->GetWorldPosition().m_z <19.0f && model->GetWorldPosition().m_z>17.0f) 
+				{
 					myscore += 9;
 
-					if (model->HP <= 1) {
+					if (model->HP <= 1) 
+					{
 						myscore += 99;
 						model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
 						endcount--;
-						if (endcount <= 0) {
-							HWND hWnd = FindWindow(NULL, TEXT("Engine"));
-							char q[200] = { 0, };
 
-							sprintf(q, "Game Clear!!.\nScore : %d", myscore);
-							wchar_t wtext[200];
-							mbstowcs(wtext, q, strlen(q) + 1);//Plus null
-							LPWSTR query = wtext;
+						if (endcount <= 3) 
+						{
+							//HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+							//char q[200] = { 0, };
 
-							MessageBox(hWnd, query, TEXT("게임 클리어"), MB_OK);
-							exit(1);
+							//sprintf(q, "Game Clear!!.\nScore : %d", myscore);
+							//wchar_t wtext[200];
+							//mbstowcs(wtext, q, strlen(q) + 1);//Plus null
+							//LPWSTR query = wtext;
 
-
+							//MessageBox(hWnd, query, TEXT("게임 클리어"), MB_OK);
+							//exit(1);
+							GraphicsClass::GetInstance()->s_StageNum++;
+							GraphicsClass::GetInstance()->ToNextStage(GraphicsClass::GetInstance()->s_StageNum);
+							return;
 						}
 					}
-					else { model->HP--; }
+					else 
+					{ 
+						model->HP--; 
+					}
+					
 					m_velocity.m_z = -m_velocity.m_z*adv2;
 					collflag = 1;
 				}
@@ -204,10 +218,9 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 			}
 		}
 	}
+
 	if (model->GetTag() == MODEL_RACKET && InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT) && isFired)
 	{
-		cout << "ASDASDASD" << endl;
-
 		sndPlaySoundA("./data/hit.wav", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 		///////////일해라 남창현////////////
 		///////////로테이션을 기준으로 노말 구해서 입사, 반사 구현
@@ -226,15 +239,10 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 			xx -= rand() % 10;
 		}
 
-		//m_velocity.m_z = 0.3f;
-
 		m_velocity.m_z = -m_velocity.m_z;
 		m_velocity.m_x = yy*0.003f;
 		m_velocity.m_y = -xx*0.003f;
 	}
-	//xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
-
-
 }
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)

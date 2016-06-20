@@ -36,9 +36,8 @@ const float SCREEN_NEAR = 0.1f;
 class GraphicsClass
 {
 public:
-	GraphicsClass();
-	GraphicsClass(const GraphicsClass&);
-	~GraphicsClass();
+	
+	static GraphicsClass* GetInstance();
 
 	bool Initialize(int, int, HWND);
 	void Shutdown();
@@ -48,9 +47,17 @@ public:
 
 	void Destroy(ModelClass* model);
 	void DestroyAll();
+	void ToNextStage(const int& stage);
+
+	int s_StageNum = 1;
 
 private:
 	bool Render();
+
+	static GraphicsClass* m_instance;
+
+	GraphicsClass();
+	~GraphicsClass();
 
 private:
 	D3DClass* m_D3D;
@@ -65,6 +72,9 @@ private:
 	bool CollisionCheck(ModelClass*, ModelClass*);
 	bool InitializeModels();
 	void InitializeTransform();
+
+	void InitializeRacketAndCircle();
+	void InitializeRacketAndCircleTransform();
 };
 
 #endif

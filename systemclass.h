@@ -53,7 +53,7 @@ private:
 	HINSTANCE m_hinstance;
 	HWND m_hwnd;
 
-	GraphicsClass* m_Graphics;
+	//GraphicsClass* m_Graphics;
 	SoundClass* m_Sound;
 };
 
