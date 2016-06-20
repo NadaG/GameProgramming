@@ -110,7 +110,8 @@ void ModelCircleClass::Update()
 	    
 		isFired = true;
 		//z = 5.0f + ((-100) * (GraphicsClass::GetInstance()->s_StageNum - 1));
-		m_velocity.m_z = -0.15f;
+		m_velocity.m_z = -0.2f;
+		m_velocity.m_z -= (stage*0.075f);
 	}	
 	if (InputClass::GetInstance()->GetMouseButtonDown(MOUSE_RIGHT) &&am<=1) {
 	    am++;
@@ -145,7 +146,7 @@ void calctime() {
 	if (collflag == 0) { collflag = 1; }
 	if (collflag == 1) {
 		DWORD sub = currtime - beforetime;
-		if (sub < 1) { 
+		if (sub < 20) { 
 		    return; }
 		else {
 			collflag = 0;
@@ -160,9 +161,14 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
     stagestart = 1;
     float adv = ((rand() % 100) + 50) / 100.0; // 0.5 ~ 1.5
     float adv2 = (rand() % 10 + 300) / 300.0; // 1.0~1.03
+
+    float Pyx;
+    float Pyy;
+    float Pyz;
+
     bz = (stage)*100.0f;
     calctime();
-    //if (collflag == 1) { return; }
+    if (collflag == 1) { return; }
 
     if (model->GetTag() == MODEL_CUBE) {
 
@@ -183,6 +189,20 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 				myscore += 100;
 				endcount[stage]--;
 				if (endcount[stage] <= 0) {
+				    if (stage == 2) {
+				    
+					   HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+					   char q[200] = { 0, };
+
+					   sprintf(q, "Game Clear.\ncongratulations!\nScore : %d", myscore);
+					   wchar_t wtext[200];
+					   mbstowcs(wtext, q, strlen(q) + 1);//Plus null
+					   LPWSTR query = wtext;
+
+					   MessageBox(hWnd, query, TEXT("게임 클리어"), MB_OK);
+					   exit(1);
+				    }
+
 				    ////////////////////////
 				    stagestart = 0;
 				    //cout << "ABCDE" << endl;
