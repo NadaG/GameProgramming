@@ -71,9 +71,8 @@ bool SystemClass::Initialize()
 	{
 		return false;
 	}
-	m_Sound = new SoundClass;
-	if (!m_Sound) { return false; }
-	result = m_Sound->Initialize(m_hwnd);
+	result = SoundClass::GetInstance()->Initialize(m_hwnd, "./data/0.wav");
+
 	if (!result) { return false; }
 	return true;
 }

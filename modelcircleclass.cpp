@@ -84,7 +84,8 @@ void ModelCircleClass::Update()
 		!isFired)
 	{
 		isFired = true;
-		m_velocity.m_z = -0.16f;
+		z = 5.0f + ((-100) * (GraphicsClass::GetInstance()->s_StageNum - 1));
+		m_velocity.m_z = -0.15f;
 	}
 
 	//   if (InputClass::GetInstance()->isFirstClick() && !isFired) 
@@ -113,7 +114,7 @@ void calctime() {
 	if (collflag == 0) { collflag = 1; }
 	if (collflag == 1) {
 		DWORD sub = currtime - beforetime;
-		if (sub < 20) { 
+		if (sub < 10) { 
 		    return; }
 		else {
 			collflag = 0;
@@ -125,7 +126,7 @@ void calctime() {
 
 void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 {
-    stagestart = 0;
+    stagestart = 1;
     float adv = ((rand() % 100) + 50) / 100.0; // 0.5 ~ 1.5
     float adv2 = (rand() % 10 + 300) / 300.0; // 1.0~1.03
     bz = (stage)*100.0f;
@@ -144,8 +145,9 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 	   switch (model->GetDirection()) {
 	   case FRONT_BACK:
 		  m_velocity.m_z = -abs(m_velocity.m_z)*adv2;
-		  if (model->GetWorldPosition().m_z> 9.0f-bz && model->GetWorldPosition().m_z<11.0f-bz) {
-			 model->HP--;
+		 // if (model->GetWorldPosition().m_z> 9.0f-bz && model->GetWorldPosition().m_z<11.0f-bz) {
+		  if(!model->backwall){
+		  model->HP--;
 			 if (model->HP <= 0) {
 				model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
 				GraphicsClass::GetInstance()->Destroy(model);
@@ -154,7 +156,7 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 				endcount[stage]--;
 				if (endcount[stage] <= 0) {
 				    ////////////////////////
-				    stagestart = 1;
+				    stagestart = 0;
 				    cout << "ABCDE" << endl;
 				    stage++;
 				    collflag = 0;
@@ -162,7 +164,13 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 				    
 				    GraphicsClass::GetInstance()->s_StageNum++;
 				    GraphicsClass::GetInstance()->ToNextStage(GraphicsClass::GetInstance()->s_StageNum);
-				    
+				    HWND hWnd = FindWindow(NULL, TEXT("Engine"));
+				    string s = "./data/";
+				    s += to_string(stage);
+				    s += ".wav";
+				    const char* cp = s.c_str();
+				    SoundClass::GetInstance()->Shutdown();
+				    SoundClass::GetInstance()->Initialize(hWnd, cp);
 				}
 			 }
 			 else {
@@ -201,8 +209,9 @@ void ModelCircleClass::OnCollisionEnter(ModelClass* model)
 
 	
 
-	if (model->GetTag() == MODEL_RACKET && InputClass::GetInstance()->GetMouseButton(MOUSE_LEFT) && isFired)
+	if (model->GetTag() == MODEL_RACKET &&  isFired)
 	{
+	    stagestart = 1;
 	    cout << "RACKET" << endl;
 		sndPlaySoundA("./data/hit.wav", SND_ASYNC | SND_NODEFAULT | SND_ASYNC);
 		///////////일해라 남창현////////////
@@ -240,14 +249,14 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
     float z = GetWorldPosition().m_z;
     switch (model->GetDirection()) {
     case FRONT_BACK: 
-	   SetWorldPosition({ x,y,z-0.1f });
+	   SetWorldPosition({ x,y,z-0.0f });
 	   m_velocity.m_z = -m_velocity.m_z*adv2;
     case LEFT_RIGHT:
 	   if (m_velocity.m_x < 0) {
-		  SetWorldPosition({x+0.1f,y,z});
+		  SetWorldPosition({x+0.0f,y,z});
 	   }
 	   else {
-		  SetWorldPosition({ x - 0.1f,y,z });
+		  SetWorldPosition({ x - 0.0f,y,z });
 	   }
 
 	   m_velocity.m_x = -m_velocity.m_x*adv;
@@ -256,10 +265,10 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 
     case UP_DOWN:
 	   if (m_velocity.m_y < 0) {
-		  SetWorldPosition({ x,y+0.1f,z });
+		  SetWorldPosition({ x,y+0.0f,z });
 	   }
 	   else {
-		  SetWorldPosition({ x,y-0.1f,z });
+		  SetWorldPosition({ x,y-0.0f,z });
 	   }
 
 	   m_velocity.m_y = -m_velocity.m_y*adv;

@@ -49,17 +49,17 @@ public:
     SoundClass();
     SoundClass(const SoundClass&);
     ~SoundClass();
-
-    bool Initialize(HWND);
+    static SoundClass* GetInstance();
+    bool Initialize(HWND,const char*);
     void Shutdown();
 
 private:
     bool InitializeDirectSound(HWND);
     void ShutdownDirectSound();
 
-    bool LoadWaveFile(char*, IDirectSoundBuffer8**);
+    bool LoadWaveFile(const char*, IDirectSoundBuffer8**);
     void ShutdownWaveFile(IDirectSoundBuffer8**);
-
+    static SoundClass* m_instance;
     bool PlayWaveFile();
 
 private:

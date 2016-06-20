@@ -19,6 +19,7 @@ ModelClass::ModelClass()
 	m_worldRotation = { 0.0f, 0.0f, 0.0f };
 
 	m_id = id++;
+	backwall = 0;
 }
 
 ModelClass::ModelClass(const ModelClass& other)

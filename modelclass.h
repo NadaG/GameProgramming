@@ -66,6 +66,7 @@ protected:
 
 public:
     int HP;
+    bool backwall;
 	ModelClass();
 	ModelClass(const ModelClass&);
 	~ModelClass();

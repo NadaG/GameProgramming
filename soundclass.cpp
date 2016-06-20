@@ -3,8 +3,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include "soundclass.h"
 #include<iostream>
+#include <string>
 using namespace std;
-
+SoundClass* SoundClass::m_instance = new SoundClass;
 SoundClass::SoundClass()
 {
     m_DirectSound = 0;
@@ -21,9 +22,12 @@ SoundClass::SoundClass(const SoundClass& other)
 SoundClass::~SoundClass()
 {
 }
+SoundClass* SoundClass::GetInstance()
+{
+    return m_instance;
+}
 
-
-bool SoundClass::Initialize(HWND hwnd)
+bool SoundClass::Initialize(HWND hwnd, const char* filename)
 {
 
     bool result;
@@ -37,7 +41,7 @@ bool SoundClass::Initialize(HWND hwnd)
     }
 
     // Load a wave audio file onto a secondary buffer.
-    result = LoadWaveFile("./data/bgm.wav", &m_secondaryBuffer1);
+    result = LoadWaveFile(filename, &m_secondaryBuffer1);
     if (!result)
     {
 	   return false;
@@ -143,7 +147,7 @@ void SoundClass::ShutdownDirectSound()
 }
 
 
-bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuffer)
+bool SoundClass::LoadWaveFile(const char* filename, IDirectSoundBuffer8** secondaryBuffer)
 {
     int error;
     FILE* filePtr;

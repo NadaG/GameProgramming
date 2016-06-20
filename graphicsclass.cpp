@@ -347,6 +347,9 @@ void GraphicsClass::InitializeTransform()
 		m_Models[i]->SetWorldPosition({ 0.0f, 0.0f, 22.5f - 100 * (i - (StartIndexNum + MaxStageNum * 4))});
 		m_Models[i]->SetWorldScale({ 10.0f, 10.0f, 1.0f });
 		m_Models[i]->SetBelongStage((i - (StartIndexNum + MaxStageNum * 4)) + 1);
+		//ROUTINE
+		m_Models[i]->backwall = 1;
+
 	}
 
 	float start_x, start_y;
@@ -360,7 +363,7 @@ void GraphicsClass::InitializeTransform()
 		{
 			for (int k = 0; k < i + 2; k++)
 			{
-				m_Models[now]->SetWorldPosition({ start_x + j*width_height, start_y - k*width_height, 10.0f-i*100 });
+				m_Models[now]->SetWorldPosition({ start_x + j*width_height, start_y - k*width_height, 17.0f-i*100 });
 				m_Models[now]->SetWorldScale({ width_height, width_height, 1.0f });
 				m_Models[now]->SetBelongStage(i + 1);
 				now++;
