@@ -20,7 +20,9 @@ public:
     }
 
     virtual void Update() override;
+	virtual void OnCollisionEnter(ModelClass* model) override;
     virtual void OnCollisionStay(ModelClass* model) override;
+	virtual void OnCollisionExit(ModelClass* model) override;
     virtual void Start() override;
 
     const float& GetX() const { return m_worldScale.m_x; }

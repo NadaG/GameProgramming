@@ -29,6 +29,28 @@ ModelClass::~ModelClass()
 {
 }
 
+bool ModelClass::InitializeByTag(ID3D11Device* device, MODEL_TAG tag)
+{
+	bool result = true;
+	switch (tag)
+	{
+	case MODEL_CIRCLE:
+		result = Initialize(device, L"./data/seafloor.dds");
+		break;
+	case MODEL_CUBE:
+		result = Initialize(device, L"./data/earth.dds");
+		break;
+	case MODEL_RACKET:
+		result = Initialize(device, L"./data/seafloor.dds");
+		break;
+	case MODEL_SPHERE:
+		result = Initialize(device, L"./data/earth.dds");
+		break;
+	default:
+		break;
+	}
+	return result;
+}
 
 bool ModelClass::Initialize(ID3D11Device* device, WCHAR* textureFilename)
 {
@@ -303,9 +325,16 @@ void ModelClass::Update()
 {
 }
 
-// TODO!!!!!!!!!!!!!!!!!
+void ModelClass::OnCollisionEnter(ModelClass* model)
+{
+}
+
 // 필요없는 함수 정의
 void ModelClass::OnCollisionStay(ModelClass* model)
+{
+}
+
+void ModelClass::OnCollisionExit(ModelClass* model)
 {
 }
 
@@ -384,3 +413,4 @@ const WALL_DIRECTION& ModelClass::GetDirection() const
 {
 	return m_wallDirection;
 }
+

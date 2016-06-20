@@ -44,6 +44,11 @@ public:
 	void Shutdown();
 	bool Frame();
 
+	void Create(ModelClass* model, Vector3f pos, Vector3f rot, Vector3f scale);
+
+	void Destroy(ModelClass* model);
+	void DestroyAll();
+
 private:
 	bool Render();
 
@@ -54,16 +59,12 @@ private:
 	LightShaderClass* m_LightShader;
 	LightClass* m_Light;
 	
+	//// bool로 할지 vector로 할지 못 정하겠다
+	bool isCollisionChecked[1000][1000];
+
 	bool CollisionCheck(ModelClass*, ModelClass*);
 	bool InitializeModels();
 	void InitializeTransform();
-
-	// TODO!!!!!!!!!!!!!!!!!! 나중에 할것 pimpl 인가? ㄷ
-	class CollisionChecker
-	{
-
-
-	};
 };
 
 #endif

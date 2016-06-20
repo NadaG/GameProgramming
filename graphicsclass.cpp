@@ -10,6 +10,13 @@ GraphicsClass::GraphicsClass()
 	m_Camera = 0;
 	m_LightShader = 0;
 	m_Light = 0;
+	for (int i = 0; i < 1000; i++)
+	{
+		for (int j = 0; j < 1000; j++)
+		{
+			isCollisionChecked[i][j] = false;
+		}
+	}
 }
 
 GraphicsClass::GraphicsClass(const GraphicsClass& other)
@@ -67,7 +74,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Initialize the model object.
 	for (int i = 0; i < m_Models.size(); i++)
 	{
-		switch (m_Models[i]->GetTag())
+		result = m_Models[i]->InitializeByTag(m_D3D->GetDevice(), m_Models[i]->GetTag());
+		/*switch (m_Models[i]->GetTag())
 		{
 		case MODEL_CIRCLE:
 			result = m_Models[i]->Initialize(m_D3D->GetDevice(), L"./data/seafloor.dds");
@@ -83,7 +91,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 			break;
 		default:
 			break; 
-		}
+		}*/
 
 		if (!result)
 		{
@@ -201,14 +209,25 @@ bool GraphicsClass::Frame()
 			{
 				if (CollisionCheck(m_Models[i], m_Models[j]))
 				{
-					// TODO!!!!!!!!!!!!!!!!!!!!!
-					// 누구와 부딪혔는지 인자로 넘겨줄 것!!!!!!!!
-					m_Models[i]->OnCollisionStay(m_Models[j]);
-					m_Models[j]->OnCollisionStay(m_Models[i]);
-
-					// TODO!!!!!!!!!!!!!!!!!!!!!!!
-					// 메모리 누수를 신경씁시다
-					//m_Models.erase(m_Models.begin() + j);
+					if (isCollisionChecked[i][j] && isCollisionChecked[j][i])
+					{
+						m_Models[i]->OnCollisionStay(m_Models[j]);
+						m_Models[j]->OnCollisionStay(m_Models[i]);
+					}
+					else
+					{
+						isCollisionChecked[i][j] = true;
+						isCollisionChecked[j][i] = true;
+						m_Models[i]->OnCollisionEnter(m_Models[j]);
+						m_Models[j]->OnCollisionEnter(m_Models[i]);
+					}
+				}
+				else if (isCollisionChecked[i][j] && isCollisionChecked[j][i])
+				{
+					isCollisionChecked[i][j] = false;
+					isCollisionChecked[j][i] = false;
+					m_Models[i]->OnCollisionExit(m_Models[j]);
+					m_Models[j]->OnCollisionExit(m_Models[i]);
 				}
 			}
 		}
@@ -467,7 +486,37 @@ bool GraphicsClass::CollisionCheck(ModelClass* model1, ModelClass* model2)
 		break;
 	}
 
-
-	
 	return false;
+}
+
+void GraphicsClass::Create(ModelClass* model, Vector3f pos, Vector3f rot, Vector3f scale)
+{
+	model->SetWorldPosition(pos);
+	model->SetWorldScale(scale);
+	model->SetWorldRotation(rot);
+	m_Models.push_back(model);
+	model->Start();
+	model->InitializeByTag(m_D3D->GetDevice(), model->GetTag());
+}
+
+void GraphicsClass::Destroy(ModelClass* model)
+{
+
+	vector<ModelClass*>::iterator itr;
+	for (itr = m_Models.begin(); itr != m_Models.end(); itr++)
+	{
+		if (*itr == model)
+		{
+			m_Models.erase(itr);
+			break;
+		}
+	}
+}
+
+void GraphicsClass::DestroyAll()
+{
+	while (!m_Models.empty())
+	{
+		m_Models.pop_back();
+	}
 }

@@ -51,6 +51,9 @@ enum WALL_DIRECTION
 
 class ModelClass
 {
+private:
+	bool Initialize(ID3D11Device*, WCHAR*);
+
 protected:
 	struct VertexType
 	{
@@ -66,7 +69,7 @@ public:
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
-	bool Initialize(ID3D11Device*, WCHAR*);
+	bool InitializeByTag(ID3D11Device*, MODEL_TAG);
 	void Shutdown();
 	void Render(ID3D11DeviceContext*);
 
@@ -80,7 +83,9 @@ public:
 	// 각각의 오브젝트 별로 따로 구현되는 함수들
 	// 스크립트 부분을 여기서 짜도록 하면 될것!
 	virtual void Update();
+	virtual void OnCollisionEnter(ModelClass* model);
 	virtual void OnCollisionStay(ModelClass* model);
+	virtual void OnCollisionExit(ModelClass* model);
 	virtual void Start();
 	
 	// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -180,5 +185,6 @@ protected:
 	string m_name;
 	MODEL_TAG m_tag;
 };
+
 
 #endif

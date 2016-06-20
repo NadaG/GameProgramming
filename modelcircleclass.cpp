@@ -100,6 +100,9 @@ void calctime() {
     }
 }
 
+void ModelCircleClass::OnCollisionEnter(ModelClass* model)
+{
+}
 
 void ModelCircleClass::OnCollisionStay(ModelClass* model)
 {
@@ -119,13 +122,17 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 		case FRONT_BACK:
 		    
 		    cout << "A" << endl;
-		    if (model->GetWorldPosition().m_z <9.0f && model->GetWorldPosition().m_z>7.0f) {
+		    if (model->GetWorldPosition().m_z <9.0f && model->GetWorldPosition().m_z>7.0f) 
+			{
 			   model->SetWorldScale({ 0.0f, 0.0f, 0.0f });
 			   m_velocity.m_z = -m_velocity.m_z*adv2;
 			   collflag = 1;
 		    }
+
 		    myscore++;
-		    if (model->GetWorldPosition().m_z > 9.0f) {
+		    
+			if (model->GetWorldPosition().m_z > 9.0f) 
+			{
 			   HWND hWnd = FindWindow(NULL, TEXT("Engine"));
 			   char q[200] = { 0, }; 
 
@@ -139,14 +146,16 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 		    }
 
 			break;
+
 		case LEFT_RIGHT:
 			m_velocity.m_x = -m_velocity.m_x*adv;
 			break;
+
 		case UP_DOWN:
 			m_velocity.m_y = -m_velocity.m_y*adv;
 			break;
+
 		default:
-		    
 			break;
 		}
     }
@@ -178,4 +187,8 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
     }
     //xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
 
+}
+
+void ModelCircleClass::OnCollisionExit(ModelClass* model)
+{
 }
