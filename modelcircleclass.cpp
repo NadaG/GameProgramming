@@ -99,7 +99,6 @@ int collflag = 0;
 DWORD beforetime=0;
 
 void calctime() {
-    cout << "A" << endl;
     DWORD currtime = GetTickCount();
     if (collflag == 0) { collflag = 1;}
     if (collflag == 1) {
@@ -226,13 +225,10 @@ void ModelCircleClass::OnCollisionStay(ModelClass* model)
 				xx -= rand() % 10;
 			}
 
-			//m_velocity.m_z = 0.3f;
 			m_velocity.m_z = -m_velocity.m_z;
 			m_velocity.m_x = yy*0.003f;
 			m_velocity.m_y = -xx*0.003f;
 		}
-		//xv = (GetPosition().m_x - model->GetPosition().m_x)*0.4f / 1.0f;
-
 	}
 }
 
